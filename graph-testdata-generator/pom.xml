@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ch.swb</groupId>
+	<artifactId>graph-testdata-generator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>Graph Testdata Generator</name>
+
+	<description>Graph Testdata Generator für Neo4j</description>
+
+	<properties>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jeasy</groupId>
+			<artifactId>easy-random-core</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tinkerpop</groupId>
+			<artifactId>tinkergraph-gremlin</artifactId>
+			<version>3.4.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.steelbridgelabs.oss</groupId>
+			<artifactId>neo4j-gremlin-bolt</artifactId>
+			<version>0.4.5</version>
+		</dependency>
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.tinkerpop</groupId> -->
+		<!-- <artifactId>neo4j-gremlin</artifactId> -->
+		<!-- <version>3.4.9</version> -->
+		<!-- </dependency> -->
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.neo4j</groupId> -->
+		<!-- <artifactId>neo4j-tinkerpop-api-impl</artifactId> -->
+		<!-- <version>0.9-3.4.0</version> -->
+		<!-- </dependency> -->
+
+
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.30</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.7.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.18.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
