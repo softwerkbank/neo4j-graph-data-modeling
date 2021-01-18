@@ -31,7 +31,8 @@ public class AssignedProjectGenerator {
 		List<AssignedProject> assignedProjects = new ArrayList<>();
 
 		RelationshipNode from = new RelationshipNode(Employment.LABEL, employment.getId());
-		Period employmentPeriod = Period.between(employment.getStart(), employment.getEnd());
+		Period employmentPeriod = employment.getEnd() != null ? Period.between(employment.getStart(), employment.getEnd())
+				: Period.between(employment.getStart(), LocalDate.now());
 		Period difference = employmentPeriod;
 		LocalDate lastEndDateProject = null;
 

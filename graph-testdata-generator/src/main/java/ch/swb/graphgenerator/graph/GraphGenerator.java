@@ -9,11 +9,13 @@ import com.github.javafaker.Faker;
 import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.Project;
+import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 
 public class GraphGenerator {
 	private final GraphParameters parameters;
@@ -34,6 +36,7 @@ public class GraphGenerator {
 		generateProjects();
 		generateEmployeeNodes();
 		generateEmployments();
+		generateAssignedProjects(graph.getProjects());
 		return graph;
 	}
 
@@ -75,6 +78,19 @@ public class GraphGenerator {
 					parameters.getJitterFirstEmployment());
 			List<Employment> employments = employmentGenerator.generateEmploymentsForEmployee();
 			employee.addEmployments(employments);
+		}
+	}
+
+	private void generateAssignedProjects(List<Project> projects) {
+		for (Employee employee : graph.getEmployees()) {
+			for (Employment employment : employee.getEmployments()) {
+				AssignedProjectGenerator assignedProjectGenerator = new AssignedProjectGenerator(employment,
+						parameters.getMinPeriodProjectAssignment(),
+						parameters.getMaxPeriodProjectAssignment(),
+						parameters.getMaxRolesProject());
+				List<AssignedProject> assignedProjects = assignedProjectGenerator.generateAssignedProjects(projects);
+				employment.addAssignedProjects(assignedProjects);
+			}
 		}
 	}
 

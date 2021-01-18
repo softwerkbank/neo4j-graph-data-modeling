@@ -48,7 +48,8 @@ class AssignedProjectGeneratorTest {
 	private AssignedProjectGenerator testee;
 
 	@Test
-	void when_generateAssignedProjects_then_fromAndToIsSetCorrectly() {
+	@DisplayName("When generating assigned projects for an employment with start and end date then all assigned projects have start and end dates")
+	void when_generateAssignedProjectsForEmploymentWithEnd_then_allAssignedProjectsHaveStartAndEndDates() {
 		// Arrange
 		Employment employment = new Employment(UUID.randomUUID(),
 				LocalDate.of(2013, 5, 1),
@@ -65,5 +66,30 @@ class AssignedProjectGeneratorTest {
 		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getRoles()).hasSizeLessThanOrEqualTo(3));
 		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getFrom().getNodeId()).isEqualTo(employment.getId()));
 		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getTo()).isNotNull());
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getStart()).isNotNull());
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getEnd()).isNotNull());
+	}
+
+	@Test
+	@DisplayName("When generating assigned projects for an employment without end date then the last assigned project has no end date")
+	void when_generateAssignedProjectsForEmploymentWithoutEnd_then_lastAssignedProjectHasNoEndDate() {
+		// Arrange
+		Employment employment = new Employment(UUID.randomUUID(),
+				LocalDate.of(2015, 7, 1),
+				null,
+				"Software Engineer",
+				new Company(UUID.randomUUID(), "Test Inc.", "IT"));
+		testee = new AssignedProjectGenerator(employment, Period.ofMonths(6), Period.ofMonths(18), 3);
+
+		// Act
+		List<AssignedProject> assignedProjects = testee.generateAssignedProjects(projects);
+
+		// Assert
+		assertThat(assignedProjects).hasSizeGreaterThanOrEqualTo(3);
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getRoles()).hasSizeLessThanOrEqualTo(3));
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getFrom().getNodeId()).isEqualTo(employment.getId()));
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getTo()).isNotNull());
+		assertThat(assignedProjects).allSatisfy(a -> assertThat(a.getStart()).isNotNull());
+		assertThat(assignedProjects.get(assignedProjects.size() - 1).getEnd()).isNull();
 	}
 }

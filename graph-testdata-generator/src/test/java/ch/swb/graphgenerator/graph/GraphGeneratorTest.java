@@ -30,6 +30,9 @@ class GraphGeneratorTest {
 		assertThat(graph.getEmployees()).allSatisfy(employee -> {
 			assertThat(employee).hasNoNullFieldsOrProperties();
 			assertThat(employee.getEmployments()).hasSizeGreaterThan(0);
+			assertThat(employee.getEmployments()).allSatisfy(employment -> {
+				assertThat(employment.getAssignedProjects()).hasSizeGreaterThanOrEqualTo(1);
+			});
 		});
 	}
 }
