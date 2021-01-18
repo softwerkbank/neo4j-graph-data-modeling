@@ -6,14 +6,14 @@ import java.util.UUID;
 
 import com.github.javafaker.Faker;
 
+import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.Project;
-import ch.swb.graphgenerator.graph.nodegenerator.EmployeeNodeGenerator;
-import ch.swb.graphgenerator.graph.nodegenerator.EmploymentNodeGenerator;
-import ch.swb.graphgenerator.graph.nodegenerator.SpecialNodeProvider;
 
 public class GraphGenerator {
 	private final GraphParameters parameters;

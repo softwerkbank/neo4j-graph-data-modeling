@@ -7,7 +7,7 @@ import java.util.List;
 
 import ch.swb.graphgenerator.graph.model.Role;
 
-public class AssignedToProject {
+public class AssignedProject extends Relationship {
 
 	public static final String LABEL = "ASSIGNED_PROJECT";
 	public static final String KEY_START = "start_date";
@@ -20,7 +20,8 @@ public class AssignedToProject {
 	private final int workload;
 	private final List<Role> roles;
 
-	public AssignedToProject(LocalDate start, LocalDate end, int workload, Role... roles) {
+	public AssignedProject(RelationshipNode from, RelationshipNode to, LocalDate start, LocalDate end, int workload, Role... roles) {
+		super(from, to);
 		this.start = start;
 		this.end = end;
 		this.workload = workload;

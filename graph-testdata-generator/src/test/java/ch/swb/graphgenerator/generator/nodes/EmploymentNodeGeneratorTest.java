@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.nodegenerator;
+package ch.swb.graphgenerator.generator.nodes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,10 +10,10 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.DefaultGraphParameters;
+import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employment;
-import ch.swb.graphgenerator.graph.nodegenerator.EmploymentNodeGenerator;
-import ch.swb.graphgenerator.graph.nodegenerator.SpecialNodeProvider;
 
 class EmploymentNodeGeneratorTest {
 

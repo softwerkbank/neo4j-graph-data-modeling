@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.graph.nodegenerator;
+package ch.swb.graphgenerator.graph.generator.nodes;
 
 import java.util.ArrayList;
 import java.util.Collections;

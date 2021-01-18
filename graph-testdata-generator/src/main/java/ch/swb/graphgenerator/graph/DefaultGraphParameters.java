@@ -17,6 +17,11 @@ public class DefaultGraphParameters {
 	public static final Period DEFAULT_JITTER_FIRST_EMPLOYMENT = Period.ofYears(6);
 	public static final Period DEFAULT_JITTER_BETWEEN_EMPLOYMENTS = Period.ofMonths(24);
 
+	// Projects
+	public static final Period DEFAULT_MIN_PERIOD_OF_PROJECT_ASSIGNMENT = Period.ofMonths(6);
+	public static final Period DEFAULT_MAX_PERIOD_OF_PROJECT_ASSIGNMENT = Period.ofMonths(36);
+	public static final int DEFAULT_MAX_ROLES_PROJECT = 3;
+
 	private DefaultGraphParameters() {
 	}
 }

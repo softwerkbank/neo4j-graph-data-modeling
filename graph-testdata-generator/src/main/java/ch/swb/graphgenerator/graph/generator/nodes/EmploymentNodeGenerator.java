@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.graph.nodegenerator;
+package ch.swb.graphgenerator.graph.generator.nodes;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,13 +24,13 @@ public class EmploymentNodeGenerator {
 	private final List<Company> companies;
 
 	public EmploymentNodeGenerator(LocalDate employeeBirthday, List<Company> companies, Period averageEmploymentPeriod, Period firstEmploymentAfter,
-			Period jitterFirtEmployment) {
+			Period jitterFirstEmployment) {
 		this.today = LocalDate.now();
 		this.employeeBirthday = employeeBirthday;
 		this.companies = companies;
 		this.averageEmploymentPeriod = averageEmploymentPeriod.getYears();
 		this.firstEmploymentAfterYears = firstEmploymentAfter.getYears();
-		this.boundForFirstEmploymentAfterYears = firstEmploymentAfter.plus(jitterFirtEmployment).getYears();
+		this.boundForFirstEmploymentAfterYears = firstEmploymentAfter.plus(jitterFirstEmployment).getYears();
 	}
 
 	public List<Employment> generateEmploymentsForEmployee() {

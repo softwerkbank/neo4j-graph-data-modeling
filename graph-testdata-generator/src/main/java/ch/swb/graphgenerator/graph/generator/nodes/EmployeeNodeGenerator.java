@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.graph.nodegenerator;
+package ch.swb.graphgenerator.graph.generator.nodes;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
