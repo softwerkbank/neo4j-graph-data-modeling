@@ -5,8 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import ch.swb.graphgenerator.graph.GraphGenerator;
-import ch.swb.graphgenerator.graph.GraphParameters;
 import ch.swb.graphgenerator.graph.model.GraphData;
 
 @DisplayName("Testing the graph generator")
@@ -27,6 +25,7 @@ class GraphGeneratorTest {
 		// Assert
 		assertThat(graph.getCompanies()).hasSize(defaultParameters.getNumberOfCompanies());
 		assertThat(graph.getCertificates()).hasSize(defaultParameters.getNumberOfCertificates());
+		assertThat(graph.getProjects()).hasSize(defaultParameters.getNumberOfProjects());
 		assertThat(graph.getEmployees()).hasSize(defaultParameters.getNumberOfEmployees());
 		assertThat(graph.getEmployees()).allSatisfy(employee -> {
 			assertThat(employee).hasNoNullFieldsOrProperties();

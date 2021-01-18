@@ -17,6 +17,7 @@ import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
+import ch.swb.graphgenerator.graph.model.Project;
 
 public class GraphDataRepository {
 
@@ -27,6 +28,7 @@ public class GraphDataRepository {
 
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
+			persistProjects(neo4jGraph, graph);
 
 			for (Employee employee : graph.getEmployees()) {
 				try (Transaction transaction = neo4jGraph.tx()) {
@@ -85,6 +87,23 @@ public class GraphDataRepository {
 						.property(Certificate.KEY_ID, certificate.getId().toString())
 						.property(Certificate.KEY_NAME, certificate.getName())
 						.property(Certificate.KEY_AUTHORITY, certificate.getAuthority())
+						.next();
+
+				transaction.commit();
+			}
+		}
+	}
+
+	private void persistProjects(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Project project : graph.getProjects()) {
+			try (Transaction transaction = neo4jGraph.tx()) {
+				GraphTraversalSource g = neo4jGraph.traversal();
+
+				g.addV(Project.LABEL)
+						.property(Project.KEY_ID, project.getId().toString())
+						.property(Project.KEY_NAME, project.getName())
+						.property(Project.KEY_DESCRIPTION, project.getDescription())
+						.property(Project.KEY_WORKING_LANGUAGE, project.getWorkingLanguage())
 						.next();
 
 				transaction.commit();

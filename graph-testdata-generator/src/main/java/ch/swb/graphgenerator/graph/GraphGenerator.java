@@ -10,6 +10,7 @@ import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
+import ch.swb.graphgenerator.graph.model.Project;
 import ch.swb.graphgenerator.graph.nodegenerator.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.nodegenerator.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.nodegenerator.SpecialNodeProvider;
@@ -30,6 +31,7 @@ public class GraphGenerator {
 	public GraphData generateGraph() {
 		generateCompanies();
 		generateCertificates();
+		generateProjects();
 		generateEmployeeNodes();
 		generateEmployments();
 		return graph;
@@ -56,6 +58,13 @@ public class GraphGenerator {
 //			customers.add(customer);
 //		}
 //	}
+
+	private void generateProjects() {
+		for (int i = 0; i < parameters.getNumberOfProjects(); i++) {
+			Project project = new Project(UUID.randomUUID(), faker.superhero().name(), faker.lorem().characters(2000, 4000), i % 2 == 0 ? "german" : "english");
+			graph.addProject(project);
+		}
+	}
 
 	private void generateEmployments() {
 		for (Employee employee : graph.getEmployees()) {

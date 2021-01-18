@@ -6,6 +6,7 @@ public class GraphParameters {
 	private int numberOfEmployees;
 	private int numberOfCompanies;
 	private int numberOfCertificates;
+	private int numberOfProjects;
 	private Period averageEmploymentPeriod;
 	private Period jitterAverageEmploymentPeriod;
 	private Period firstEmploymentAfter;
@@ -16,6 +17,7 @@ public class GraphParameters {
 		numberOfEmployees = DefaultGraphParameters.DEFAULT_NUMBER_OF_EMPLOYEES;
 		numberOfCompanies = DefaultGraphParameters.DEFAULT_NUMBER_OF_COMPANIES;
 		numberOfCertificates = DefaultGraphParameters.DEFAULT_NUMBER_OF_CERTIFICATES;
+		numberOfProjects = DefaultGraphParameters.DEFAULT_NUMBER_OF_PROJECTS;
 		averageEmploymentPeriod = DefaultGraphParameters.DEFAULT_AVERAGE_EMPLOYMENT_PERIOD;
 		jitterAverageEmploymentPeriod = DefaultGraphParameters.DEFAULT_JITTER_AVERAGE_EMPLOYMENT_PERIOD;
 		firstEmploymentAfter = DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER;
@@ -48,6 +50,15 @@ public class GraphParameters {
 
 	public int getNumberOfCertificates() {
 		return numberOfCertificates;
+	}
+
+	public GraphParameters numberOfProjects(int number) {
+		numberOfProjects = number;
+		return this;
+	}
+
+	public int getNumberOfProjects() {
+		return numberOfProjects;
 	}
 
 	public GraphParameters averageEmploymentPeriod(Period period) {

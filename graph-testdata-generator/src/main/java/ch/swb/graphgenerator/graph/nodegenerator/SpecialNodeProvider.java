@@ -71,7 +71,6 @@ public class SpecialNodeProvider {
 		certificates.add(new Certificate(UUID.randomUUID(), "ITIL 4 Specialist High-velocity IT", "ITIL"));
 		certificates.add(new Certificate(UUID.randomUUID(), "ITIL 4 Strategist Direct, Plan and Improve", "ITIL"));
 		certificates.add(new Certificate(UUID.randomUUID(), "ITIL 4 Strategic Leader", "ITIL"));
-		certificates.add(new Certificate(UUID.randomUUID(), "ITIL 4 Strategist Direct, Plan and Improve", "ITIL"));
 		certificates.add(new Certificate(UUID.randomUUID(), "ITIL 4 Leader Digital and IT Strategy", "ITIL"));
 		certificates.add(new Certificate(UUID.randomUUID(), "ITIL Master", "ITIL"));
 		certificates.add(new Certificate(UUID.randomUUID(), "LPIC-1 – Junior Level Linux Professional", "Linux Professional Institute"));

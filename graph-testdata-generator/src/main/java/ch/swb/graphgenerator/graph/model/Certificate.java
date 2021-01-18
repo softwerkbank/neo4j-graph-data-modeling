@@ -3,7 +3,7 @@ package ch.swb.graphgenerator.graph.model;
 import java.util.UUID;
 
 public class Certificate extends Entity {
-	public static final String LABEL = "Certifivate";
+	public static final String LABEL = "Certificate";
 	public static final String KEY_ID = "id";
 	public static final String KEY_NAME = "name";
 	public static final String KEY_AUTHORITY = "authority";
