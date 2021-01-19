@@ -1,0 +1,142 @@
+-  name: Neo4j Certified Professional
+   authority: Neo4j
+-  name: Certified SAFe® Agilist
+   authority: SAFe
+-  name: Certified SAFe® Program Consultant
+   authority: SAFe
+-  name: Certified SAFe® Practitioner
+   authority: SAFe
+-  name: Certified SAFe® Scrum Master
+   authority: SAFe
+-  name: Certified SAFe® Advanced Scrum Master
+   authority: SAFe
+-  name: Certified SAFe® Release Train Engineer
+   authority: SAFe
+-  name: Certified SAFe® Product Owner / Product Manager
+   authority: SAFe
+-  name: Certified SAFe® DevOps Practitioner
+   authority: SAFe
+-  name: Certified SAFe® Government Practitioner
+   authority: SAFe
+-  name: Certified SAFe® Architect
+   authority: SAFe
+-  name: Certified SAFe® Agile Software Engineer
+   authority: SAFe
+-  name: Certified SAFe® Agile Product Manager
+   authority: SAFe
+-  name: Certified SAFe® Lean Portfolio Manager
+   authority: SAFe
+-  name: iSAQB® Certified Professional for Software Architecture - Foundation Level (CPSA-F)
+   authority: iSAQB
+-  name: iSAQB® Certified Professional for Software Architecture - Advanced Level (CPSA-A)
+   authority: iSAQB
+-  name: Oracle Certified Associate, Java SE 8 Programmer
+   authority: Oracle
+-  name: Oracle Certified Professional, Java SE 8 Programmer
+   authority: Oracle
+-  name: Professional Scrum Master I (PSM I)
+   authority: Scrum.org
+-  name: Professional Scrum Master II (PSM II)
+   authority: Scrum.org
+-  name: Professional Scrum Master III (PSM III)
+   authority: Scrum.org
+-  name: Professional Scrum Product Owner I (PSPO I)
+   authority: Scrum.org
+-  name: Professional Scrum Product Owner II (PSPO II)
+   authority: Scrum.org
+-  name: Professional Scrum Product Owner III (PSPO III)
+   authority: Scrum.org
+-  name: Professional Scrum Developer I (PSD I)
+   authority: Scrum.org
+-  name: ITIL 4 Foundation
+   authority: ITIL
+-  name: ITIL 4 Managing Professional
+   authority: ITIL
+-  name: ITIL 4 Specialist Create, Deliver and Support
+   authority: ITIL
+-  name: ITIL 4 Specialist Drive Stakeholder Value
+   authority: ITIL
+-  name: ITIL 4 Specialist High-velocity IT
+   authority: ITIL
+-  name: ITIL 4 Strategist Direct, Plan and Improve
+   authority: ITIL
+-  name: ITIL 4 Strategic Leader
+   authority: ITIL
+-  name: ITIL 4 Leader Digital and IT Strategy
+   authority: ITIL
+-  name: ITIL Master
+   authority: ITIL
+-  name: LPIC-1 – Junior Level Linux Professional
+   authority: Linux Professional Institute
+-  name: LPIC-2 – Advanced Level Linux Professional
+   authority: Linux Professional Institute
+-  name: LPIC-3 – Senior Level Linux Professional
+   authority: Linux Professional Institute
+-  name: LFCS – Linux Foundation Certified Sysadmin
+   authority: Linux Foundation
+-  name: LFCE – Linux Foundation Certified Engineer
+   authority: Linux Foundation
+-  name: COA – Certified OpenStack Administrator
+   authority: Linux Foundation
+-  name: CFCD – Cloud Foundry Certified Developer
+   authority: Linux Foundation
+-  name: CHFA – Certified Hyperledger Fabric Administrator
+   authority: Linux Foundation
+-  name: CHSA – Certified Hyperledger Sawtooth Administrator
+   authority: Linux Foundation
+-  name: CKA – Certified Kubernetes Administrator
+   authority: Linux Foundation
+-  name: CKAD – Certified Kubernetes Application Developer
+   authority: Linux Foundation
+-  name: AWS Certified Cloud Practitioner
+   authority: Amazon Web Services
+-  name: AWS Certified Solutions Architect – Associate
+   authority: Amazon Web Services
+-  name: AWS Certified Solutions Architect – Professional
+   authority: Amazon Web Services
+-  name: AWS Certified SysOps Administrator – Associate
+   authority: Amazon Web Services
+-  name: AWS Certified Developer – Associate
+   authority: Amazon Web Services
+-  name: AWS Certified DevOps Engineer – Professional
+   authority: Amazon Web Services
+-  name: AWS Certified Machine Learning – Specialty
+   authority: Amazon Web Services
+-  name: AWS Certified Security – Specialty
+   authority: Amazon Web Services
+-  name: AWS Certified Advanced Networking – Specialty
+   authority: Amazon Web Services
+-  name: AWS Certified Data Analytics – Specialty
+   authority: Amazon Web Services
+-  name: AWS Certified Alexa Skill Builder – Specialty
+   authority: Amazon Web Services
+-  name: AWS Certified Database – Specialty
+   authority: Amazon Web Services
+-  name: Hermes Foundation Level
+   authority: Hermes
+-  name: Hermes Advanced Level
+   authority: Hermes
+-  name: Azure Fundamentals
+   authority: Microsoft
+-  name: Azure AI Fundamentals
+   authority: Microsoft
+-  name: Azure Data Fundamentals
+   authority: Microsoft
+-  name: Azure Developer Associate
+   authority: Microsoft
+-  name: Azure AI Engineer Associate
+   authority: Microsoft
+-  name: Azure Data Engineer Associate
+   authority: Microsoft
+-  name: Azure Data Scientist Associate
+   authority: Microsoft
+-  name: Azure Administrator Associate
+   authority: Microsoft
+-  name: Azure Security Engineer Associate
+   authority: Microsoft
+-  name: Azure Database Administrator Associate
+   authority: Microsoft
+-  name: Azure Solutions Architect Expert
+   authority: Microsoft
+-  name: Azure DevOps Engineer Expert
+   authority: Microsoft

@@ -2,6 +2,8 @@ package ch.swb.graphgenerator.graph.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Certificate extends Entity {
 	public static final String LABEL = "Certificate";
 	public static final String KEY_ID = "id";
@@ -10,6 +12,12 @@ public class Certificate extends Entity {
 
 	private final String name;
 	private final String authority;
+
+	public Certificate(@JsonProperty("name") String name, @JsonProperty("authority") String authority) {
+		super(UUID.randomUUID());
+		this.name = name;
+		this.authority = authority;
+	}
 
 	public Certificate(UUID id, String name, String authority) {
 		super(id);
