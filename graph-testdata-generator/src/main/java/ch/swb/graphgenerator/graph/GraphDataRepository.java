@@ -1,6 +1,7 @@
 package ch.swb.graphgenerator.graph;
 
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
 
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Transaction;
@@ -18,6 +19,7 @@ import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.Project;
+import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 
 public class GraphDataRepository {
 
@@ -55,6 +57,21 @@ public class GraphDataRepository {
 						Vertex companyNode = g.V().has(Company.LABEL, Company.KEY_ID, company.getId().toString()).next();
 						g.addE(Constants.EMPLOYMENT_COMPANY_LABEL).from(employmentNode).to(companyNode).next();
 
+						for (AssignedProject assignedProject : employment.getAssignedProjects()) {
+							Vertex projectNode = g.V().has(assignedProject.getTo().getNodeLabel(),
+									Project.KEY_ID,
+									assignedProject.getTo().getNodeId().toString()).next();
+
+							String roles = assignedProject.getRoles().stream().map(r -> r.getName()).collect(Collectors.joining(","));
+
+							g.addE(AssignedProject.LABEL).from(employmentNode).to(projectNode)
+									.property(AssignedProject.KEY_START, assignedProject.getStart().format(DateTimeFormatter.ISO_DATE))
+									.property(AssignedProject.KEY_END,
+											assignedProject.getEnd() != null ? assignedProject.getEnd().format(DateTimeFormatter.ISO_DATE) : null)
+									.property(AssignedProject.KEY_WORKLOAD, String.valueOf(assignedProject.getWorkload()))
+									.property(AssignedProject.KEY_ROLES, roles)
+									.next();
+						}
 					}
 					transaction.commit();
 				}
