@@ -26,8 +26,8 @@ public class SpecialNodeProvider {
 
 	private SpecialNodeProvider() {
 		initCertificates("src/main/resources/data/certificates.yaml");
-		initRoles();
-		initPositions();
+		initRoles("src/main/resources/data/roles.yaml");
+		initPositions("src/main/resources/data/positions.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
 	}
 
@@ -47,29 +47,22 @@ public class SpecialNodeProvider {
 		}
 	}
 
-	public void initRoles() {
-		roles.add(new Role(UUID.randomUUID(), "Frontend Developer"));
-		roles.add(new Role(UUID.randomUUID(), "Backend Developer"));
-		roles.add(new Role(UUID.randomUUID(), "Fullstack Developer"));
-		roles.add(new Role(UUID.randomUUID(), "Software Architect"));
-		roles.add(new Role(UUID.randomUUID(), "Business Analyst"));
-		roles.add(new Role(UUID.randomUUID(), "Requirements Engineer"));
-		roles.add(new Role(UUID.randomUUID(), "Product Owner"));
-		roles.add(new Role(UUID.randomUUID(), "Scrum Master"));
-		roles.add(new Role(UUID.randomUUID(), "Project Manager"));
-		roles.add(new Role(UUID.randomUUID(), "Test Manager"));
-		roles.add(new Role(UUID.randomUUID(), "Software Tester"));
-		roles.add(new Role(UUID.randomUUID(), "Test Automation Engineer"));
+	public void initRoles(String yaml) {
+		try {
+			RoleNodeGenerator roleGenerator = new RoleNodeGenerator(yaml);
+			this.roles.addAll(roleGenerator.generateNodes());
+		} catch (Exception e) {
+			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
+		}
 	}
 
-	public void initPositions() {
-		positions.add(new Position(UUID.randomUUID(), "Business Analyst"));
-		positions.add(new Position(UUID.randomUUID(), "Software Engineer"));
-		positions.add(new Position(UUID.randomUUID(), "Software Architect"));
-		positions.add(new Position(UUID.randomUUID(), "Department Manager"));
-		positions.add(new Position(UUID.randomUUID(), "Project Manager"));
-		positions.add(new Position(UUID.randomUUID(), "Test Manager"));
-		positions.add(new Position(UUID.randomUUID(), "CEO"));
+	public void initPositions(String yaml) {
+		try {
+			PositionNodeGenerator positionGenerator = new PositionNodeGenerator(yaml);
+			this.positions.addAll(positionGenerator.generateNodes());
+		} catch (Exception e) {
+			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
+		}
 	}
 
 	public Certificate getRandomCertificate() {

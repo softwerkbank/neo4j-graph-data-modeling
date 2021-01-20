@@ -2,8 +2,14 @@ package ch.swb.graphgenerator.graph.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Position extends Entity {
 	private String name;
+
+	public Position(@JsonProperty("name") String name) {
+		this(UUID.randomUUID(), name);
+	}
 
 	public Position(UUID id, String name) {
 		super(id);

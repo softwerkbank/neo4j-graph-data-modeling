@@ -14,9 +14,7 @@ public class Certificate extends Entity {
 	private final String authority;
 
 	public Certificate(@JsonProperty("name") String name, @JsonProperty("authority") String authority) {
-		super(UUID.randomUUID());
-		this.name = name;
-		this.authority = authority;
+		this(UUID.randomUUID(), name, authority);
 	}
 
 	public Certificate(UUID id, String name, String authority) {
