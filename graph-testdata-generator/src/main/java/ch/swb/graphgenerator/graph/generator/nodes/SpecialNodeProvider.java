@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.swb.graphgenerator.graph.model.Certificate;
 import ch.swb.graphgenerator.graph.model.Company;
+import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Position;
 import ch.swb.graphgenerator.graph.model.Role;
 
@@ -22,12 +23,14 @@ public class SpecialNodeProvider {
 	private final List<Certificate> certificates = new ArrayList<>();
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
+	private final List<Knowledge> knowledges = new ArrayList<>();
 	private final Company companyForLastEmployment;
 
 	private SpecialNodeProvider() {
 		initCertificates("src/main/resources/data/certificates.yaml");
 		initRoles("src/main/resources/data/roles.yaml");
 		initPositions("src/main/resources/data/positions.yaml");
+		initKnowledges("src/main/resources/data/knowledges.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
 	}
 
@@ -65,9 +68,19 @@ public class SpecialNodeProvider {
 		}
 	}
 
+	private void initKnowledges(String yaml) {
+		try {
+			KnowledgeNodeGenerator knowlegdeGenerator = new KnowledgeNodeGenerator(yaml);
+			this.knowledges.addAll(knowlegdeGenerator.generateNodes());
+		} catch (Exception e) {
+			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
+		}
+
+	}
+
 	public Certificate getRandomCertificate() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.currentTimeMillis());
+				.seed(System.nanoTime());
 		EasyRandom random = new EasyRandom(parameters);
 		int randomIndex = random.nextInt(certificates.size());
 		return certificates.get(randomIndex);
@@ -79,7 +92,7 @@ public class SpecialNodeProvider {
 
 	public Role getRandomRole() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.currentTimeMillis());
+				.seed(System.nanoTime());
 		EasyRandom random = new EasyRandom(parameters);
 		int randomIndex = random.nextInt(roles.size());
 		return roles.get(randomIndex);
@@ -91,7 +104,7 @@ public class SpecialNodeProvider {
 
 	public Position getRandomPosition() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.currentTimeMillis());
+				.seed(System.nanoTime());
 		EasyRandom random = new EasyRandom(parameters);
 		int randomIndex = random.nextInt(positions.size());
 		return positions.get(randomIndex);
