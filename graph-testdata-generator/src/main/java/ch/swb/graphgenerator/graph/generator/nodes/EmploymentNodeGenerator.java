@@ -73,7 +73,7 @@ public class EmploymentNodeGenerator {
 
 	private Company getRandomCompany() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.currentTimeMillis());
+				.seed(System.nanoTime());
 		EasyRandom random = new EasyRandom(parameters);
 		int randomIndex = random.nextInt(companies.size());
 		return companies.get(randomIndex);
