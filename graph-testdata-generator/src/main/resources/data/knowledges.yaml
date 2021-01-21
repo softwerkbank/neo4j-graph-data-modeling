@@ -1,8 +1,22 @@
 - name: Java SE
   description: Java is a object oriented programming language. 
   tags:
+   - Java
+   - Standard Edition
    - programming language
    - object oriented programming
+
+- name: Java EE
+  description: The Enterprise Edition of Java (until Version 8). The standard moved from Oracle to the Eclipse Foundation. For newer versions see Jakarta EE.
+  tags:
+   - Java
+   - Enterprise Edition
+
+- name: Jakarta EE
+  description: The Enterprise Edition of Java (from Version 8). The standard moved from Oracle to the Eclipse Foundation. For older versions see Java EE.
+  tags:
+   - Java
+   - Enterprise Edition
    
 - name: Neo4j
   description: Neo4j is a widespreaded graph database with a property-graph model 
@@ -20,3 +34,116 @@
    - scripting language
    
 - name: Scrum
+
+- name: Risiko Management
+
+- name: ITIL
+
+- name: SAFe
+
+- name: Cloud Computing
+
+- name: UML
+
+- name: Design Patterns
+
+- name: BPMN
+
+- name: DMN
+
+- name: CMMN
+
+- name: Anforderungsanalyse
+
+- name: Geschäftprozessanalyse
+
+- name: Hadoop
+
+- name: Agile Entwicklung
+
+- name: TDD (Test Driven Development)
+
+- name: BDD (Behavior Driven Development)
+
+- name: Cucumber
+  tags:
+   - BDD
+   - Behavior Driven Development
+
+- name: MDA (Model Driven Architecture)
+
+- name: DevOps
+
+- name: Ansible
+  tags:
+   - Konfigurationsmanagement
+   
+- name: Puppet
+  tags:
+   - Konfigurationsmanagement
+
+- name: Chef
+  tags:
+   - Konfigurationsmanagement
+
+- name: Visual Studio
+  tags:
+   - Entwicklungsumgebung
+   - IDE
+
+- name: Visual Studio Code
+  tags:
+   - Entwicklungsumgebung
+   - IDE
+   
+- name: Eclipse
+  tags:
+   - Entwicklungsumgebung
+   - IDE
+   
+- name: Jetbrains IntelliJ IDEA
+  tags:
+   - Entwicklungsumgebung
+   - IDE
+      
+- name: .NET
+
+- name: .NET Core
+
+- name: Maven
+
+- name: Gradle
+
+- name: Git
+
+- name: SVN
+
+- name: Jira
+
+- name: Confluence
+
+- name: Bitbucket
+
+- name: Github
+
+- name: Spring Framework
+
+- name: Spring Boot
+
+- name: Kubernetes
+
+- name: Domain Driven Design (DDD)
+
+- name: HTML
+
+- name: CSS
+
+- name: Angular
+
+- name: React
+
+- name: Vue.js
+
+- name: Node.js
+
+- name: Python

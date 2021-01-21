@@ -3,6 +3,7 @@ package ch.swb.graphgenerator.graph;
 import java.time.format.DateTimeFormatter;
 import java.util.stream.Collectors;
 
+import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversal;
 import org.apache.tinkerpop.gremlin.process.traversal.dsl.graph.GraphTraversalSource;
 import org.apache.tinkerpop.gremlin.structure.Transaction;
 import org.apache.tinkerpop.gremlin.structure.Vertex;
@@ -18,6 +19,7 @@ import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
+import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 
@@ -30,6 +32,7 @@ public class GraphDataRepository {
 
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
+			persistKnowledges(neo4jGraph, graph);
 			persistProjects(neo4jGraph, graph);
 
 			for (Employee employee : graph.getEmployees()) {
@@ -106,6 +109,30 @@ public class GraphDataRepository {
 						.property(Certificate.KEY_AUTHORITY, certificate.getAuthority())
 						.next();
 
+				transaction.commit();
+			}
+		}
+	}
+
+	private void persistKnowledges(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Knowledge knowledge : graph.getKnowledges()) {
+			try (Transaction transaction = neo4jGraph.tx()) {
+				GraphTraversalSource g = neo4jGraph.traversal();
+
+				String tags = knowledge.getTags().stream().collect(Collectors.joining(","));
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Knowledge.LABEL)
+						.property(Knowledge.KEY_ID, knowledge.getId().toString())
+						.property(Knowledge.KEY_NAME, knowledge.getName());
+
+				if (knowledge.getDescription() != null) {
+					traversal.property(Knowledge.KEY_DESCRIPTION, knowledge.getDescription());
+				}
+
+				if (!tags.isBlank()) {
+					traversal.property(Knowledge.KEY_TAGS, tags);
+				}
+
+				traversal.next();
 				transaction.commit();
 			}
 		}

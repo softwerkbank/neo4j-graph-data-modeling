@@ -8,22 +8,21 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Knowledge extends Entity {
+	public static final String LABEL = "Knowledge";
+	public static final String KEY_ID = "id";
+	public static final String KEY_NAME = "name";
+	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_TAGS = "tags";
 
 	private final String name;
 	private String description;
 	private List<String> tags;
 
-//	public Knowledge(@JsonProperty("name") String name) {
-//		this(name, null);
-//	}
-//
-//	public Knowledge(@JsonProperty("name") String name, @JsonProperty("description") String description) {
-//		this(UUID.randomUUID(), name, description);
-//	}
-
 	public Knowledge(@JsonProperty("name") String name, @JsonProperty("description") String description, @JsonProperty("tags") List<String> tags) {
 		this(UUID.randomUUID(), name, description);
-		this.tags = tags;
+		if (tags != null && !tags.isEmpty()) {
+			this.tags = tags;
+		}
 	}
 
 	private Knowledge(UUID id, String name, String description) {

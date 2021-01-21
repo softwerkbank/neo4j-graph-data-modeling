@@ -33,6 +33,7 @@ public class GraphGenerator {
 	public GraphData generateGraph() {
 		generateCompanies();
 		generateCertificates();
+		generateKnowledges();
 		generateProjects();
 		generateEmployeeNodes();
 		generateEmployments();
@@ -96,5 +97,9 @@ public class GraphGenerator {
 
 	private void generateCertificates() {
 		graph.addCertificates(specialNodeProvider.getCertificates().subList(0, parameters.getNumberOfCertificates()));
+	}
+
+	private void generateKnowledges() {
+		graph.addKnowledges(specialNodeProvider.getKnowledges().subList(0, parameters.getNumberOfKnowledges()));
 	}
 }

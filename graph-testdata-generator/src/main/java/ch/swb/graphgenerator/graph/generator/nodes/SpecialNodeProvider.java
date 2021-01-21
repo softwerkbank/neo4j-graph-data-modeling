@@ -114,6 +114,18 @@ public class SpecialNodeProvider {
 		return Collections.unmodifiableList(positions);
 	}
 
+	public Knowledge getRandomKnowledge() {
+		EasyRandomParameters parameters = new EasyRandomParameters()
+				.seed(System.nanoTime());
+		EasyRandom random = new EasyRandom(parameters);
+		int randomIndex = random.nextInt(knowledges.size());
+		return knowledges.get(randomIndex);
+	}
+
+	public List<Knowledge> getKnowledges() {
+		return Collections.unmodifiableList(knowledges);
+	}
+
 	public Company getCompanyForLastEmployment() {
 		return companyForLastEmployment;
 	}
