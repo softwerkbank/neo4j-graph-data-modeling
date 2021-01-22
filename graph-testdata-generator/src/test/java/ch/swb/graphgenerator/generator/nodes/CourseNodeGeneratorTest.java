@@ -23,9 +23,5 @@ public class CourseNodeGeneratorTest {
 		});
 		Condition<Course> containsKnowledges = new Condition<>(c -> c.getKnowledges() != null && c.getKnowledges().size() == 2, "courses transfers knowledge");
 		assertThat(courses).areExactly(3, containsKnowledges);
-
-		Condition<Course> containsPrerequisites = new Condition<>(c -> c.getPrerequisites() != null && c.getPrerequisites().size() == 1,
-				"some courses have prerequisites");
-		assertThat(courses).areExactly(1, containsPrerequisites);
 	}
 }
