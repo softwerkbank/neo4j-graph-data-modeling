@@ -34,6 +34,7 @@ public class GraphGenerator {
 		generateCompanies();
 		generateCertificates();
 		generateKnowledges();
+		generateCourses();
 		generateProjects();
 		generateEmployeeNodes();
 		generateEmployments();
@@ -96,10 +97,18 @@ public class GraphGenerator {
 	}
 
 	private void generateCertificates() {
-		graph.addCertificates(specialNodeProvider.getCertificates().subList(0, parameters.getNumberOfCertificates()));
+		int toIndex = Math.min(parameters.getNumberOfCertificates(), specialNodeProvider.getCertificates().size());
+		graph.addCertificates(specialNodeProvider.getCertificates().subList(0, toIndex));
 	}
 
 	private void generateKnowledges() {
-		graph.addKnowledges(specialNodeProvider.getKnowledges().subList(0, parameters.getNumberOfKnowledges()));
+		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getKnowledges().size());
+		graph.addKnowledges(specialNodeProvider.getKnowledges().subList(0, toIndex));
 	}
+
+	private void generateCourses() {
+		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getCourses().size());
+		graph.addCourses(specialNodeProvider.getCourses().subList(0, toIndex));
+	}
+
 }

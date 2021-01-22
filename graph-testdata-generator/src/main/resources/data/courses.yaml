@@ -31,3 +31,132 @@
    - JavaScript
    - Node.js
    
+- name: Develop Enterprise Java Applications
+  duration: P4D
+  organizer: Skillsight Academy
+  knowledges:
+   - Java EE
+   - Jakarta EE
+   - MicroProfile
+
+- name: Mastering Build Tools
+  duration: P3D
+  organizer: Skillsight Academy
+  knowledges:
+   - Maven
+   - Gradle
+   
+- name: iSAQB Foundation Level Course
+  duration: P3D
+  organizer: Skillsight Academy
+  knowledges:
+   - Design Patterns
+   - Software Architecture
+   
+- name: Becoming a Scrum Master
+  duration: P2D
+  organizer: Agile Company
+  knowledges:
+   - Scrum
+   - Agile development
+   
+- name: Introduction to BDD
+  duration: P3D
+  organizer: Skillsight Academy
+  knowledges:
+   - Cucumber
+   - BDD (Behavior Driven Development)
+   - TDD (Test Driven Development)
+   
+- name: Using Git with Bitbucket efficiently
+  duration: P2D
+  organizer: Skillsight Academy
+  knowledges:
+   - Git
+   - Bitbucket
+   
+- name: Becoming a Java Expert
+  duration: P4D
+  organizer: Skillsight Academy
+  knowledges:
+   - Java SE
+   
+- name: .NET Development for Java developers
+  duration: P3D
+  organizer: Skillsight Academy
+  knowledges:
+   - .NET 
+   - .NET Core
+   - Visual Studio
+   - C#
+   
+- name: Azure Fundamentals
+  duration: P2D
+  organizer: Microsoft
+  knowledges:
+   - Azure
+   - Cloud Computing
+   
+- name: Modelling with UML
+  duration: P4D
+  organizer: Skillsight Academy
+  knowledges:
+   - UML
+   
+- name: Configuration management for administrators
+  duration: P4D
+  organizer: Skillsight Academy
+  knowledges:
+   - Puppet
+   - Ansible
+   - DevOps
+   - Linux
+   
+- name: Orchestrating Microservices with Kubernetes
+  duration: P3D
+  organizer: DevOps Company
+  knowledges:
+   - Kubernetes
+   - DevOps
+
+- name: Web Development using Angular
+  duration: P4D
+  organizer: WebDev Inc.
+  knowledges:
+   - Angular
+   - HTML
+   - CSS
+   - TypeScript
+
+- name: Web Development using React
+  duration: P4D
+  organizer: WebDev Inc.
+  knowledges:
+   - React
+   - HTML
+   - CSS
+   - JavaScript
+   
+- name: Web Development using Vue.js
+  duration: P4D
+  organizer: WebDev Inc.
+  knowledges:
+   - Vue.js
+   - HTML
+   - CSS
+   - JavaScript
+   
+- name: Implementing business processes with Camunda
+  duration: P4D
+  organizer: Business Process Inc.
+  knowledges:
+   - Camunda
+   - BPMN
+   - DMN
+   
+- name: Leading SAFe
+  duration: P3D
+  organizer: Agile Company
+  knowledges:
+   - SAFe
+   - Agile development

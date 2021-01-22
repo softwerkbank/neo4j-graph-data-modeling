@@ -43,9 +43,11 @@
    - Web development
    - scripting language
    
+- name: TypeScript
+
 - name: Scrum
 
-- name: Risiko Management
+- name: Risk management
 
 - name: ITIL
 
@@ -57,19 +59,23 @@
 
 - name: Design Patterns
 
+- name: Software Architecture
+
 - name: BPMN
 
 - name: DMN
 
 - name: CMMN
 
-- name: Anforderungsanalyse
+- name: Camunda
 
-- name: Geschäftprozessanalyse
+- name: Requirements Engineering
+
+- name: Business process analysis
 
 - name: Hadoop
 
-- name: Agile Entwicklung
+- name: Agile development
 
 - name: TDD (Test Driven Development)
 
@@ -80,35 +86,41 @@
    - BDD
    - Behavior Driven Development
 
+- name: Azure
+
 - name: MDA (Model Driven Architecture)
+
+- name: Linux
+
+- name: Windows
 
 - name: DevOps
 
 - name: Ansible
   tags:
-   - Konfigurationsmanagement
+   - Configuration management
    
 - name: Puppet
   tags:
-   - Konfigurationsmanagement
+   - Configuration management
 
 - name: Chef
   tags:
-   - Konfigurationsmanagement
+   - Configuration management
 
 - name: Visual Studio
   tags:
-   - Entwicklungsumgebung
+   - Development environment
    - IDE
 
 - name: Visual Studio Code
   tags:
-   - Entwicklungsumgebung
+   - Development environment
    - IDE
    
 - name: Eclipse
   tags:
-   - Entwicklungsumgebung
+   - Development environment
    - IDE
    
 - name: Jetbrains IntelliJ IDEA

@@ -10,6 +10,7 @@ public class GraphData {
 	private final List<Company> companies = new ArrayList<>();
 	private final List<Certificate> certificates = new ArrayList<>();
 	private final List<Knowledge> knowledges = new ArrayList<>();
+	private final List<Course> courses = new ArrayList<>();
 	private final List<Project> projects = new ArrayList<>();
 
 	public List<Employee> getEmployees() {
@@ -58,6 +59,18 @@ public class GraphData {
 
 	public void addKnowledges(List<Knowledge> knowledges) {
 		this.knowledges.addAll(knowledges);
+	}
+
+	public List<Course> getCourses() {
+		return Collections.unmodifiableList(courses);
+	}
+
+	public void addCourse(Course course) {
+		this.courses.add(course);
+	}
+
+	public void addCourses(List<Course> courses) {
+		this.courses.addAll(courses);
 	}
 
 	public List<Project> getProjects() {

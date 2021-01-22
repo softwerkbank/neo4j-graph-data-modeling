@@ -7,6 +7,13 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Course extends Entity {
+	public static final String LABEL = "Course";
+	public static final String KEY_ID = "id";
+	public static final String KEY_NAME = "name";
+	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_ORGANIZER = "organizer";
+	public static final String KEY_PLATFORM = "platform";
+	public static final String KEY_DURATION = "duration";
 
 	private final String name;
 	private final String organizer;

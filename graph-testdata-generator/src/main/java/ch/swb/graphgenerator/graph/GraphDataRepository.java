@@ -16,6 +16,7 @@ import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdPro
 
 import ch.swb.graphgenerator.graph.model.Certificate;
 import ch.swb.graphgenerator.graph.model.Company;
+import ch.swb.graphgenerator.graph.model.Course;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
@@ -33,6 +34,7 @@ public class GraphDataRepository {
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
 			persistKnowledges(neo4jGraph, graph);
+			persistCourses(neo4jGraph, graph);
 			persistProjects(neo4jGraph, graph);
 
 			for (Employee employee : graph.getEmployees()) {
@@ -133,6 +135,37 @@ public class GraphDataRepository {
 				}
 
 				traversal.next();
+				transaction.commit();
+			}
+		}
+	}
+
+	private void persistCourses(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Course course : graph.getCourses()) {
+			try (Transaction transaction = neo4jGraph.tx()) {
+				GraphTraversalSource g = neo4jGraph.traversal();
+
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Course.LABEL)
+						.property(Course.KEY_ID, course.getId().toString())
+						.property(Course.KEY_NAME, course.getName())
+						.property(Course.KEY_DURATION, course.getDuration())
+						.property(Course.KEY_ORGANIZER, course.getOrganizer());
+
+				if (course.getDescription() != null) {
+					traversal.property(Course.KEY_DESCRIPTION, course.getDescription());
+				}
+
+				if (course.getPlatform() != null) {
+					traversal.property(Course.KEY_PLATFORM, course.getPlatform());
+				}
+
+				Vertex courseNode = traversal.next();
+
+				for (String knowledgeName : course.getKnowledges()) {
+					Vertex knowledgeNode = g.V().has(Knowledge.LABEL, Knowledge.KEY_NAME, knowledgeName).next();
+					g.addE(Constants.COURSE_KNOWLEDGE_LABEL).from(courseNode).to(knowledgeNode).next();
+				}
+
 				transaction.commit();
 			}
 		}
