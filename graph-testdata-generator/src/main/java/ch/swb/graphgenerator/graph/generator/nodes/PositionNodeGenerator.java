@@ -16,8 +16,7 @@ public class PositionNodeGenerator extends YamlNodeGenerator<Position> {
 
 	@Override
 	public List<Position> generateNodes() throws Exception {
-		List<Position> positions = YAMLUtil.getListOfObjects(new File(yaml), Position.class);
-		return positions;
+		return YAMLUtil.getListOfObjects(new File(yaml), Position.class);
 	}
 
 }

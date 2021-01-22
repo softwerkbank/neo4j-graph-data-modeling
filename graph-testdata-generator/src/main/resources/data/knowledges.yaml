@@ -17,13 +17,23 @@
   tags:
    - Java
    - Enterprise Edition
+
+- name: MicroProfile
+  tags: 
+   - Java
+   - Enterprise development
+   - Microservices
    
 - name: Neo4j
   description: Neo4j is a widespreaded graph database with a property-graph model 
   tags:
    - database
-   - Nosql
+   - NoSQL
    - graph database
+
+- name: Graph databases
+  tags:
+   - NoSQL
    
 - name: C#
   description: C# is a object oriented programming language.  

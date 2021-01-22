@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.swb.graphgenerator.graph.model.Certificate;
 import ch.swb.graphgenerator.graph.model.Company;
+import ch.swb.graphgenerator.graph.model.Course;
 import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Position;
 import ch.swb.graphgenerator.graph.model.Role;
@@ -24,6 +25,7 @@ public class SpecialNodeProvider {
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
 	private final List<Knowledge> knowledges = new ArrayList<>();
+	private final List<Course> courses = new ArrayList<>();
 	private final Company companyForLastEmployment;
 
 	private SpecialNodeProvider() {
@@ -31,6 +33,7 @@ public class SpecialNodeProvider {
 		initRoles("src/main/resources/data/roles.yaml");
 		initPositions("src/main/resources/data/positions.yaml");
 		initKnowledges("src/main/resources/data/knowledges.yaml");
+		initCourses("src/main/resources/data/courses.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
 	}
 
@@ -72,6 +75,16 @@ public class SpecialNodeProvider {
 		try {
 			KnowledgeNodeGenerator knowlegdeGenerator = new KnowledgeNodeGenerator(yaml);
 			this.knowledges.addAll(knowlegdeGenerator.generateNodes());
+		} catch (Exception e) {
+			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
+		}
+
+	}
+
+	private void initCourses(String yaml) {
+		try {
+			CourseNodeGenerator courseGenerator = new CourseNodeGenerator(yaml);
+			this.courses.addAll(courseGenerator.generateNodes());
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -124,6 +137,18 @@ public class SpecialNodeProvider {
 
 	public List<Knowledge> getKnowledges() {
 		return Collections.unmodifiableList(knowledges);
+	}
+
+	public Course getRandomCourse() {
+		EasyRandomParameters parameters = new EasyRandomParameters()
+				.seed(System.nanoTime());
+		EasyRandom random = new EasyRandom(parameters);
+		int randomIndex = random.nextInt(courses.size());
+		return courses.get(randomIndex);
+	}
+
+	public List<Course> getCourses() {
+		return Collections.unmodifiableList(courses);
 	}
 
 	public Company getCompanyForLastEmployment() {

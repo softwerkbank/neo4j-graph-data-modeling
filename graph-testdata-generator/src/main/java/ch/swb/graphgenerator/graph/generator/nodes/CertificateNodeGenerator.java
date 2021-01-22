@@ -16,8 +16,7 @@ public class CertificateNodeGenerator extends YamlNodeGenerator<Certificate> {
 
 	@Override
 	public List<Certificate> generateNodes() throws Exception {
-		List<Certificate> certificates = YAMLUtil.getListOfObjects(new File(yaml), Certificate.class);
-		return certificates;
+		return YAMLUtil.getListOfObjects(new File(yaml), Certificate.class);
 	}
 
 }

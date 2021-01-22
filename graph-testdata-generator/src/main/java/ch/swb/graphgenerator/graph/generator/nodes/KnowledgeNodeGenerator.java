@@ -16,8 +16,7 @@ public class KnowledgeNodeGenerator extends YamlNodeGenerator<Knowledge> {
 
 	@Override
 	public List<Knowledge> generateNodes() throws Exception {
-		List<Knowledge> knowledges = YAMLUtil.getListOfObjects(new File(yaml), Knowledge.class);
-		return knowledges;
+		return YAMLUtil.getListOfObjects(new File(yaml), Knowledge.class);
 	}
 
 }

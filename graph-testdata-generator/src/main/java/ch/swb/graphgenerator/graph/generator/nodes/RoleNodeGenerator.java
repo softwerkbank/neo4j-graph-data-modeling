@@ -16,8 +16,7 @@ public class RoleNodeGenerator extends YamlNodeGenerator<Role> {
 
 	@Override
 	public List<Role> generateNodes() throws Exception {
-		List<Role> roles = YAMLUtil.getListOfObjects(new File(yaml), Role.class);
-		return roles;
+		return YAMLUtil.getListOfObjects(new File(yaml), Role.class);
 	}
 
 }

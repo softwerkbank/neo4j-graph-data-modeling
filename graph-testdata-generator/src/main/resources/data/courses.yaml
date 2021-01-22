@@ -1,0 +1,34 @@
+- name: Introduction to Neo4j 4.x
+  description: This course is an introduction to Neo4j 4.x. Including writing Cypher queries, creating nodes and relationships, using indexes and query best practices and importing data.  
+  # ISO-8601 format see https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence- and https://de.wikipedia.org/wiki/ISO_8601
+  duration: P2D
+  organizer: Neo4j 
+  platform: Neo4j GraphAcademy
+  online: true
+  knowledges:
+   - Neo4j
+   - Graph databases
+   
+- name: Developing applications using the Spring framework
+  description: This course shows how to develop applications with the Spring framework
+  # ISO-8601 format see https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence- and https://de.wikipedia.org/wiki/ISO_8601
+  duration: P4D
+  prerequisites: 
+   - Java Programming Skills
+  organizer: Skillsight Academy 
+  online: false 
+  knowledges:
+   - Spring Framework
+   - Spring Boot
+   
+- name: "The complete JavaScript Masterclass: From beginner to expert"
+  description: "Learn JavaScript by example: With many exercises and a lot of practice including Node.js, Webpack etc."
+  # ISO-8601 format see https://docs.oracle.com/javase/8/docs/api/java/time/Duration.html#parse-java.lang.CharSequence- and https://de.wikipedia.org/wiki/ISO_8601
+  duration: P5D
+  organizer: The JavaScript guy
+  platform: Udemy
+  online: true 
+  knowledges:
+   - JavaScript
+   - Node.js
+   

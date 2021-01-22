@@ -13,7 +13,7 @@ import ch.swb.graphgenerator.graph.model.Knowledge;
 public class KnowledgeNodeGeneratorTest {
 
 	@Test
-	void when_generateNodes_then_allRolesFromYAMLAreReturned() throws Exception {
+	void when_generateNodes_then_allKnowledgesFromYAMLAreReturned() throws Exception {
 		KnowledgeNodeGenerator knowledgeGenerator = new KnowledgeNodeGenerator("src/test/resources/data/knowledges.yaml");
 		List<Knowledge> knowledges = knowledgeGenerator.generateNodes();
 
