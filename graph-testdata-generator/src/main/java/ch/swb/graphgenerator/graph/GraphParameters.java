@@ -8,6 +8,7 @@ public class GraphParameters {
 	private int numberOfCertificates;
 	private int numberOfProjects;
 	private int numberOfKnowledges;
+	private int numberOfSkills;
 	private int numberOfCourses;
 
 	private Period averageEmploymentPeriod;
@@ -26,6 +27,7 @@ public class GraphParameters {
 		numberOfCertificates = DefaultGraphParameters.DEFAULT_NUMBER_OF_CERTIFICATES;
 		numberOfProjects = DefaultGraphParameters.DEFAULT_NUMBER_OF_PROJECTS;
 		numberOfKnowledges = DefaultGraphParameters.DEFAULT_NUMBER_OF_KNOWLEDGES;
+		numberOfSkills = DefaultGraphParameters.DEFAULT_NUMBER_OF_SKILLS;
 		numberOfCourses = DefaultGraphParameters.DEFAULT_NUMBER_OF_COURSES;
 
 		// Employment
@@ -75,6 +77,15 @@ public class GraphParameters {
 
 	public int getNumberOfKnowledges() {
 		return numberOfKnowledges;
+	}
+
+	public GraphParameters numberOfSkills(int number) {
+		numberOfSkills = number;
+		return this;
+	}
+
+	public int getNumberOfSkills() {
+		return numberOfSkills;
 	}
 
 	public GraphParameters numberOfCourses(int number) {

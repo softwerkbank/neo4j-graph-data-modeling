@@ -26,6 +26,7 @@ class GraphGeneratorTest {
 		assertThat(graph.getCompanies()).hasSize(defaultParameters.getNumberOfCompanies());
 		assertThat(graph.getCertificates()).hasSize(defaultParameters.getNumberOfCertificates());
 		assertThat(graph.getKnowledges()).hasSize(defaultParameters.getNumberOfKnowledges());
+		assertThat(graph.getSkills()).hasSize(defaultParameters.getNumberOfSkills());
 		assertThat(graph.getCourses()).hasSize(defaultParameters.getNumberOfCourses());
 		assertThat(graph.getProjects()).hasSize(defaultParameters.getNumberOfProjects());
 		assertThat(graph.getEmployees()).hasSize(defaultParameters.getNumberOfEmployees());

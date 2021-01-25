@@ -22,6 +22,7 @@ import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Project;
+import ch.swb.graphgenerator.graph.model.Skill;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 
 public class GraphDataRepository {
@@ -34,6 +35,7 @@ public class GraphDataRepository {
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
 			persistKnowledges(neo4jGraph, graph);
+			persistSkills(neo4jGraph, graph);
 			persistCourses(neo4jGraph, graph);
 			persistProjects(neo4jGraph, graph);
 
@@ -132,6 +134,30 @@ public class GraphDataRepository {
 
 				if (!tags.isBlank()) {
 					traversal.property(Knowledge.KEY_TAGS, tags);
+				}
+
+				traversal.next();
+				transaction.commit();
+			}
+		}
+	}
+
+	private void persistSkills(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Skill skill : graph.getSkills()) {
+			try (Transaction transaction = neo4jGraph.tx()) {
+				GraphTraversalSource g = neo4jGraph.traversal();
+
+				String tags = skill.getTags().stream().collect(Collectors.joining(","));
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Skill.LABEL)
+						.property(Skill.KEY_ID, skill.getId().toString())
+						.property(Skill.KEY_NAME, skill.getName());
+
+				if (skill.getDescription() != null) {
+					traversal.property(Skill.KEY_DESCRIPTION, skill.getDescription());
+				}
+
+				if (!tags.isBlank()) {
+					traversal.property(Skill.KEY_TAGS, tags);
 				}
 
 				traversal.next();

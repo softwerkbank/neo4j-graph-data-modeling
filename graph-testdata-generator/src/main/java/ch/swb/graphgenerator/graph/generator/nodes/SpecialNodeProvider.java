@@ -16,6 +16,7 @@ import ch.swb.graphgenerator.graph.model.Course;
 import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Position;
 import ch.swb.graphgenerator.graph.model.Role;
+import ch.swb.graphgenerator.graph.model.Skill;
 
 public class SpecialNodeProvider {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpecialNodeProvider.class);
@@ -25,6 +26,7 @@ public class SpecialNodeProvider {
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
 	private final List<Knowledge> knowledges = new ArrayList<>();
+	private final List<Skill> skills = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
 	private final Company companyForLastEmployment;
 
@@ -33,6 +35,7 @@ public class SpecialNodeProvider {
 		initRoles("src/main/resources/data/roles.yaml");
 		initPositions("src/main/resources/data/positions.yaml");
 		initKnowledges("src/main/resources/data/knowledges.yaml");
+		initSkills("src/main/resources/data/skills.yaml");
 		initCourses("src/main/resources/data/courses.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
 	}
@@ -75,6 +78,16 @@ public class SpecialNodeProvider {
 		try {
 			KnowledgeNodeGenerator knowlegdeGenerator = new KnowledgeNodeGenerator(yaml);
 			this.knowledges.addAll(knowlegdeGenerator.generateNodes());
+		} catch (Exception e) {
+			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
+		}
+
+	}
+
+	private void initSkills(String yaml) {
+		try {
+			SkillNodeGenerator skillGenerator = new SkillNodeGenerator(yaml);
+			this.skills.addAll(skillGenerator.generateNodes());
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -137,6 +150,18 @@ public class SpecialNodeProvider {
 
 	public List<Knowledge> getKnowledges() {
 		return Collections.unmodifiableList(knowledges);
+	}
+
+	public Skill getRandomSkill() {
+		EasyRandomParameters parameters = new EasyRandomParameters()
+				.seed(System.nanoTime());
+		EasyRandom random = new EasyRandom(parameters);
+		int randomIndex = random.nextInt(skills.size());
+		return skills.get(randomIndex);
+	}
+
+	public List<Skill> getSkills() {
+		return Collections.unmodifiableList(skills);
 	}
 
 	public Course getRandomCourse() {

@@ -1,0 +1,171 @@
+- name: Java SE
+  description: Java is a object oriented programming language. 
+  tags:
+   - Java
+   - Standard Edition
+   - programming language
+   - object oriented programming
+
+- name: Java EE
+  description: The Enterprise Edition of Java (until Version 8). The standard moved from Oracle to the Eclipse Foundation. For newer versions see Jakarta EE.
+  tags:
+   - Java
+   - Enterprise Edition
+
+- name: Jakarta EE
+  description: The Enterprise Edition of Java (from Version 8). The standard moved from Oracle to the Eclipse Foundation. For older versions see Java EE.
+  tags:
+   - Java
+   - Enterprise Edition
+
+- name: MicroProfile
+  tags: 
+   - Java
+   - Enterprise development
+   - Microservices
+   
+- name: Neo4j
+  description: Neo4j is a widespreaded graph database with a property-graph model 
+  tags:
+   - database
+   - NoSQL
+   - graph database
+
+- name: Graph databases
+  tags:
+   - NoSQL
+   
+- name: C#
+  description: C# is a object oriented programming language.  
+   
+- name: JavaScript
+  tags:
+   - Web development
+   - scripting language
+   
+- name: TypeScript
+
+- name: Scrum
+
+- name: Risk management
+
+- name: ITIL
+
+- name: SAFe
+
+- name: Cloud Computing
+
+- name: UML
+
+- name: Design Patterns
+
+- name: Software Architecture
+
+- name: BPMN
+
+- name: DMN
+
+- name: CMMN
+
+- name: Camunda
+
+- name: Requirements Engineering
+
+- name: Business process analysis
+
+- name: Hadoop
+
+- name: Agile development
+
+- name: TDD (Test Driven Development)
+
+- name: BDD (Behavior Driven Development)
+
+- name: Cucumber
+  tags:
+   - BDD
+   - Behavior Driven Development
+
+- name: Azure
+
+- name: MDA (Model Driven Architecture)
+
+- name: Linux
+
+- name: Windows
+
+- name: DevOps
+
+- name: Ansible
+  tags:
+   - Configuration management
+   
+- name: Puppet
+  tags:
+   - Configuration management
+
+- name: Chef
+  tags:
+   - Configuration management
+
+- name: Visual Studio
+  tags:
+   - Development environment
+   - IDE
+
+- name: Visual Studio Code
+  tags:
+   - Development environment
+   - IDE
+   
+- name: Eclipse
+  tags:
+   - Development environment
+   - IDE
+   
+- name: Jetbrains IntelliJ IDEA
+  tags:
+   - Entwicklungsumgebung
+   - IDE
+      
+- name: .NET
+
+- name: .NET Core
+
+- name: Maven
+
+- name: Gradle
+
+- name: Git
+
+- name: SVN
+
+- name: Jira
+
+- name: Confluence
+
+- name: Bitbucket
+
+- name: Github
+
+- name: Spring Framework
+
+- name: Spring Boot
+
+- name: Kubernetes
+
+- name: Domain Driven Design (DDD)
+
+- name: HTML
+
+- name: CSS
+
+- name: Angular
+
+- name: React
+
+- name: Vue.js
+
+- name: Node.js
+
+- name: Python

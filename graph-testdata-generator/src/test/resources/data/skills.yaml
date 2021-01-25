@@ -1,0 +1,22 @@
+- name: Java SE
+  description: Java is a object oriented programming language. 
+  tags:
+   - programming language
+   - object oriented programming
+   
+- name: Neo4j
+  description: Neo4j is a widespreaded graph database with a property-graph model 
+  tags:
+   - database
+   - Nosql
+   - graph database
+   
+- name: C#
+  description: C# is a object oriented programming language.  
+   
+- name: JavaScript
+  tags:
+   - Web development
+   - scripting language
+   
+- name: Scrum
