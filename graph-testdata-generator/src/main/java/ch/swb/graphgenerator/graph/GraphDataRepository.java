@@ -107,12 +107,16 @@ public class GraphDataRepository {
 			try (Transaction transaction = neo4jGraph.tx()) {
 				GraphTraversalSource g = neo4jGraph.traversal();
 
-				g.addV(Certificate.LABEL)
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Certificate.LABEL)
 						.property(Certificate.KEY_ID, certificate.getId().toString())
 						.property(Certificate.KEY_NAME, certificate.getName())
-						.property(Certificate.KEY_AUTHORITY, certificate.getAuthority())
-						.next();
+						.property(Certificate.KEY_AUTHORITY, certificate.getAuthority());
 
+				if (certificate.getValidity() != null) {
+					traversal.property(Certificate.KEY_VALIDITY, certificate.getValidity());
+				}
+
+				traversal.next();
 				transaction.commit();
 			}
 		}

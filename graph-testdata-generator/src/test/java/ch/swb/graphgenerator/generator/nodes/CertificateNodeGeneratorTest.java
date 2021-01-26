@@ -21,5 +21,6 @@ public class CertificateNodeGeneratorTest {
 			assertThat(certificate.getName()).isNotBlank();
 			assertThat(certificate.getAuthority()).isNotBlank();
 		});
+		assertThat(certificates.get(1).getValidity()).isNotBlank();
 	}
 }
