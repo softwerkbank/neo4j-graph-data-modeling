@@ -21,6 +21,8 @@ public class GraphParameters {
 	private Period maxPeriodProjectAssignment;
 	private int maxRolesProject;
 
+	private int certificateEveryNumberOfYears;
+
 	public GraphParameters() {
 		numberOfEmployees = DefaultGraphParameters.DEFAULT_NUMBER_OF_EMPLOYEES;
 		numberOfCompanies = DefaultGraphParameters.DEFAULT_NUMBER_OF_COMPANIES;
@@ -41,6 +43,9 @@ public class GraphParameters {
 		minPeriodProjectAssignment = DefaultGraphParameters.DEFAULT_MIN_PERIOD_OF_PROJECT_ASSIGNMENT;
 		maxPeriodProjectAssignment = DefaultGraphParameters.DEFAULT_MAX_PERIOD_OF_PROJECT_ASSIGNMENT;
 		maxRolesProject = DefaultGraphParameters.DEFAULT_MAX_ROLES_PROJECT;
+
+		// Certificate
+		certificateEveryNumberOfYears = DefaultGraphParameters.DEFAULT_CERTIFICATE_EVERY_NUMBER_OF_YEARS;
 	}
 
 	public GraphParameters numberOfEmployees(int number) {
@@ -176,5 +181,14 @@ public class GraphParameters {
 
 	public int getMaxRolesProject() {
 		return maxRolesProject;
+	}
+
+	public GraphParameters certificateEveryNumberOfYears(int number) {
+		certificateEveryNumberOfYears = number;
+		return this;
+	}
+
+	public int getCertifcateEveryNumberOfYears() {
+		return certificateEveryNumberOfYears;
 	}
 }

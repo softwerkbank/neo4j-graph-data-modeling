@@ -3,9 +3,12 @@ package ch.swb.graphgenerator.graph.model;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+
+import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 
 public class Employee extends Entity {
 	public static final String LABEL = "Employee";
@@ -21,6 +24,8 @@ public class Employee extends Entity {
 	private final String loginname;
 	private final Set<Employment> employments;
 
+	private final Set<PassesExam> passedExams;
+
 	public Employee(UUID id, String firstname, String lastname, LocalDate dateOfBirth) {
 		super(id);
 		this.firstname = firstname;
@@ -28,6 +33,7 @@ public class Employee extends Entity {
 		this.dateOfBirth = dateOfBirth;
 		this.loginname = computeLoginname();
 		this.employments = new HashSet<>();
+		this.passedExams = new HashSet<>();
 	}
 
 	public String getFirstname() {
@@ -67,6 +73,23 @@ public class Employee extends Entity {
 	private String computeLoginname() {
 		return lastname.length() > 3 ? lastname.substring(0, 4).concat(firstname.substring(0, 2)).toLowerCase()
 				: lastname.concat(firstname.substring(0, 2)).toLowerCase();
+	}
+
+	public Employment getFirstEmployment() {
+		Comparator<Employment> comparatorByStartDate = (a, b) -> a.getStart().compareTo(b.getStart());
+		return employments.stream().sorted(comparatorByStartDate).findFirst().get();
+	}
+
+	public Set<PassesExam> getPassedExams() {
+		return Collections.unmodifiableSet(this.passedExams);
+	}
+
+	public void addPassedExam(PassesExam passedExam) {
+		this.passedExams.add(passedExam);
+	}
+
+	public void addPassedExams(Collection<PassesExam> passedExams) {
+		this.passedExams.addAll(passedExams);
 	}
 
 }

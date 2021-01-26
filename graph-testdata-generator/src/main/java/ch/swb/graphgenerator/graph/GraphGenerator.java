@@ -2,6 +2,7 @@ package ch.swb.graphgenerator.graph;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.github.javafaker.Faker;
@@ -10,12 +11,14 @@ import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.PassesExamGenerator;
 import ch.swb.graphgenerator.graph.model.Company;
 import ch.swb.graphgenerator.graph.model.Employee;
 import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
+import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 
 public class GraphGenerator {
 	private final GraphParameters parameters;
@@ -37,13 +40,14 @@ public class GraphGenerator {
 		generateSkills();
 		generateCourses();
 		generateProjects();
-		generateEmployeeNodes();
+		generateEmployees();
 		generateEmployments();
 		generateAssignedProjects(graph.getProjects());
+		generatePassesExam();
 		return graph;
 	}
 
-	private void generateEmployeeNodes() {
+	private void generateEmployees() {
 		EmployeeNodeGenerator employeeGenerator = new EmployeeNodeGenerator();
 		List<Employee> employees = employeeGenerator.generateNodes(parameters.getNumberOfEmployees());
 		graph.addEmployees(employees);
@@ -80,6 +84,7 @@ public class GraphGenerator {
 					parameters.getFirstEmploymentAfter(),
 					parameters.getJitterFirstEmployment());
 			List<Employment> employments = employmentGenerator.generateEmploymentsForEmployee();
+			Optional<Employment> firstEmployment = employments.stream().findFirst();
 			employee.addEmployments(employments);
 		}
 	}
@@ -94,6 +99,16 @@ public class GraphGenerator {
 				List<AssignedProject> assignedProjects = assignedProjectGenerator.generateAssignedProjects(projects);
 				employment.addAssignedProjects(assignedProjects);
 			}
+		}
+	}
+
+	private void generatePassesExam() {
+		for (Employee employee : graph.getEmployees()) {
+			PassesExamGenerator passesExamGenerator = new PassesExamGenerator(employee,
+					employee.getFirstEmployment().getStart(),
+					parameters.getCertifcateEveryNumberOfYears());
+			List<PassesExam> passedExams = passesExamGenerator.generatePassedExams();
+			employee.addPassedExams(passedExams);
 		}
 	}
 

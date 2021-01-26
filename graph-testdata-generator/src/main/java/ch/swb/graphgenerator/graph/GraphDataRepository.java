@@ -24,6 +24,7 @@ import ch.swb.graphgenerator.graph.model.Knowledge;
 import ch.swb.graphgenerator.graph.model.Project;
 import ch.swb.graphgenerator.graph.model.Skill;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
+import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 
 public class GraphDataRepository {
 
@@ -80,6 +81,19 @@ public class GraphDataRepository {
 									.next();
 						}
 					}
+
+					for (PassesExam passedExam : employee.getPassedExams()) {
+						Vertex certificateNode = g.V().has(passedExam.getTo().getNodeLabel(),
+								Certificate.KEY_ID,
+								passedExam.getTo().getNodeId().toString()).next();
+
+						g.addE(PassesExam.LABEL).from(employeeNode).to(certificateNode)
+								.property(PassesExam.KEY_EXAMINATION_DATE, passedExam.getExaminationDate().format(DateTimeFormatter.ISO_DATE))
+								.property(PassesExam.KEY_EXAMINATION_INSTITUTE, passedExam.getExaminationInstitute())
+								.property(PassesExam.KEY_EXAM, passedExam.getExam())
+								.next();
+					}
+
 					transaction.commit();
 				}
 			}
