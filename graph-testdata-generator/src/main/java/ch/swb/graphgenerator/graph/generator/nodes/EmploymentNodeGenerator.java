@@ -23,6 +23,8 @@ public class EmploymentNodeGenerator {
 	private final SpecialNodeProvider specialNodeProvider = SpecialNodeProvider.getInstance();
 	private final List<Company> companies;
 
+	private UUID lastCompany = null;
+
 	public EmploymentNodeGenerator(LocalDate employeeBirthday, List<Company> companies, Period averageEmploymentPeriod, Period firstEmploymentAfter,
 			Period jitterFirstEmployment) {
 		this.today = LocalDate.now();
@@ -75,8 +77,13 @@ public class EmploymentNodeGenerator {
 		EasyRandomParameters parameters = new EasyRandomParameters()
 				.seed(System.nanoTime());
 		EasyRandom random = new EasyRandom(parameters);
-		int randomIndex = random.nextInt(companies.size());
-		return companies.get(randomIndex);
+		Company company = null;
+		do {
+			int randomIndex = random.nextInt(companies.size());
+			company = companies.get(randomIndex);
+		} while (company.getId().equals(lastCompany));
+		lastCompany = company.getId();
+		return company;
 	}
 
 	private LocalDate calculateStartDate(LocalDate lastEndDate) {
