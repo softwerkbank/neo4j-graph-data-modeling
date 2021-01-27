@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.generator.nodes;
+package ch.swb.graphgenerator.graph.generator.nodes;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

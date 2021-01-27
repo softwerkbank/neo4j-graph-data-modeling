@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.generator.relationships;
+package ch.swb.graphgenerator.graph.generator.relationships;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
