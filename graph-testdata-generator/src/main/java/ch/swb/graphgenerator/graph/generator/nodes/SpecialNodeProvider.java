@@ -29,8 +29,12 @@ public class SpecialNodeProvider {
 	private final List<Skill> skills = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
 	private final Company companyForLastEmployment;
+	private final EasyRandom random;
 
 	private SpecialNodeProvider() {
+		EasyRandomParameters parameters = new EasyRandomParameters()
+				.seed(System.nanoTime());
+		random = new EasyRandom(parameters);
 		initCertificates("src/main/resources/data/certificates.yaml");
 		initRoles("src/main/resources/data/roles.yaml");
 		initPositions("src/main/resources/data/positions.yaml");
@@ -105,9 +109,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Certificate getRandomCertificate() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(certificates.size());
 		return certificates.get(randomIndex);
 	}
@@ -117,9 +119,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Role getRandomRole() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(roles.size());
 		return roles.get(randomIndex);
 	}
@@ -129,9 +129,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Position getRandomPosition() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(positions.size());
 		return positions.get(randomIndex);
 	}
@@ -141,9 +139,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Knowledge getRandomKnowledge() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(knowledges.size());
 		return knowledges.get(randomIndex);
 	}
@@ -153,9 +149,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Skill getRandomSkill() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(skills.size());
 		return skills.get(randomIndex);
 	}
@@ -165,9 +159,7 @@ public class SpecialNodeProvider {
 	}
 
 	public Course getRandomCourse() {
-		EasyRandomParameters parameters = new EasyRandomParameters()
-				.seed(System.nanoTime());
-		EasyRandom random = new EasyRandom(parameters);
+		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(courses.size());
 		return courses.get(randomIndex);
 	}

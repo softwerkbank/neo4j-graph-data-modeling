@@ -160,3 +160,308 @@
   knowledges:
    - SAFe
    - Agile development
+   
+### One day courses ###
+- name: One day course
+  duration: P1D
+  organizer: One day trainings
+  knowledges:
+   - One day knowledge
+   
+- name: One day course
+  duration: P1D
+  organizer: One day courses
+  knowledges:
+   - One day knowledge
+   
+- name: One day course
+  duration: P1D
+  organizer: One day company
+  knowledges:
+   - One day knowledge
+   
+- name: One day course
+  duration: P1D
+  organizer: One day solutions
+  knowledges:
+   - One day knowledge
+   
+- name: One day course
+  duration: P1D
+  organizer: One day Inc.
+  knowledges:
+   - One day knowledge
+   
+- name: 1 day course
+  duration: P1D
+  organizer: 1 day trainings
+  knowledges:
+   - One day knowledge
+   
+- name: 1 day course
+  duration: P1D
+  organizer: 1 day courses
+  knowledges:
+   - One day knowledge
+   
+- name: 1 day course
+  duration: P1D
+  organizer: 1 day company
+  knowledges:
+   - One day knowledge
+   
+- name: 1 day course
+  duration: P1D
+  organizer: 1 day solutions
+  knowledges:
+   - One day knowledge
+   
+- name: 1 day course
+  duration: P1D
+  organizer: 1 day Inc
+  knowledges:
+   - One day knowledge
+   
+### Two day courses ###
+- name: Two day course
+  duration: P2D
+  organizer: Two day trainings
+  knowledges:
+   - Two day knowledge
+   
+- name: Two day course
+  duration: P2D
+  organizer: Two day courses
+  knowledges:
+   - Two day knowledge
+   
+- name: Two day course
+  duration: P2D
+  organizer: Two day company
+  knowledges:
+   - Two day knowledge
+   
+- name: Two day course
+  duration: P2D
+  organizer: Two day solutions
+  knowledges:
+   - Two day knowledge
+   
+- name: Two day course
+  duration: P2D
+  organizer: Two day Inc.
+  knowledges:
+   - Two day knowledge
+   
+- name: 2 day course
+  duration: P2D
+  organizer: 2 day trainings
+  knowledges:
+   - Two day knowledge
+   
+- name: 2 day course
+  duration: P2D
+  organizer: 2 day courses
+  knowledges:
+   - Two day knowledge
+   
+- name: 2 day course
+  duration: P2D
+  organizer: 2 day company
+  knowledges:
+   - Two day knowledge
+   
+- name: 2 day course
+  duration: P2D
+  organizer: 2 day solutions
+  knowledges:
+   - Two day knowledge
+   
+- name: 2 day course
+  duration: P2D
+  organizer: 2 day Inc
+  knowledges:
+   - Two day knowledge
+   
+### Three day courses ###
+- name: Three day course
+  duration: P3D
+  organizer: Three day trainings
+  knowledges:
+   - Three day knowledge
+   
+- name: Three day course
+  duration: P3D
+  organizer: Three day courses
+  knowledges:
+   - Three day knowledge
+   
+- name: Three day course
+  duration: P3D
+  organizer: Three day company
+  knowledges:
+   - Three day knowledge
+   
+- name: Three day course
+  duration: P3D
+  organizer: Three day solutions
+  knowledges:
+   - Three day knowledge
+   
+- name: Three day course
+  duration: P3D
+  organizer: Three day Inc.
+  knowledges:
+   - Three day knowledge
+   
+- name: 3 day course
+  duration: P3D
+  organizer: 3 day trainings
+  knowledges:
+   - Three day knowledge
+   
+- name: 3 day course
+  duration: P3D
+  organizer: 3 day courses
+  knowledges:
+   - Three day knowledge
+   
+- name: 3 day course
+  duration: P3D
+  organizer: 3 day company
+  knowledges:
+   - Three day knowledge
+   
+- name: 3 day course
+  duration: P3D
+  organizer: 3 day solutions
+  knowledges:
+   - Three day knowledge
+   
+- name: 3 day course
+  duration: P3D
+  organizer: 3 day Inc
+  knowledges:
+   - Three day knowledge
+   
+### Four day courses ###
+- name: Four day course
+  duration: P4D
+  organizer: Four day trainings
+  knowledges:
+   - Four day knowledge
+   
+- name: Four day course
+  duration: P4D
+  organizer: Four day courses
+  knowledges:
+   - Four day knowledge
+   
+- name: Four day course
+  duration: P4D
+  organizer: Four day company
+  knowledges:
+   - Four day knowledge
+   
+- name: Four day course
+  duration: P4D
+  organizer: Four day solutions
+  knowledges:
+   - Four day knowledge
+   
+- name: Four day course
+  duration: P4D
+  organizer: Four day Inc.
+  knowledges:
+   - Four day knowledge
+   
+- name: 4 day course
+  duration: P4D
+  organizer: 4 day trainings
+  knowledges:
+   - Four day knowledge
+   
+- name: 4 day course
+  duration: P4D
+  organizer: 4 day courses
+  knowledges:
+   - Four day knowledge
+   
+- name: 4 day course
+  duration: P4D
+  organizer: 4 day company
+  knowledges:
+   - Four day knowledge
+   
+- name: 4 day course
+  duration: P4D
+  organizer: 4 day solutions
+  knowledges:
+   - Four day knowledge
+   
+- name: 4 day course
+  duration: P4D
+  organizer: 4 day Inc
+  knowledges:
+   - Four day knowledge
+   
+### Five day courses ###
+- name: Five day course
+  duration: P5D
+  organizer: Five day trainings
+  knowledges:
+   - Five day knowledge
+   
+- name: Five day course
+  duration: P5D
+  organizer: Five day courses
+  knowledges:
+   - Five day knowledge
+   
+- name: Five day course
+  duration: P5D
+  organizer: Five day company
+  knowledges:
+   - Five day knowledge
+   
+- name: Five day course
+  duration: P5D
+  organizer: Five day solutions
+  knowledges:
+   - Five day knowledge
+   
+- name: Five day course
+  duration: P5D
+  organizer: Five day Inc.
+  knowledges:
+   - Five day knowledge
+   
+- name: 5 day course
+  duration: P5D
+  organizer: 5 day trainings
+  knowledges:
+   - Five day knowledge
+   
+- name: 5 day course
+  duration: P5D
+  organizer: 5 day courses
+  knowledges:
+   - Five day knowledge
+   
+- name: 5 day course
+  duration: P5D
+  organizer: 5 day company
+  knowledges:
+   - Five day knowledge
+   
+- name: 5 day course
+  duration: P5D
+  organizer: 5 day solutions
+  knowledges:
+   - Five day knowledge
+   
+- name: 5 day course
+  duration: P5D
+  organizer: 5 day Inc
+  knowledges:
+   - Five day knowledge
