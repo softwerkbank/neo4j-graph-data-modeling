@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.graph.model;
+package ch.swb.graphgenerator.graph.model.nodes;
 
 import java.time.LocalDate;
 import java.util.Collections;

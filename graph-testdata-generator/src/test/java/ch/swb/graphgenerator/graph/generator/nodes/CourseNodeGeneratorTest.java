@@ -8,7 +8,7 @@ import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.CourseNodeGenerator;
-import ch.swb.graphgenerator.graph.model.Course;
+import ch.swb.graphgenerator.graph.model.nodes.Course;
 
 public class CourseNodeGeneratorTest {
 

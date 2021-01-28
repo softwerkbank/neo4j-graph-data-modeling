@@ -12,11 +12,11 @@ import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassesExamGenerator;
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Employee;
-import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
-import ch.swb.graphgenerator.graph.model.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 

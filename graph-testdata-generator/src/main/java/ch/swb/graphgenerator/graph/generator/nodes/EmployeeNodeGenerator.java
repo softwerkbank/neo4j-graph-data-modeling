@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import ch.swb.graphgenerator.graph.model.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
 
 public class EmployeeNodeGenerator extends AbstractNodeGenerator<Employee> {
 

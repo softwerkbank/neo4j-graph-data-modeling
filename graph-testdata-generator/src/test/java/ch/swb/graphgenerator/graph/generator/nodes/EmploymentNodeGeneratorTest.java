@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import ch.swb.graphgenerator.graph.DefaultGraphParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
 
 class EmploymentNodeGeneratorTest {
 

@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
-import ch.swb.graphgenerator.graph.model.Employment;
-import ch.swb.graphgenerator.graph.model.Project;
-import ch.swb.graphgenerator.graph.model.Role;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Role;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
 

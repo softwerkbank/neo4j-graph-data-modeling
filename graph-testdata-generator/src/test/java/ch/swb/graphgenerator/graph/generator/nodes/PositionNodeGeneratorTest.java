@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.PositionNodeGenerator;
-import ch.swb.graphgenerator.graph.model.Position;
+import ch.swb.graphgenerator.graph.model.nodes.Position;
 
 public class PositionNodeGeneratorTest {
 

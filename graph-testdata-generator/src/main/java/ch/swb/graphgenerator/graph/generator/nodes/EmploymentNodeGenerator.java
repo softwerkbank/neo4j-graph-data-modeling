@@ -10,8 +10,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
 
 public class EmploymentNodeGenerator {
 

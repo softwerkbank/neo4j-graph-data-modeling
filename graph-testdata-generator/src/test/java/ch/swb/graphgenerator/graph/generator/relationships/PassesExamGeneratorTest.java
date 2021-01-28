@@ -10,7 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.relationships.PassesExamGenerator;
-import ch.swb.graphgenerator.graph.model.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 
 @DisplayName("Testing the generation of \"PASSES_EXAM\" relationships")

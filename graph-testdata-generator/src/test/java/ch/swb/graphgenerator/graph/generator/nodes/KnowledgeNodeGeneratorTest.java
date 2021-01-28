@@ -8,7 +8,7 @@ import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.KnowledgeNodeGenerator;
-import ch.swb.graphgenerator.graph.model.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
 
 public class KnowledgeNodeGeneratorTest {
 

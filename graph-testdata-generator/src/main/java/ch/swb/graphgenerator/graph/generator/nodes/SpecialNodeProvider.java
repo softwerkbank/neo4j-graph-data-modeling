@@ -10,13 +10,13 @@ import org.jeasy.random.EasyRandomParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.swb.graphgenerator.graph.model.Certificate;
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Course;
-import ch.swb.graphgenerator.graph.model.Knowledge;
-import ch.swb.graphgenerator.graph.model.Position;
-import ch.swb.graphgenerator.graph.model.Role;
-import ch.swb.graphgenerator.graph.model.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Course;
+import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Position;
+import ch.swb.graphgenerator.graph.model.nodes.Role;
+import ch.swb.graphgenerator.graph.model.nodes.Skill;
 
 public class SpecialNodeProvider {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpecialNodeProvider.class);

@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.CertificateNodeGenerator;
-import ch.swb.graphgenerator.graph.model.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 
 public class CertificateNodeGeneratorTest {
 

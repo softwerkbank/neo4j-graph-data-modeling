@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import ch.swb.graphgenerator.common.YAMLUtil;
-import ch.swb.graphgenerator.graph.model.Position;
+import ch.swb.graphgenerator.graph.model.nodes.Position;
 
 public class PositionNodeGenerator extends YamlNodeGenerator<Position> {
 

@@ -12,9 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Employment;
-import ch.swb.graphgenerator.graph.model.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 
 @DisplayName("Testing the generation of \"ASSIGNED_PROJECT\" relationships")

@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import ch.swb.graphgenerator.common.YAMLUtil;
-import ch.swb.graphgenerator.graph.model.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Skill;
 
 public class SkillNodeGenerator extends YamlNodeGenerator<Skill> {
 

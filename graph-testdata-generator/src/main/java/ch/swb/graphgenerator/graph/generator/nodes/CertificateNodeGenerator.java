@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import ch.swb.graphgenerator.common.YAMLUtil;
-import ch.swb.graphgenerator.graph.model.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 
 public class CertificateNodeGenerator extends YamlNodeGenerator<Certificate> {
 

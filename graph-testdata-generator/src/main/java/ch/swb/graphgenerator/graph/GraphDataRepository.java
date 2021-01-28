@@ -14,15 +14,15 @@ import org.neo4j.driver.GraphDatabase;
 import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph;
 import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider;
 
-import ch.swb.graphgenerator.graph.model.Certificate;
-import ch.swb.graphgenerator.graph.model.Company;
-import ch.swb.graphgenerator.graph.model.Course;
-import ch.swb.graphgenerator.graph.model.Employee;
-import ch.swb.graphgenerator.graph.model.Employment;
 import ch.swb.graphgenerator.graph.model.GraphData;
-import ch.swb.graphgenerator.graph.model.Knowledge;
-import ch.swb.graphgenerator.graph.model.Project;
-import ch.swb.graphgenerator.graph.model.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Course;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Employment;
+import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Skill;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import ch.swb.graphgenerator.graph.model.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 
 public class ParticipatedCourseGeneratorTest {

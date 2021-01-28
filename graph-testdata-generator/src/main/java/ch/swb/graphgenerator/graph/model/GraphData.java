@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Company;
+import ch.swb.graphgenerator.graph.model.nodes.Course;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Skill;
+
 public class GraphData {
 
 	private final List<Employee> employees = new ArrayList<>();

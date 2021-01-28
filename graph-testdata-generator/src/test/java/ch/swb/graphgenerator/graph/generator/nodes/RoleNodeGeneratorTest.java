@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.RoleNodeGenerator;
-import ch.swb.graphgenerator.graph.model.Role;
+import ch.swb.graphgenerator.graph.model.nodes.Role;
 
 public class RoleNodeGeneratorTest {
 

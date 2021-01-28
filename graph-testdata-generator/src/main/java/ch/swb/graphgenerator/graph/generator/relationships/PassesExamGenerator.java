@@ -8,8 +8,8 @@ import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
-import ch.swb.graphgenerator.graph.model.Certificate;
-import ch.swb.graphgenerator.graph.model.Employee;
+import ch.swb.graphgenerator.graph.model.nodes.Certificate;
+import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
 
