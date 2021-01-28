@@ -11,14 +11,16 @@ import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
-import ch.swb.graphgenerator.graph.generator.relationships.PassesExamGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
-import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
+import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
+import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
 
 public class GraphGenerator {
 	private final GraphParameters parameters;
@@ -43,7 +45,7 @@ public class GraphGenerator {
 		generateEmployees();
 		generateEmployments();
 		generateAssignedProjects(graph.getProjects());
-		generatePassesExam();
+		generatePassedExams();
 		return graph;
 	}
 
@@ -102,13 +104,23 @@ public class GraphGenerator {
 		}
 	}
 
-	private void generatePassesExam() {
+	private void generatePassedExams() {
 		for (Employee employee : graph.getEmployees()) {
-			PassesExamGenerator passesExamGenerator = new PassesExamGenerator(employee,
+			PassedExamGenerator passedExamGenerator = new PassedExamGenerator(employee,
 					employee.getFirstEmployment().getStart(),
 					parameters.getCertifcateEveryNumberOfYears());
-			List<PassesExam> passedExams = passesExamGenerator.generatePassedExams();
+			List<PassedExam> passedExams = passedExamGenerator.generatePassedExams();
 			employee.addPassedExams(passedExams);
+		}
+	}
+
+	private void generateParticipatedCourses() {
+		for (Employee employee : graph.getEmployees()) {
+			ParticipatedCourseGenerator participatedCourseGenerator = new ParticipatedCourseGenerator(employee,
+					employee.getFirstEmployment().getStart(),
+					parameters.getCertifcateEveryNumberOfYears());
+			List<ParticipatedCourse> participatedCourses = participatedCourseGenerator.generateParticipatedCourses();
+			employee.addParticipatedCourses(participatedCourses);
 		}
 	}
 

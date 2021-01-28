@@ -10,23 +10,23 @@ import org.jeasy.random.EasyRandomParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
-import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
+import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
 
-public class PassesExamGenerator {
+public class PassedExamGenerator {
 
 	private final Employee employee;
 	private final LocalDate startOfFirstEmployment;
 	private final int oneCertificateEveryYears;
 
-	public PassesExamGenerator(Employee employee, LocalDate startOfFirstEmployment, int oneCertificateEveryYears) {
+	public PassedExamGenerator(Employee employee, LocalDate startOfFirstEmployment, int oneCertificateEveryYears) {
 		this.employee = employee;
 		this.startOfFirstEmployment = startOfFirstEmployment;
 		this.oneCertificateEveryYears = oneCertificateEveryYears;
 	}
 
-	public List<PassesExam> generatePassedExams() {
-		List<PassesExam> passedExams = new ArrayList<>();
+	public List<PassedExam> generatePassedExams() {
+		List<PassedExam> passedExams = new ArrayList<>();
 
 		RelationshipNode from = new RelationshipNode(Employee.LABEL, employee.getId());
 		long numberOfCertificates = startOfFirstEmployment.until(LocalDate.now()).toTotalMonths() / 12 / oneCertificateEveryYears;
@@ -34,7 +34,7 @@ public class PassesExamGenerator {
 			Certificate certificate = SpecialNodeProvider.getInstance().getRandomCertificate();
 			RelationshipNode to = new RelationshipNode(Certificate.LABEL, certificate.getId());
 
-			passedExams.add(new PassesExam(from, to, getRandomLocalDate(), certificate.getName().concat(" Exam"), certificate.getAuthority()));
+			passedExams.add(new PassedExam(from, to, getRandomLocalDate(), certificate.getName().concat(" Exam"), certificate.getAuthority()));
 		}
 
 		return passedExams;

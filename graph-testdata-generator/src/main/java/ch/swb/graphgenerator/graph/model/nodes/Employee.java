@@ -8,7 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import ch.swb.graphgenerator.graph.model.relationships.PassesExam;
+import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
+import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
 
 public class Employee extends Entity {
 	public static final String LABEL = "Employee";
@@ -22,9 +23,10 @@ public class Employee extends Entity {
 	private final String lastname;
 	private final LocalDate dateOfBirth;
 	private final String loginname;
-	private final Set<Employment> employments;
 
-	private final Set<PassesExam> passedExams;
+	private final Set<Employment> employments;
+	private final Set<PassedExam> passedExams;
+	private final Set<ParticipatedCourse> participatedCourses;
 
 	public Employee(UUID id, String firstname, String lastname, LocalDate dateOfBirth) {
 		super(id);
@@ -34,6 +36,7 @@ public class Employee extends Entity {
 		this.loginname = computeLoginname();
 		this.employments = new HashSet<>();
 		this.passedExams = new HashSet<>();
+		this.participatedCourses = new HashSet<>();
 	}
 
 	public String getFirstname() {
@@ -80,16 +83,28 @@ public class Employee extends Entity {
 		return employments.stream().sorted(comparatorByStartDate).findFirst().get();
 	}
 
-	public Set<PassesExam> getPassedExams() {
+	public Set<PassedExam> getPassedExams() {
 		return Collections.unmodifiableSet(this.passedExams);
 	}
 
-	public void addPassedExam(PassesExam passedExam) {
+	public void addPassedExam(PassedExam passedExam) {
 		this.passedExams.add(passedExam);
 	}
 
-	public void addPassedExams(Collection<PassesExam> passedExams) {
+	public void addPassedExams(Collection<PassedExam> passedExams) {
 		this.passedExams.addAll(passedExams);
+	}
+
+	public Set<ParticipatedCourse> getParticipatedCourses() {
+		return participatedCourses;
+	}
+
+	public void addParticipatedCourse(ParticipatedCourse participatedCourse) {
+		this.participatedCourses.add(participatedCourse);
+	}
+
+	public void addParticipatedCourses(Collection<ParticipatedCourse> participatedCourses) {
+		this.participatedCourses.addAll(participatedCourses);
 	}
 
 }
