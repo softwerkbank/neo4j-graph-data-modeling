@@ -2,8 +2,10 @@ package ch.swb.graphgenerator.graph;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.github.javafaker.Faker;
 
@@ -21,18 +23,34 @@ import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
+import jakarta.inject.Inject;
 
 public class GraphGenerator {
+	private static final Logger LOGGER = LoggerFactory.getLogger(GraphGenerator.class);
+
 	private final GraphParameters parameters;
 	private final GraphData graph;
 	private final Faker faker;
 	private final SpecialNodeProvider specialNodeProvider;
+	private final EmployeeNodeGenerator employeeGenerator;
+	private final EmploymentNodeGenerator employmentGenerator;
+	private final AssignedProjectGenerator assignedProjectGenerator;
+	private final PassedExamGenerator passedExamGenerator;
+	private final ParticipatedCourseGenerator participatedCourseGenerator;
 
-	public GraphGenerator(GraphParameters parameters) {
+	@Inject
+	public GraphGenerator(GraphParameters parameters, SpecialNodeProvider specialNodeProvider, EmployeeNodeGenerator employeeGenerator,
+			EmploymentNodeGenerator employmentGenerator, AssignedProjectGenerator assignedProjectGenerator, PassedExamGenerator passedExamGenerator,
+			ParticipatedCourseGenerator participatedCourseGenerator) {
 		this.parameters = parameters;
 		this.graph = new GraphData();
 		this.faker = new Faker(Locale.GERMANY);
-		this.specialNodeProvider = SpecialNodeProvider.getInstance();
+		this.specialNodeProvider = specialNodeProvider;
+		this.employeeGenerator = employeeGenerator;
+		this.employmentGenerator = employmentGenerator;
+		this.assignedProjectGenerator = assignedProjectGenerator;
+		this.passedExamGenerator = passedExamGenerator;
+		this.participatedCourseGenerator = participatedCourseGenerator;
 	}
 
 	public GraphData generateGraph() {
@@ -44,16 +62,16 @@ public class GraphGenerator {
 		generateProjects();
 		generateEmployees();
 		generateEmployments();
-		generateAssignedProjects(graph.getProjects());
+		generateAssignedProjects();
 		generatePassedExams();
 		generateParticipatedCourses();
 		return graph;
 	}
 
 	private void generateEmployees() {
-		EmployeeNodeGenerator employeeGenerator = new EmployeeNodeGenerator();
 		List<Employee> employees = employeeGenerator.generateNodes(parameters.getNumberOfEmployees());
 		graph.addEmployees(employees);
+		LOGGER.info("Generated {} employees", graph.getEmployees().size());
 	}
 
 	private void generateCompanies() {
@@ -62,6 +80,7 @@ public class GraphGenerator {
 			graph.addCompany(company);
 		}
 		graph.addCompany(specialNodeProvider.getCompanyForLastEmployment());
+		LOGGER.info("Generated {} companies", graph.getCompanies().size());
 	}
 
 //	private void generateCustomers() {
@@ -77,72 +96,77 @@ public class GraphGenerator {
 			Project project = new Project(UUID.randomUUID(), faker.superhero().name(), faker.lorem().characters(2000, 4000), i % 2 == 0 ? "german" : "english");
 			graph.addProject(project);
 		}
+		LOGGER.info("Generated {} projects", graph.getProjects().size());
 	}
 
 	private void generateEmployments() {
 		for (Employee employee : graph.getEmployees()) {
-			EmploymentNodeGenerator employmentGenerator = new EmploymentNodeGenerator(employee.getDateOfBirth(),
+			List<Employment> employments = employmentGenerator.generateEmploymentsForEmployee(employee.getDateOfBirth(),
 					graph.getCompanies(),
 					parameters.getAverageEmploymentPeriod(),
 					parameters.getFirstEmploymentAfter(),
 					parameters.getJitterFirstEmployment());
-			List<Employment> employments = employmentGenerator.generateEmploymentsForEmployee();
-			Optional<Employment> firstEmployment = employments.stream().findFirst();
 			employee.addEmployments(employments);
+			LOGGER.info("Generated {} employments for employee {}", employee.getEmployments().size(), employee.getLoginname());
 		}
 	}
 
-	private void generateAssignedProjects(List<Project> projects) {
+	private void generateAssignedProjects() {
 		for (Employee employee : graph.getEmployees()) {
 			for (Employment employment : employee.getEmployments()) {
-				AssignedProjectGenerator assignedProjectGenerator = new AssignedProjectGenerator(employment,
+				List<AssignedProject> assignedProjects = assignedProjectGenerator.generateAssignedProjects(graph.getProjects(),
+						employment,
 						parameters.getMinPeriodProjectAssignment(),
 						parameters.getMaxPeriodProjectAssignment(),
 						parameters.getMaxRolesProject());
-				List<AssignedProject> assignedProjects = assignedProjectGenerator.generateAssignedProjects(projects);
 				employment.addAssignedProjects(assignedProjects);
+				// TODO: LOGGER.info("Generated {} employees", graph.getEmployees().size());
 			}
 		}
 	}
 
 	private void generatePassedExams() {
 		for (Employee employee : graph.getEmployees()) {
-			PassedExamGenerator passedExamGenerator = new PassedExamGenerator(employee,
+			List<PassedExam> passedExams = passedExamGenerator.generatePassedExams(employee,
 					employee.getFirstEmployment().getStart(),
 					parameters.getCertifcateEveryNumberOfYears());
-			List<PassedExam> passedExams = passedExamGenerator.generatePassedExams();
 			employee.addPassedExams(passedExams);
+			LOGGER.info("Generated {} passed exams for employee {}", employee.getPassedExams().size(), employee.getLoginname());
 		}
 	}
 
 	private void generateParticipatedCourses() {
 		for (Employee employee : graph.getEmployees()) {
-			ParticipatedCourseGenerator participatedCourseGenerator = new ParticipatedCourseGenerator(employee,
+			List<ParticipatedCourse> participatedCourses = participatedCourseGenerator.generateParticipatedCourses(employee,
 					employee.getFirstEmployment().getStart(),
 					parameters.getTrainingDaysPerYear());
-			List<ParticipatedCourse> participatedCourses = participatedCourseGenerator.generateParticipatedCourses();
 			employee.addParticipatedCourses(participatedCourses);
+			LOGGER.info("Generated {} participated courses for employee {}", employee.getParticipatedCourses().size(), employee.getLoginname());
 		}
 	}
 
 	private void generateCertificates() {
 		int toIndex = Math.min(parameters.getNumberOfCertificates(), specialNodeProvider.getCertificates().size());
 		graph.addCertificates(specialNodeProvider.getCertificates().subList(0, toIndex));
+		LOGGER.info("Generated {} certificates", graph.getCertificates().size());
 	}
 
 	private void generateKnowledges() {
 		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getKnowledges().size());
 		graph.addKnowledges(specialNodeProvider.getKnowledges().subList(0, toIndex));
+		LOGGER.info("Generated {} knowledges", graph.getKnowledges().size());
 	}
 
 	private void generateSkills() {
 		int toIndex = Math.min(parameters.getNumberOfSkills(), specialNodeProvider.getSkills().size());
 		graph.addSkills(specialNodeProvider.getSkills().subList(0, toIndex));
+		LOGGER.info("Generated {} skills", graph.getSkills().size());
 	}
 
 	private void generateCourses() {
 		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getCourses().size());
 		graph.addCourses(specialNodeProvider.getCourses().subList(0, toIndex));
+		LOGGER.info("Generated {} courses", graph.getCourses().size());
 	}
 
 }

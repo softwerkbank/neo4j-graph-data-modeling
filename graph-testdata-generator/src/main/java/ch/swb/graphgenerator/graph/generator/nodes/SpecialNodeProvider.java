@@ -10,6 +10,7 @@ import org.jeasy.random.EasyRandomParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.swb.graphgenerator.graph.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
@@ -17,11 +18,15 @@ import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
 import ch.swb.graphgenerator.graph.model.nodes.Position;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
 import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
+@Singleton
 public class SpecialNodeProvider {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SpecialNodeProvider.class);
 
-	private static SpecialNodeProvider instance;
+	private final GraphParameters graphParameters;
+
 	private final List<Certificate> certificates = new ArrayList<>();
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
@@ -31,7 +36,10 @@ public class SpecialNodeProvider {
 	private final Company companyForLastEmployment;
 	private final EasyRandom random;
 
-	private SpecialNodeProvider() {
+	@Inject
+	public SpecialNodeProvider(GraphParameters graphParameters) {
+		this.graphParameters = graphParameters;
+
 		EasyRandomParameters parameters = new EasyRandomParameters()
 				.seed(System.nanoTime());
 		random = new EasyRandom(parameters);
@@ -42,13 +50,6 @@ public class SpecialNodeProvider {
 		initSkills("src/main/resources/data/skills.yaml");
 		initCourses("src/main/resources/data/courses.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
-	}
-
-	public static SpecialNodeProvider getInstance() {
-		if (instance == null) {
-			instance = new SpecialNodeProvider();
-		}
-		return instance;
 	}
 
 	private void initCertificates(String yaml) {
@@ -110,7 +111,7 @@ public class SpecialNodeProvider {
 
 	public Certificate getRandomCertificate() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(certificates.size());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfCertificates());
 		return certificates.get(randomIndex);
 	}
 
@@ -140,7 +141,7 @@ public class SpecialNodeProvider {
 
 	public Knowledge getRandomKnowledge() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(knowledges.size());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfKnowledges());
 		return knowledges.get(randomIndex);
 	}
 
@@ -150,7 +151,7 @@ public class SpecialNodeProvider {
 
 	public Skill getRandomSkill() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(skills.size());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfSkills());
 		return skills.get(randomIndex);
 	}
 
@@ -160,7 +161,7 @@ public class SpecialNodeProvider {
 
 	public Course getRandomCourse() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(courses.size());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfCourses());
 		return courses.get(randomIndex);
 	}
 

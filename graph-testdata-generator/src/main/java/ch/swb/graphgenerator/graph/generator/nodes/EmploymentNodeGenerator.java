@@ -12,36 +12,41 @@ import org.jeasy.random.EasyRandomParameters;
 
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
+import jakarta.inject.Inject;
 
 public class EmploymentNodeGenerator {
 
+	private final SpecialNodeProvider specialNodeProvider;
 	private final LocalDate today;
-	private final LocalDate employeeBirthday;
-	private final int averageEmploymentPeriod;
-	private final int firstEmploymentAfterYears;
-	private final int boundForFirstEmploymentAfterYears;
-	private final SpecialNodeProvider specialNodeProvider = SpecialNodeProvider.getInstance();
-	private final List<Company> companies;
-
 	private UUID lastCompany = null;
 
-	public EmploymentNodeGenerator(LocalDate employeeBirthday, List<Company> companies, Period averageEmploymentPeriod, Period firstEmploymentAfter,
+	private LocalDate employeeBirthday;
+	private List<Company> companies;
+	private int averageEmploymentPeriod;
+	private int firstEmploymentAfterYears;
+	private int boundForFirstEmploymentAfterYears;
+
+	@Inject
+	public EmploymentNodeGenerator(SpecialNodeProvider specialNodeProvider) {
+		this.specialNodeProvider = specialNodeProvider;
+		today = LocalDate.now();
+	}
+
+	public List<Employment> generateEmploymentsForEmployee(LocalDate employeeBirthday, List<Company> companies, Period averageEmploymentPeriod,
+			Period firstEmploymentAfter,
 			Period jitterFirstEmployment) {
-		this.today = LocalDate.now();
 		this.employeeBirthday = employeeBirthday;
 		this.companies = companies;
 		this.averageEmploymentPeriod = averageEmploymentPeriod.getYears();
 		this.firstEmploymentAfterYears = firstEmploymentAfter.getYears();
 		this.boundForFirstEmploymentAfterYears = firstEmploymentAfter.plus(jitterFirstEmployment).getYears();
-	}
 
-	public List<Employment> generateEmploymentsForEmployee() {
 		List<Employment> employments = new ArrayList<>();
 
 		LocalDate lastEndDate = null;
 
-		Period workingPeriod = Period.between(employeeBirthday.plusYears(firstEmploymentAfterYears), today);
-		int number = workingPeriod.getYears() / averageEmploymentPeriod;
+		Period workingPeriod = Period.between(employeeBirthday.plusYears(firstEmploymentAfter.getYears()), today);
+		int number = workingPeriod.getYears() / averageEmploymentPeriod.getYears();
 
 		for (int i = 0; i < number; i++) {
 			if (i == number - 1) {
@@ -55,13 +60,13 @@ public class EmploymentNodeGenerator {
 		return employments;
 	}
 
-	public Employment generateEmploymentWithoutEnd(LocalDate lastEndDate) {
+	private Employment generateEmploymentWithoutEnd(LocalDate lastEndDate) {
 		LocalDate start = calculateStartDate(lastEndDate);
 		return new Employment(UUID.randomUUID(), start, null, specialNodeProvider.getRandomPosition().getName(),
 				specialNodeProvider.getCompanyForLastEmployment());
 	}
 
-	public Employment generateEmploymentWithEnd(LocalDate lastEndDate) {
+	private Employment generateEmploymentWithEnd(LocalDate lastEndDate) {
 		LocalDate start = calculateStartDate(lastEndDate);
 		LocalDate end;
 		if (averageEmploymentPeriod > 0) {

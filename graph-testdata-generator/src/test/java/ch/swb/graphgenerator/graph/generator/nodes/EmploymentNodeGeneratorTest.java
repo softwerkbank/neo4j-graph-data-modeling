@@ -10,8 +10,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.DefaultGraphParameters;
-import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 
@@ -41,39 +40,17 @@ class EmploymentNodeGeneratorTest {
 		companies.add(new Company(UUID.randomUUID(), "Company 19", "Industry 2"));
 		companies.add(new Company(UUID.randomUUID(), "Company 20", "Industry 4"));
 	}
-
-	private EmploymentNodeGenerator testee = new EmploymentNodeGenerator(LocalDate.of(1973, 5, 24),
-			companies,
-			DefaultGraphParameters.DEFAULT_AVERAGE_EMPLOYMENT_PERIOD,
-			DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER,
-			DefaultGraphParameters.DEFAULT_JITTER_FIRST_EMPLOYMENT);
+	private SpecialNodeProvider specialNodeProvider = new SpecialNodeProvider(new GraphParameters());
+	private EmploymentNodeGenerator testee = new EmploymentNodeGenerator(specialNodeProvider);
 	private final LocalDate today = LocalDate.now();
 
 	@Test
-	void when_noEndDate_then_EmploymentWithoutEnd() {
-		Employment employment = testee.generateEmploymentWithoutEnd(null);
-
-		assertThat(employment).hasNoNullFieldsOrPropertiesExcept("end")
-				.extracting("end").isNull();
-		assertThat(employment.getStart()).isBefore(today)
-				.isAfter(LocalDate.of(1973, 12, 31).plus(DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER.minusYears(1)));
-
-	}
-
-	@Test
-	void when_withEndDate_then_EmploymentWithEndBeforeNow() {
-		Employment employment = testee.generateEmploymentWithEnd(null);
-
-		assertThat(employment).hasNoNullFieldsOrProperties();
-		assertThat(employment.getStart()).isBefore(today)
-				.isAfter(LocalDate.of(1973, 12, 31).plus(DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER.minusYears(1)));
-
-		assertThat(employment.getEnd()).isBefore(LocalDate.of(today.getYear() + 1, 1, 1));
-	}
-
-	@Test
 	void when_generateEmploymentsForEmployee_then_allEmploymentsAreChronologicalAndLastEmploymentHasNoEnd() {
-		List<Employment> employments = testee.generateEmploymentsForEmployee();
+		List<Employment> employments = testee.generateEmploymentsForEmployee(LocalDate.of(1973, 5, 24),
+				companies,
+				DefaultGraphParameters.DEFAULT_AVERAGE_EMPLOYMENT_PERIOD,
+				DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER,
+				DefaultGraphParameters.DEFAULT_JITTER_FIRST_EMPLOYMENT);
 		assertThat(employments).hasSize(9);
 		assertThat(employments).allSatisfy(employment -> {
 			assertThat(employment.getStart()).isBefore(today);
@@ -90,7 +67,7 @@ class EmploymentNodeGeneratorTest {
 		}
 
 		Employment lastEmployment = employments.get(employments.size() - 1);
-		assertThat(lastEmployment.getCompany()).isEqualTo(SpecialNodeProvider.getInstance().getCompanyForLastEmployment());
+		assertThat(lastEmployment.getCompany()).isEqualTo(specialNodeProvider.getCompanyForLastEmployment());
 		assertThat(lastEmployment.getEnd()).isNull();
 	}
 

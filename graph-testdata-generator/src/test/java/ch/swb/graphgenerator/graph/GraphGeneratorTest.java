@@ -5,6 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
 import ch.swb.graphgenerator.graph.model.GraphData;
 
 @DisplayName("Testing the graph generator")
@@ -17,7 +23,13 @@ class GraphGeneratorTest {
 	void when_generateGraphWithDefaultParameters_then_defaultNumberOfEmployeesWithEmploymentsWereGenerated() {
 		// Arrange
 		GraphParameters defaultParameters = new GraphParameters();
-		generator = new GraphGenerator(defaultParameters);
+		SpecialNodeProvider specialNodeProvider = new SpecialNodeProvider(defaultParameters);
+		generator = new GraphGenerator(defaultParameters, specialNodeProvider,
+				new EmployeeNodeGenerator(),
+				new EmploymentNodeGenerator(specialNodeProvider),
+				new AssignedProjectGenerator(specialNodeProvider),
+				new PassedExamGenerator(specialNodeProvider),
+				new ParticipatedCourseGenerator(specialNodeProvider));
 
 		// Act
 		GraphData graph = generator.generateGraph();

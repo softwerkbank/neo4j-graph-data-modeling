@@ -9,9 +9,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 
@@ -19,16 +22,20 @@ public class ParticipatedCourseGeneratorTest {
 
 	private ParticipatedCourseGenerator testee;
 
+	@BeforeEach
+	void setupTestcase() {
+		testee = new ParticipatedCourseGenerator(new SpecialNodeProvider(new GraphParameters()));
+	}
+
 	@Test
 	@DisplayName("When generating \"PARTICIPATED_COURSE\" relationships for an employee with 5 years experience and 5 training days per year then minimum 5 relationships are created")
 	public void when_generatingParticipatedCourse_then_relationshipsBasedOnTrainingDaysPerYearAreCreated() {
 		// arrange
 		Employee employee = new Employee(UUID.randomUUID(), "John", "Doe", LocalDate.of(1995, 5, 23));
 		LocalDate startOfFirstEmployment = LocalDate.of(2015, 4, 1);
-		testee = new ParticipatedCourseGenerator(employee, startOfFirstEmployment, 5);
 
 		// act
-		List<ParticipatedCourse> participatedCourses = testee.generateParticipatedCourses();
+		List<ParticipatedCourse> participatedCourses = testee.generateParticipatedCourses(employee, startOfFirstEmployment, 5);
 
 		// assert
 		assertThat(participatedCourses).hasSizeGreaterThanOrEqualTo(5);

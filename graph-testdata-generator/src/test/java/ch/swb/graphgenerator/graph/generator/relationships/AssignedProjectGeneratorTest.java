@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
+import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
@@ -47,6 +49,11 @@ class AssignedProjectGeneratorTest {
 
 	private AssignedProjectGenerator testee;
 
+	@BeforeEach
+	void setupTestcase() {
+		testee = new AssignedProjectGenerator(new SpecialNodeProvider(new GraphParameters()));
+	}
+
 	@Test
 	@DisplayName("When generating assigned projects for an employment with start and end date then all assigned projects have start and end dates")
 	void when_generateAssignedProjectsForEmploymentWithEnd_then_allAssignedProjectsHaveStartAndEndDates() {
@@ -56,10 +63,9 @@ class AssignedProjectGeneratorTest {
 				LocalDate.of(2019, 2, 28),
 				"Software Engineer",
 				new Company(UUID.randomUUID(), "Test Inc.", "IT"));
-		testee = new AssignedProjectGenerator(employment, Period.ofMonths(6), Period.ofMonths(18), 3);
 
 		// Act
-		List<AssignedProject> assignedProjects = testee.generateAssignedProjects(projects);
+		List<AssignedProject> assignedProjects = testee.generateAssignedProjects(projects, employment, Period.ofMonths(6), Period.ofMonths(18), 3);
 
 		// Assert
 		assertThat(assignedProjects).hasSizeGreaterThanOrEqualTo(3);
@@ -79,10 +85,9 @@ class AssignedProjectGeneratorTest {
 				null,
 				"Software Engineer",
 				new Company(UUID.randomUUID(), "Test Inc.", "IT"));
-		testee = new AssignedProjectGenerator(employment, Period.ofMonths(6), Period.ofMonths(18), 3);
 
 		// Act
-		List<AssignedProject> assignedProjects = testee.generateAssignedProjects(projects);
+		List<AssignedProject> assignedProjects = testee.generateAssignedProjects(projects, employment, Period.ofMonths(6), Period.ofMonths(18), 3);
 
 		// Assert
 		assertThat(assignedProjects).hasSizeGreaterThanOrEqualTo(3);

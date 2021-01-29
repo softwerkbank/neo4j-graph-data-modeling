@@ -12,22 +12,19 @@ import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
+import jakarta.inject.Inject;
 
 public class AssignedProjectGenerator {
 
-	private final Employment employment;
-	private final int minMonthsProjectAssignment;
-	private final int maxMonthsProjectAssignment;
-	private final int maxRolesProject;
+	private SpecialNodeProvider specialNodeProvider;
 
-	public AssignedProjectGenerator(Employment employment, Period minPeriodProjectAssignment, Period maxPeriodProjectAssignment, int maxRolesProject) {
-		this.maxRolesProject = maxRolesProject;
-		this.employment = employment;
-		this.minMonthsProjectAssignment = (int) minPeriodProjectAssignment.toTotalMonths();
-		this.maxMonthsProjectAssignment = (int) maxPeriodProjectAssignment.toTotalMonths();
+	@Inject
+	public AssignedProjectGenerator(SpecialNodeProvider specialNodeProvider) {
+		this.specialNodeProvider = specialNodeProvider;
 	}
 
-	public List<AssignedProject> generateAssignedProjects(List<Project> projects) {
+	public List<AssignedProject> generateAssignedProjects(List<Project> projects, Employment employment, Period minPeriodProjectAssignment,
+			Period maxPeriodProjectAssignment, int maxRolesProject) {
 		List<AssignedProject> assignedProjects = new ArrayList<>();
 
 		RelationshipNode from = new RelationshipNode(Employment.LABEL, employment.getId());
@@ -35,6 +32,9 @@ public class AssignedProjectGenerator {
 				: Period.between(employment.getStart(), LocalDate.now());
 		Period difference = employmentPeriod;
 		LocalDate lastEndDateProject = null;
+
+		int minMonthsProjectAssignment = (int) minPeriodProjectAssignment.toTotalMonths();
+		int maxMonthsProjectAssignment = (int) maxPeriodProjectAssignment.toTotalMonths();
 
 		do {
 			int projectPeriodInMonths = ThreadLocalRandom.current().nextInt(minMonthsProjectAssignment, maxMonthsProjectAssignment + 1);
@@ -47,18 +47,18 @@ public class AssignedProjectGenerator {
 			Project project = projects.get(ThreadLocalRandom.current().nextInt(projects.size()));
 			RelationshipNode to = new RelationshipNode(Project.LABEL, project.getId());
 
-			assignedProjects.add(new AssignedProject(from, to, projectStart, projectEnd, workload, getRandomRoles()));
+			assignedProjects.add(new AssignedProject(from, to, projectStart, projectEnd, workload, getRandomRoles(maxRolesProject)));
 
 		} while (!difference.isNegative());
 
 		return assignedProjects;
 	}
 
-	private Role[] getRandomRoles() {
+	private Role[] getRandomRoles(int maxRolesProject) {
 		int numberOfRoles = ThreadLocalRandom.current().nextInt(1, maxRolesProject + 1);
 		Role[] roles = new Role[numberOfRoles];
 		for (int index = 0; index < numberOfRoles; index++) {
-			roles[index] = SpecialNodeProvider.getInstance().getRandomRole();
+			roles[index] = specialNodeProvider.getRandomRole();
 		}
 		return roles;
 	}

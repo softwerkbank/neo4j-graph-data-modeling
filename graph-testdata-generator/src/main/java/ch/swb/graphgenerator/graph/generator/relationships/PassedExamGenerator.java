@@ -12,35 +12,34 @@ import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
+import jakarta.inject.Inject;
 
 public class PassedExamGenerator {
 
-	private final Employee employee;
-	private final LocalDate startOfFirstEmployment;
-	private final int oneCertificateEveryYears;
+	private final SpecialNodeProvider specialNodeProvider;
 
-	public PassedExamGenerator(Employee employee, LocalDate startOfFirstEmployment, int oneCertificateEveryYears) {
-		this.employee = employee;
-		this.startOfFirstEmployment = startOfFirstEmployment;
-		this.oneCertificateEveryYears = oneCertificateEveryYears;
+	@Inject
+	public PassedExamGenerator(SpecialNodeProvider specialNodeProvider) {
+		this.specialNodeProvider = specialNodeProvider;
 	}
 
-	public List<PassedExam> generatePassedExams() {
+	public List<PassedExam> generatePassedExams(Employee employee, LocalDate startOfFirstEmployment, int oneCertificateEveryYears) {
 		List<PassedExam> passedExams = new ArrayList<>();
 
 		RelationshipNode from = new RelationshipNode(Employee.LABEL, employee.getId());
 		long numberOfCertificates = startOfFirstEmployment.until(LocalDate.now()).toTotalMonths() / 12 / oneCertificateEveryYears;
 		for (int counter = 0; counter < numberOfCertificates; counter++) {
-			Certificate certificate = SpecialNodeProvider.getInstance().getRandomCertificate();
+			Certificate certificate = specialNodeProvider.getRandomCertificate();
 			RelationshipNode to = new RelationshipNode(Certificate.LABEL, certificate.getId());
 
-			passedExams.add(new PassedExam(from, to, getRandomLocalDate(), certificate.getName().concat(" Exam"), certificate.getAuthority()));
+			passedExams.add(
+					new PassedExam(from, to, getRandomLocalDate(startOfFirstEmployment), certificate.getName().concat(" Exam"), certificate.getAuthority()));
 		}
 
 		return passedExams;
 	}
 
-	private LocalDate getRandomLocalDate() {
+	private LocalDate getRandomLocalDate(LocalDate startOfFirstEmployment) {
 		EasyRandomParameters parameters = new EasyRandomParameters()
 				.seed(System.currentTimeMillis())
 				.objectPoolSize(100)

@@ -16,31 +16,29 @@ import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 import ch.swb.graphgenerator.graph.model.relationships.RelationshipNode;
+import jakarta.inject.Inject;
 
 public class ParticipatedCourseGenerator {
 
-	private final Employee employee;
-	private final LocalDate startOfFirstEmployment;
-	private final int trainingDaysPerYear;
+	private final SpecialNodeProvider specialNodeProvider;
 	private final Set<UUID> participatedCourses;
 
 	private int trainingDaysInCurrentYear = 0;
 
-	public ParticipatedCourseGenerator(Employee employee, LocalDate startOfFirstEmployment, int trainingDaysPerYear) {
-		this.employee = employee;
-		this.startOfFirstEmployment = startOfFirstEmployment;
-		this.trainingDaysPerYear = trainingDaysPerYear;
+	@Inject
+	public ParticipatedCourseGenerator(SpecialNodeProvider specialNodeProvider) {
+		this.specialNodeProvider = specialNodeProvider;
 		this.participatedCourses = new HashSet<>();
 	}
 
-	public List<ParticipatedCourse> generateParticipatedCourses() {
+	public List<ParticipatedCourse> generateParticipatedCourses(Employee employee, LocalDate startOfFirstEmployment, int trainingDaysPerYear) {
 		List<ParticipatedCourse> participatedCourses = new ArrayList<>();
 
 		RelationshipNode from = new RelationshipNode(Employee.LABEL, employee.getId());
 		int year = startOfFirstEmployment.getYear();
 		int currentYear = LocalDate.now().getYear();
 		while (year <= currentYear) {
-			Course course = getRandomCourse();
+			Course course = getRandomCourse(trainingDaysPerYear);
 			RelationshipNode to = new RelationshipNode(Course.LABEL, course.getId());
 			LocalDate startDate = getRandomLocalDate(year);
 			participatedCourses.add(new ParticipatedCourse(from, to, startDate, startDate.plus(Period.parse(course.getDuration()))));
@@ -63,11 +61,11 @@ public class ParticipatedCourseGenerator {
 		return new EasyRandom(parameters).nextObject(LocalDate.class);
 	}
 
-	private Course getRandomCourse() {
+	private Course getRandomCourse(int trainingDaysPerYear) {
 		Course course = null;
 		Period courseDuration = null;
 		do {
-			course = SpecialNodeProvider.getInstance().getRandomCourse();
+			course = specialNodeProvider.getRandomCourse();
 			courseDuration = Period.parse(course.getDuration());
 		} while (participatedCourses.contains(course.getId()) || trainingDaysInCurrentYear + courseDuration.getDays() > trainingDaysPerYear);
 		trainingDaysInCurrentYear += courseDuration.getDays();
