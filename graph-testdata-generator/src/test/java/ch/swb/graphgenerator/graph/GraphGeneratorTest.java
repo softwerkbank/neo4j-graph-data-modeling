@@ -37,6 +37,7 @@ class GraphGeneratorTest {
 				assertThat(employment.getAssignedProjects()).hasSizeGreaterThanOrEqualTo(1);
 			});
 			assertThat(employee.getPassedExams()).hasSizeGreaterThan(0);
+			assertThat(employee.getParticipatedCourses()).hasSizeGreaterThan(0);
 		});
 	}
 }

@@ -46,6 +46,7 @@ public class GraphGenerator {
 		generateEmployments();
 		generateAssignedProjects(graph.getProjects());
 		generatePassedExams();
+		generateParticipatedCourses();
 		return graph;
 	}
 
@@ -118,7 +119,7 @@ public class GraphGenerator {
 		for (Employee employee : graph.getEmployees()) {
 			ParticipatedCourseGenerator participatedCourseGenerator = new ParticipatedCourseGenerator(employee,
 					employee.getFirstEmployment().getStart(),
-					parameters.getCertifcateEveryNumberOfYears());
+					parameters.getTrainingDaysPerYear());
 			List<ParticipatedCourse> participatedCourses = participatedCourseGenerator.generateParticipatedCourses();
 			employee.addParticipatedCourses(participatedCourses);
 		}

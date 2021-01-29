@@ -22,6 +22,7 @@ public class GraphParameters {
 	private int maxRolesProject;
 
 	private int certificateEveryNumberOfYears;
+	private int trainingDaysPerYear;
 
 	public GraphParameters() {
 		numberOfEmployees = DefaultGraphParameters.DEFAULT_NUMBER_OF_EMPLOYEES;
@@ -46,6 +47,8 @@ public class GraphParameters {
 
 		// Certificate
 		certificateEveryNumberOfYears = DefaultGraphParameters.DEFAULT_CERTIFICATE_EVERY_NUMBER_OF_YEARS;
+
+		trainingDaysPerYear = DefaultGraphParameters.DEFAULT_TRAINING_DAYS_PER_YEAR;
 	}
 
 	public GraphParameters numberOfEmployees(int number) {
@@ -190,5 +193,14 @@ public class GraphParameters {
 
 	public int getCertifcateEveryNumberOfYears() {
 		return certificateEveryNumberOfYears;
+	}
+
+	public GraphParameters trainingDaysPerYear(int number) {
+		trainingDaysPerYear = number;
+		return this;
+	}
+
+	public int getTrainingDaysPerYear() {
+		return trainingDaysPerYear;
 	}
 }

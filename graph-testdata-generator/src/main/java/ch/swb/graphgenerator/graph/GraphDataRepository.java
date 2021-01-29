@@ -24,7 +24,7 @@ import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.nodes.Skill;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
-import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
+import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 
 public class GraphDataRepository {
 
@@ -82,15 +82,26 @@ public class GraphDataRepository {
 						}
 					}
 
-					for (PassedExam passedExam : employee.getPassedExams()) {
-						Vertex certificateNode = g.V().has(passedExam.getTo().getNodeLabel(),
-								Certificate.KEY_ID,
-								passedExam.getTo().getNodeId().toString()).next();
+//					for (PassedExam passedExam : employee.getPassedExams()) {
+//						Vertex certificateNode = g.V().has(passedExam.getTo().getNodeLabel(),
+//								Certificate.KEY_ID,
+//								passedExam.getTo().getNodeId().toString()).next();
+//
+//						g.addE(PassedExam.LABEL).from(employeeNode).to(certificateNode)
+//								.property(PassedExam.KEY_EXAMINATION_DATE, passedExam.getExaminationDate().format(DateTimeFormatter.ISO_DATE))
+//								.property(PassedExam.KEY_EXAMINATION_INSTITUTE, passedExam.getExaminationInstitute())
+//								.property(PassedExam.KEY_EXAM, passedExam.getExam())
+//								.next();
+//					}
 
-						g.addE(PassedExam.LABEL).from(employeeNode).to(certificateNode)
-								.property(PassedExam.KEY_EXAMINATION_DATE, passedExam.getExaminationDate().format(DateTimeFormatter.ISO_DATE))
-								.property(PassedExam.KEY_EXAMINATION_INSTITUTE, passedExam.getExaminationInstitute())
-								.property(PassedExam.KEY_EXAM, passedExam.getExam())
+					for (ParticipatedCourse participatedCourse : employee.getParticipatedCourses()) {
+						Vertex courseNode = g.V().has(participatedCourse.getTo().getNodeLabel(),
+								Course.KEY_ID,
+								participatedCourse.getTo().getNodeId().toString()).next();
+
+						g.addE(ParticipatedCourse.LABEL).from(employeeNode).to(courseNode)
+								.property(ParticipatedCourse.KEY_START_DATE, participatedCourse.getStartDate().format(DateTimeFormatter.ISO_DATE))
+								.property(ParticipatedCourse.KEY_END_DATE, participatedCourse.getEndDate().format(DateTimeFormatter.ISO_DATE))
 								.next();
 					}
 
