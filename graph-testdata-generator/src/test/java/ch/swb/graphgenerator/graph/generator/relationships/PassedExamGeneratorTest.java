@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.GraphParameters;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
 
@@ -22,7 +22,7 @@ class PassedExamGeneratorTest {
 
 	@BeforeEach
 	void setupTestcase() {
-		testee = new PassedExamGenerator(new SpecialNodeProvider(new GraphParameters()));
+		testee = new PassedExamGenerator(new FixedNodeProvider(new GraphParameters()));
 	}
 
 	@Test

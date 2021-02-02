@@ -18,12 +18,13 @@ import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
 import ch.swb.graphgenerator.graph.model.nodes.Position;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
 import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 @Singleton
-public class SpecialNodeProvider {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SpecialNodeProvider.class);
+public class FixedNodeProvider {
+	private static final Logger LOGGER = LoggerFactory.getLogger(FixedNodeProvider.class);
 
 	private final GraphParameters graphParameters;
 
@@ -33,13 +34,16 @@ public class SpecialNodeProvider {
 	private final List<Knowledge> knowledges = new ArrayList<>();
 	private final List<Skill> skills = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
-	private final Company companyForLastEmployment;
-	private final EasyRandom random;
+	private Company companyForLastEmployment;
+	private EasyRandom random;
 
 	@Inject
-	public SpecialNodeProvider(GraphParameters graphParameters) {
+	public FixedNodeProvider(GraphParameters graphParameters) {
 		this.graphParameters = graphParameters;
+	}
 
+	@PostConstruct
+	private void init() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
 				.seed(System.nanoTime());
 		random = new EasyRandom(parameters);

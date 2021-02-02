@@ -11,7 +11,7 @@ import java.util.UUID;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
@@ -20,14 +20,14 @@ import jakarta.inject.Inject;
 
 public class ParticipatedCourseGenerator {
 
-	private final SpecialNodeProvider specialNodeProvider;
+	private final FixedNodeProvider fixedNodeProvider;
 	private final Set<UUID> participatedCourses;
 
 	private int trainingDaysInCurrentYear = 0;
 
 	@Inject
-	public ParticipatedCourseGenerator(SpecialNodeProvider specialNodeProvider) {
-		this.specialNodeProvider = specialNodeProvider;
+	public ParticipatedCourseGenerator(FixedNodeProvider fixedNodeProvider) {
+		this.fixedNodeProvider = fixedNodeProvider;
 		this.participatedCourses = new HashSet<>();
 	}
 
@@ -65,7 +65,7 @@ public class ParticipatedCourseGenerator {
 		Course course = null;
 		Period courseDuration = null;
 		do {
-			course = specialNodeProvider.getRandomCourse();
+			course = fixedNodeProvider.getRandomCourse();
 			courseDuration = Period.parse(course.getDuration());
 		} while (participatedCourses.contains(course.getId()) || trainingDaysInCurrentYear + courseDuration.getDays() > trainingDaysPerYear);
 		trainingDaysInCurrentYear += courseDuration.getDays();

@@ -7,7 +7,7 @@ import java.util.List;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
@@ -16,11 +16,11 @@ import jakarta.inject.Inject;
 
 public class PassedExamGenerator {
 
-	private final SpecialNodeProvider specialNodeProvider;
+	private final FixedNodeProvider fixedNodeProvider;
 
 	@Inject
-	public PassedExamGenerator(SpecialNodeProvider specialNodeProvider) {
-		this.specialNodeProvider = specialNodeProvider;
+	public PassedExamGenerator(FixedNodeProvider fixedNodeProvider) {
+		this.fixedNodeProvider = fixedNodeProvider;
 	}
 
 	public List<PassedExam> generatePassedExams(Employee employee, LocalDate startOfFirstEmployment, int oneCertificateEveryYears) {
@@ -29,7 +29,7 @@ public class PassedExamGenerator {
 		RelationshipNode from = new RelationshipNode(Employee.LABEL, employee.getId());
 		long numberOfCertificates = startOfFirstEmployment.until(LocalDate.now()).toTotalMonths() / 12 / oneCertificateEveryYears;
 		for (int counter = 0; counter < numberOfCertificates; counter++) {
-			Certificate certificate = specialNodeProvider.getRandomCertificate();
+			Certificate certificate = fixedNodeProvider.getRandomCertificate();
 			RelationshipNode to = new RelationshipNode(Certificate.LABEL, certificate.getId());
 
 			passedExams.add(

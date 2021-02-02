@@ -16,7 +16,7 @@ import jakarta.inject.Inject;
 
 public class EmploymentNodeGenerator {
 
-	private final SpecialNodeProvider specialNodeProvider;
+	private final FixedNodeProvider fixedNodeProvider;
 	private final LocalDate today;
 	private UUID lastCompany = null;
 
@@ -27,8 +27,8 @@ public class EmploymentNodeGenerator {
 	private int boundForFirstEmploymentAfterYears;
 
 	@Inject
-	public EmploymentNodeGenerator(SpecialNodeProvider specialNodeProvider) {
-		this.specialNodeProvider = specialNodeProvider;
+	public EmploymentNodeGenerator(FixedNodeProvider fixedNodeProvider) {
+		this.fixedNodeProvider = fixedNodeProvider;
 		today = LocalDate.now();
 	}
 
@@ -62,8 +62,8 @@ public class EmploymentNodeGenerator {
 
 	private Employment generateEmploymentWithoutEnd(LocalDate lastEndDate) {
 		LocalDate start = calculateStartDate(lastEndDate);
-		return new Employment(UUID.randomUUID(), start, null, specialNodeProvider.getRandomPosition().getName(),
-				specialNodeProvider.getCompanyForLastEmployment());
+		return new Employment(UUID.randomUUID(), start, null, fixedNodeProvider.getRandomPosition().getName(),
+				fixedNodeProvider.getCompanyForLastEmployment());
 	}
 
 	private Employment generateEmploymentWithEnd(LocalDate lastEndDate) {
@@ -75,7 +75,7 @@ public class EmploymentNodeGenerator {
 			end = calculateEndDate(start, today.getYear() + 1);
 		}
 		// lastEndDate = end;
-		return new Employment(UUID.randomUUID(), start, end, specialNodeProvider.getRandomPosition().getName(), getRandomCompany());
+		return new Employment(UUID.randomUUID(), start, end, fixedNodeProvider.getRandomPosition().getName(), getRandomCompany());
 	}
 
 	private Company getRandomCompany() {

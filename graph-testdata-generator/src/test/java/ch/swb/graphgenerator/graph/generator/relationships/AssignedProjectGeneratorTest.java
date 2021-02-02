@@ -13,7 +13,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.GraphParameters;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
@@ -51,7 +51,7 @@ class AssignedProjectGeneratorTest {
 
 	@BeforeEach
 	void setupTestcase() {
-		testee = new AssignedProjectGenerator(new SpecialNodeProvider(new GraphParameters()));
+		testee = new AssignedProjectGenerator(new FixedNodeProvider(new GraphParameters()));
 	}
 
 	@Test

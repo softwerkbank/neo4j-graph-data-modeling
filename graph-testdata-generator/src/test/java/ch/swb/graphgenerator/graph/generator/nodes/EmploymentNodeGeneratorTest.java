@@ -40,8 +40,8 @@ class EmploymentNodeGeneratorTest {
 		companies.add(new Company(UUID.randomUUID(), "Company 19", "Industry 2"));
 		companies.add(new Company(UUID.randomUUID(), "Company 20", "Industry 4"));
 	}
-	private SpecialNodeProvider specialNodeProvider = new SpecialNodeProvider(new GraphParameters());
-	private EmploymentNodeGenerator testee = new EmploymentNodeGenerator(specialNodeProvider);
+	private FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(new GraphParameters());
+	private EmploymentNodeGenerator testee = new EmploymentNodeGenerator(fixedNodeProvider);
 	private final LocalDate today = LocalDate.now();
 
 	@Test
@@ -67,7 +67,7 @@ class EmploymentNodeGeneratorTest {
 		}
 
 		Employment lastEmployment = employments.get(employments.size() - 1);
-		assertThat(lastEmployment.getCompany()).isEqualTo(specialNodeProvider.getCompanyForLastEmployment());
+		assertThat(lastEmployment.getCompany()).isEqualTo(fixedNodeProvider.getCompanyForLastEmployment());
 		assertThat(lastEmployment.getEnd()).isNull();
 	}
 

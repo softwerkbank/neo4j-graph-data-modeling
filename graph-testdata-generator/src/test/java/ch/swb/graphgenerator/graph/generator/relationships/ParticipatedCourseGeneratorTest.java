@@ -14,7 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.GraphParameters;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 
@@ -24,7 +24,7 @@ public class ParticipatedCourseGeneratorTest {
 
 	@BeforeEach
 	void setupTestcase() {
-		testee = new ParticipatedCourseGenerator(new SpecialNodeProvider(new GraphParameters()));
+		testee = new ParticipatedCourseGenerator(new FixedNodeProvider(new GraphParameters()));
 	}
 
 	@Test

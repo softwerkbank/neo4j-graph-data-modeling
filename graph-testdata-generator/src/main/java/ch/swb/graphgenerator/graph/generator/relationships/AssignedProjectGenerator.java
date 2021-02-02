@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
@@ -16,11 +16,11 @@ import jakarta.inject.Inject;
 
 public class AssignedProjectGenerator {
 
-	private SpecialNodeProvider specialNodeProvider;
+	private FixedNodeProvider fixedNodeProvider;
 
 	@Inject
-	public AssignedProjectGenerator(SpecialNodeProvider specialNodeProvider) {
-		this.specialNodeProvider = specialNodeProvider;
+	public AssignedProjectGenerator(FixedNodeProvider fixedNodeProvider) {
+		this.fixedNodeProvider = fixedNodeProvider;
 	}
 
 	public List<AssignedProject> generateAssignedProjects(List<Project> projects, Employment employment, Period minPeriodProjectAssignment,
@@ -58,7 +58,7 @@ public class AssignedProjectGenerator {
 		int numberOfRoles = ThreadLocalRandom.current().nextInt(1, maxRolesProject + 1);
 		Role[] roles = new Role[numberOfRoles];
 		for (int index = 0; index < numberOfRoles; index++) {
-			roles[index] = specialNodeProvider.getRandomRole();
+			roles[index] = fixedNodeProvider.getRandomRole();
 		}
 		return roles;
 	}

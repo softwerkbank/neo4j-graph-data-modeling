@@ -11,7 +11,7 @@ import com.github.javafaker.Faker;
 
 import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
@@ -31,7 +31,7 @@ public class GraphGenerator {
 	private final GraphParameters parameters;
 	private final GraphData graph;
 	private final Faker faker;
-	private final SpecialNodeProvider specialNodeProvider;
+	private final FixedNodeProvider fixedNodeProvider;
 	private final EmployeeNodeGenerator employeeGenerator;
 	private final EmploymentNodeGenerator employmentGenerator;
 	private final AssignedProjectGenerator assignedProjectGenerator;
@@ -39,13 +39,13 @@ public class GraphGenerator {
 	private final ParticipatedCourseGenerator participatedCourseGenerator;
 
 	@Inject
-	public GraphGenerator(GraphParameters parameters, SpecialNodeProvider specialNodeProvider, EmployeeNodeGenerator employeeGenerator,
+	public GraphGenerator(GraphParameters parameters, FixedNodeProvider fixedNodeProvider, EmployeeNodeGenerator employeeGenerator,
 			EmploymentNodeGenerator employmentGenerator, AssignedProjectGenerator assignedProjectGenerator, PassedExamGenerator passedExamGenerator,
 			ParticipatedCourseGenerator participatedCourseGenerator) {
 		this.parameters = parameters;
 		this.graph = new GraphData();
 		this.faker = new Faker(Locale.GERMANY);
-		this.specialNodeProvider = specialNodeProvider;
+		this.fixedNodeProvider = fixedNodeProvider;
 		this.employeeGenerator = employeeGenerator;
 		this.employmentGenerator = employmentGenerator;
 		this.assignedProjectGenerator = assignedProjectGenerator;
@@ -79,7 +79,7 @@ public class GraphGenerator {
 			Company company = new Company(UUID.randomUUID(), faker.company().name(), faker.company().industry());
 			graph.addCompany(company);
 		}
-		graph.addCompany(specialNodeProvider.getCompanyForLastEmployment());
+		graph.addCompany(fixedNodeProvider.getCompanyForLastEmployment());
 		LOGGER.info("Generated {} companies", graph.getCompanies().size());
 	}
 
@@ -146,26 +146,26 @@ public class GraphGenerator {
 	}
 
 	private void generateCertificates() {
-		int toIndex = Math.min(parameters.getNumberOfCertificates(), specialNodeProvider.getCertificates().size());
-		graph.addCertificates(specialNodeProvider.getCertificates().subList(0, toIndex));
+		int toIndex = Math.min(parameters.getNumberOfCertificates(), fixedNodeProvider.getCertificates().size());
+		graph.addCertificates(fixedNodeProvider.getCertificates().subList(0, toIndex));
 		LOGGER.info("Generated {} certificates", graph.getCertificates().size());
 	}
 
 	private void generateKnowledges() {
-		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getKnowledges().size());
-		graph.addKnowledges(specialNodeProvider.getKnowledges().subList(0, toIndex));
+		int toIndex = Math.min(parameters.getNumberOfKnowledges(), fixedNodeProvider.getKnowledges().size());
+		graph.addKnowledges(fixedNodeProvider.getKnowledges().subList(0, toIndex));
 		LOGGER.info("Generated {} knowledges", graph.getKnowledges().size());
 	}
 
 	private void generateSkills() {
-		int toIndex = Math.min(parameters.getNumberOfSkills(), specialNodeProvider.getSkills().size());
-		graph.addSkills(specialNodeProvider.getSkills().subList(0, toIndex));
+		int toIndex = Math.min(parameters.getNumberOfSkills(), fixedNodeProvider.getSkills().size());
+		graph.addSkills(fixedNodeProvider.getSkills().subList(0, toIndex));
 		LOGGER.info("Generated {} skills", graph.getSkills().size());
 	}
 
 	private void generateCourses() {
-		int toIndex = Math.min(parameters.getNumberOfKnowledges(), specialNodeProvider.getCourses().size());
-		graph.addCourses(specialNodeProvider.getCourses().subList(0, toIndex));
+		int toIndex = Math.min(parameters.getNumberOfKnowledges(), fixedNodeProvider.getCourses().size());
+		graph.addCourses(fixedNodeProvider.getCourses().subList(0, toIndex));
 		LOGGER.info("Generated {} courses", graph.getCourses().size());
 	}
 

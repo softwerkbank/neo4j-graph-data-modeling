@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
-import ch.swb.graphgenerator.graph.generator.nodes.SpecialNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
@@ -23,13 +23,13 @@ class GraphGeneratorTest {
 	void when_generateGraphWithDefaultParameters_then_defaultNumberOfEmployeesWithEmploymentsWereGenerated() {
 		// Arrange
 		GraphParameters defaultParameters = new GraphParameters();
-		SpecialNodeProvider specialNodeProvider = new SpecialNodeProvider(defaultParameters);
-		generator = new GraphGenerator(defaultParameters, specialNodeProvider,
+		FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(defaultParameters);
+		generator = new GraphGenerator(defaultParameters, fixedNodeProvider,
 				new EmployeeNodeGenerator(),
-				new EmploymentNodeGenerator(specialNodeProvider),
-				new AssignedProjectGenerator(specialNodeProvider),
-				new PassedExamGenerator(specialNodeProvider),
-				new ParticipatedCourseGenerator(specialNodeProvider));
+				new EmploymentNodeGenerator(fixedNodeProvider),
+				new AssignedProjectGenerator(fixedNodeProvider),
+				new PassedExamGenerator(fixedNodeProvider),
+				new ParticipatedCourseGenerator(fixedNodeProvider));
 
 		// Act
 		GraphData graph = generator.generateGraph();
