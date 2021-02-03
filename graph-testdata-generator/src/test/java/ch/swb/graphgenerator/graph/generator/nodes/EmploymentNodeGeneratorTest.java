@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.DefaultGraphParameters;
@@ -40,9 +41,17 @@ class EmploymentNodeGeneratorTest {
 		companies.add(new Company(UUID.randomUUID(), "Company 19", "Industry 2"));
 		companies.add(new Company(UUID.randomUUID(), "Company 20", "Industry 4"));
 	}
-	private FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(new GraphParameters());
-	private EmploymentNodeGenerator testee = new EmploymentNodeGenerator(fixedNodeProvider);
-	private final LocalDate today = LocalDate.now();
+
+	private FixedNodeProvider fixedNodeProvider;
+	private EmploymentNodeGenerator testee;
+	private LocalDate today;
+
+	@BeforeEach
+	void setup() {
+		fixedNodeProvider = new FixedNodeProvider(new GraphParameters());
+		testee = new EmploymentNodeGenerator(fixedNodeProvider);
+		today = LocalDate.now();
+	}
 
 	@Test
 	void when_generateEmploymentsForEmployee_then_allEmploymentsAreChronologicalAndLastEmploymentHasNoEnd() {

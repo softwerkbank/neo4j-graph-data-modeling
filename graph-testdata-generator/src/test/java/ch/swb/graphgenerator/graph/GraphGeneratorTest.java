@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import ch.swb.graphgenerator.graph.generator.nodes.EmployeeNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
+import ch.swb.graphgenerator.graph.generator.nodes.NodeGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
@@ -24,9 +24,8 @@ class GraphGeneratorTest {
 		// Arrange
 		GraphParameters defaultParameters = new GraphParameters();
 		FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(defaultParameters);
-		generator = new GraphGenerator(defaultParameters, fixedNodeProvider,
-				new EmployeeNodeGenerator(),
-				new EmploymentNodeGenerator(fixedNodeProvider),
+		NodeGenerator nodeGenerator = new NodeGenerator(new EmploymentNodeGenerator(fixedNodeProvider), fixedNodeProvider, defaultParameters);
+		generator = new GraphGenerator(defaultParameters, nodeGenerator,
 				new AssignedProjectGenerator(fixedNodeProvider),
 				new PassedExamGenerator(fixedNodeProvider),
 				new ParticipatedCourseGenerator(fixedNodeProvider));

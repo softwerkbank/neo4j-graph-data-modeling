@@ -2,6 +2,9 @@ package ch.swb.graphgenerator.graph;
 
 import java.time.Period;
 
+import jakarta.inject.Singleton;
+
+@Singleton
 public class GraphParameters {
 	private int numberOfEmployees;
 	private int numberOfCompanies;

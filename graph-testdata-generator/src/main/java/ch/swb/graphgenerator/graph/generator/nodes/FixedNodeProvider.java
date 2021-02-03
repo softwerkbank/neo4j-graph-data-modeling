@@ -1,5 +1,6 @@
 package ch.swb.graphgenerator.graph.generator.nodes;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.jeasy.random.EasyRandomParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ch.swb.graphgenerator.common.YAMLUtil;
 import ch.swb.graphgenerator.graph.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
@@ -18,7 +20,6 @@ import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
 import ch.swb.graphgenerator.graph.model.nodes.Position;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
 import ch.swb.graphgenerator.graph.model.nodes.Skill;
-import jakarta.annotation.PostConstruct;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -40,10 +41,7 @@ public class FixedNodeProvider {
 	@Inject
 	public FixedNodeProvider(GraphParameters graphParameters) {
 		this.graphParameters = graphParameters;
-	}
 
-	@PostConstruct
-	private void init() {
 		EasyRandomParameters parameters = new EasyRandomParameters()
 				.seed(System.nanoTime());
 		random = new EasyRandom(parameters);
@@ -58,8 +56,7 @@ public class FixedNodeProvider {
 
 	private void initCertificates(String yaml) {
 		try {
-			CertificateNodeGenerator certificateGenerator = new CertificateNodeGenerator(yaml);
-			this.certificates.addAll(certificateGenerator.generateNodes());
+			this.certificates.addAll(YAMLUtil.getListOfObjects(new File(yaml), Certificate.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -67,8 +64,7 @@ public class FixedNodeProvider {
 
 	public void initRoles(String yaml) {
 		try {
-			RoleNodeGenerator roleGenerator = new RoleNodeGenerator(yaml);
-			this.roles.addAll(roleGenerator.generateNodes());
+			this.roles.addAll(YAMLUtil.getListOfObjects(new File(yaml), Role.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -76,8 +72,7 @@ public class FixedNodeProvider {
 
 	public void initPositions(String yaml) {
 		try {
-			PositionNodeGenerator positionGenerator = new PositionNodeGenerator(yaml);
-			this.positions.addAll(positionGenerator.generateNodes());
+			this.positions.addAll(YAMLUtil.getListOfObjects(new File(yaml), Position.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -85,8 +80,7 @@ public class FixedNodeProvider {
 
 	private void initKnowledges(String yaml) {
 		try {
-			KnowledgeNodeGenerator knowlegdeGenerator = new KnowledgeNodeGenerator(yaml);
-			this.knowledges.addAll(knowlegdeGenerator.generateNodes());
+			this.knowledges.addAll(YAMLUtil.getListOfObjects(new File(yaml), Knowledge.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -95,8 +89,7 @@ public class FixedNodeProvider {
 
 	private void initSkills(String yaml) {
 		try {
-			SkillNodeGenerator skillGenerator = new SkillNodeGenerator(yaml);
-			this.skills.addAll(skillGenerator.generateNodes());
+			this.skills.addAll(YAMLUtil.getListOfObjects(new File(yaml), Skill.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -105,8 +98,7 @@ public class FixedNodeProvider {
 
 	private void initCourses(String yaml) {
 		try {
-			CourseNodeGenerator courseGenerator = new CourseNodeGenerator(yaml);
-			this.courses.addAll(courseGenerator.generateNodes());
+			this.courses.addAll(YAMLUtil.getListOfObjects(new File(yaml), Course.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
