@@ -11,6 +11,7 @@ import ch.swb.graphgenerator.graph.generator.nodes.NodeGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
+import ch.swb.graphgenerator.graph.generator.relationships.RelationshipGenerator;
 import ch.swb.graphgenerator.graph.model.GraphData;
 
 @DisplayName("Testing the graph generator")
@@ -25,10 +26,11 @@ class GraphGeneratorTest {
 		GraphParameters defaultParameters = new GraphParameters();
 		FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(defaultParameters);
 		NodeGenerator nodeGenerator = new NodeGenerator(new EmploymentNodeGenerator(fixedNodeProvider), fixedNodeProvider, defaultParameters);
-		generator = new GraphGenerator(defaultParameters, nodeGenerator,
+		RelationshipGenerator relationshipGenerator = new RelationshipGenerator(defaultParameters,
 				new AssignedProjectGenerator(fixedNodeProvider),
 				new PassedExamGenerator(fixedNodeProvider),
 				new ParticipatedCourseGenerator(fixedNodeProvider));
+		generator = new GraphGenerator(nodeGenerator, relationshipGenerator);
 
 		// Act
 		GraphData graph = generator.generateGraph();
