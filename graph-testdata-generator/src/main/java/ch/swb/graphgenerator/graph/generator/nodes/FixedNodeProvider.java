@@ -12,7 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ch.swb.graphgenerator.common.YAMLUtil;
-import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;

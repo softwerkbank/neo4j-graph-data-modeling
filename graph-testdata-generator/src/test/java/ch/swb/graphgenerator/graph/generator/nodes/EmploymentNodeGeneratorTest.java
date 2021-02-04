@@ -10,8 +10,8 @@ import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import ch.swb.graphgenerator.graph.DefaultGraphParameters;
-import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.configuration.DefaultGraphParameters;
+import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
 
@@ -57,9 +57,9 @@ class EmploymentNodeGeneratorTest {
 	void when_generateEmploymentsForEmployee_then_allEmploymentsAreChronologicalAndLastEmploymentHasNoEnd() {
 		List<Employment> employments = testee.generateEmploymentsForEmployee(LocalDate.of(1973, 5, 24),
 				companies,
-				DefaultGraphParameters.DEFAULT_AVERAGE_EMPLOYMENT_PERIOD,
-				DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER,
-				DefaultGraphParameters.DEFAULT_JITTER_FIRST_EMPLOYMENT);
+				DefaultGraphParameters.EMPLOYMENT_DEFAULT_AVERAGE_PERIOD,
+				DefaultGraphParameters.EMPLOYMENT_DEFAULT_FIRST_AFTER_YEARS,
+				DefaultGraphParameters.EMPLOYMENT_DEFAULT_JITTER_FIRST_EMPLOYMENT);
 		assertThat(employments).hasSize(9);
 		assertThat(employments).allSatisfy(employment -> {
 			assertThat(employment.getStart()).isBefore(today);

@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;

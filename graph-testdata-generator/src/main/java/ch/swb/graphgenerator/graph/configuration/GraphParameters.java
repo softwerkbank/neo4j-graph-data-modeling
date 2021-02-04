@@ -1,4 +1,4 @@
-package ch.swb.graphgenerator.graph;
+package ch.swb.graphgenerator.graph.configuration;
 
 import java.time.Period;
 
@@ -28,30 +28,30 @@ public class GraphParameters {
 	private int trainingDaysPerYear;
 
 	public GraphParameters() {
-		numberOfEmployees = DefaultGraphParameters.DEFAULT_NUMBER_OF_EMPLOYEES;
-		numberOfCompanies = DefaultGraphParameters.DEFAULT_NUMBER_OF_COMPANIES;
-		numberOfCertificates = DefaultGraphParameters.DEFAULT_NUMBER_OF_CERTIFICATES;
-		numberOfProjects = DefaultGraphParameters.DEFAULT_NUMBER_OF_PROJECTS;
-		numberOfKnowledges = DefaultGraphParameters.DEFAULT_NUMBER_OF_KNOWLEDGES;
-		numberOfSkills = DefaultGraphParameters.DEFAULT_NUMBER_OF_SKILLS;
-		numberOfCourses = DefaultGraphParameters.DEFAULT_NUMBER_OF_COURSES;
+		numberOfEmployees = DefaultGraphParameters.DEFAULT_NUMBER_EMPLOYEES;
+		numberOfCompanies = DefaultGraphParameters.DEFAULT_NUMBER_COMPANIES;
+		numberOfCertificates = DefaultGraphParameters.DEFAULT_NUMBER_CERTIFICATES;
+		numberOfProjects = DefaultGraphParameters.DEFAULT_NUMBER_PROJECTS;
+		numberOfKnowledges = DefaultGraphParameters.DEFAULT_NUMBER_KNOWLEDGES;
+		numberOfSkills = DefaultGraphParameters.DEFAULT_NUMBER_SKILLS;
+		numberOfCourses = DefaultGraphParameters.DEFAULT_NUMBER_COURSES;
 
 		// Employment
-		averageEmploymentPeriod = DefaultGraphParameters.DEFAULT_AVERAGE_EMPLOYMENT_PERIOD;
-		jitterAverageEmploymentPeriod = DefaultGraphParameters.DEFAULT_JITTER_AVERAGE_EMPLOYMENT_PERIOD;
-		firstEmploymentAfter = DefaultGraphParameters.DEFAULT_FIRST_EMPLOYMENT_AFTER;
-		jitterFirstEmployment = DefaultGraphParameters.DEFAULT_JITTER_FIRST_EMPLOYMENT;
-		jitterBetweenEmployments = DefaultGraphParameters.DEFAULT_JITTER_BETWEEN_EMPLOYMENTS;
+		averageEmploymentPeriod = DefaultGraphParameters.EMPLOYMENT_DEFAULT_AVERAGE_PERIOD;
+		jitterAverageEmploymentPeriod = DefaultGraphParameters.EMPLOYMENT_DEFAULT_JITTER_AVERAGE_PERIOD;
+		firstEmploymentAfter = DefaultGraphParameters.EMPLOYMENT_DEFAULT_FIRST_AFTER_YEARS;
+		jitterFirstEmployment = DefaultGraphParameters.EMPLOYMENT_DEFAULT_JITTER_FIRST_EMPLOYMENT;
+		jitterBetweenEmployments = DefaultGraphParameters.EMPLOYMENT_DEFAULT_JITTER_BETWEEN_EMPLOYMENTS;
 
 		// Project
-		minPeriodProjectAssignment = DefaultGraphParameters.DEFAULT_MIN_PERIOD_OF_PROJECT_ASSIGNMENT;
-		maxPeriodProjectAssignment = DefaultGraphParameters.DEFAULT_MAX_PERIOD_OF_PROJECT_ASSIGNMENT;
-		maxRolesProject = DefaultGraphParameters.DEFAULT_MAX_ROLES_PROJECT;
+		minPeriodProjectAssignment = DefaultGraphParameters.PROJECT_DEFAULT_MIN_PERIOD_ASSIGNMENT;
+		maxPeriodProjectAssignment = DefaultGraphParameters.PROJECT_DEFAULT_MAX_PERIOD_ASSIGNMENT;
+		maxRolesProject = DefaultGraphParameters.PROJECT_DEFAULT_MAX_ROLES;
 
 		// Certificate
-		certificateEveryNumberOfYears = DefaultGraphParameters.DEFAULT_CERTIFICATE_EVERY_NUMBER_OF_YEARS;
+		certificateEveryNumberOfYears = DefaultGraphParameters.CERTIFICATE_DEFAULT_NUMBER_YEARS_PER_CERTIFICATE;
 
-		trainingDaysPerYear = DefaultGraphParameters.DEFAULT_TRAINING_DAYS_PER_YEAR;
+		trainingDaysPerYear = DefaultGraphParameters.CERTIFICATE_DEFAULT_TRAINING_DAYS_PER_YEAR;
 	}
 
 	public GraphParameters numberOfEmployees(int number) {

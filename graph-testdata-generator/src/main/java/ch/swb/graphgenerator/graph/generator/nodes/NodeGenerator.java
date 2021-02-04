@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.javafaker.Faker;
 
-import ch.swb.graphgenerator.graph.GraphParameters;
+import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;

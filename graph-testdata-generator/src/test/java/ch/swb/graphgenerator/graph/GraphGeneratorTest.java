@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.generator.nodes.NodeGenerator;
