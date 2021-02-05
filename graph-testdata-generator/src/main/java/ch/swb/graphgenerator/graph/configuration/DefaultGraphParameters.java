@@ -27,7 +27,9 @@ public class DefaultGraphParameters {
 
 	// Certificates
 	public static final int CERTIFICATE_DEFAULT_NUMBER_YEARS_PER_CERTIFICATE = 3;
-	public static final int CERTIFICATE_DEFAULT_TRAINING_DAYS_PER_YEAR = 5;
+
+	// Courses
+	public static final int COURSE_DEFAULT_TRAINING_DAYS_PER_YEAR = 5;
 
 	private DefaultGraphParameters() {
 	}

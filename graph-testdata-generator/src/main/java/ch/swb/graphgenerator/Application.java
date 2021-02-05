@@ -7,8 +7,8 @@ import jakarta.inject.Inject;
 
 public class Application {
 
-	private GraphGenerator generator;
-	private GraphDataRepository graphRepository;
+	private final GraphGenerator generator;
+	private final GraphDataRepository graphRepository;
 
 	@Inject
 	public Application(GraphGenerator generator, GraphDataRepository graphRepository) {
@@ -19,5 +19,6 @@ public class Application {
 	public void run() {
 		GraphData graph = generator.generateGraph();
 		graphRepository.persist(graph);
+
 	}
 }

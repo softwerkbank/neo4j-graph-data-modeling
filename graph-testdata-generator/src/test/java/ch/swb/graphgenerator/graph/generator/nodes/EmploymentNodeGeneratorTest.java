@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ch.swb.graphgenerator.graph.configuration.DefaultGraphParameters;
+import ch.swb.graphgenerator.graph.configuration.GraphConfiguration;
 import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
@@ -48,7 +49,7 @@ class EmploymentNodeGeneratorTest {
 
 	@BeforeEach
 	void setup() {
-		fixedNodeProvider = new FixedNodeProvider(new GraphParameters());
+		fixedNodeProvider = new FixedNodeProvider(new GraphParameters(new GraphConfiguration()));
 		testee = new EmploymentNodeGenerator(fixedNodeProvider);
 		today = LocalDate.now();
 	}

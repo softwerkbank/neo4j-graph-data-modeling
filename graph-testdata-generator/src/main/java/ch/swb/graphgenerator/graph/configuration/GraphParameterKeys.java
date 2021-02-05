@@ -25,7 +25,9 @@ public class GraphParameterKeys {
 
 	// Certificates
 	public static final String CERTIFICATE_NUMBER_YEARS_PER_CERTIFICATE = "certificate.number.years.per.certificate";
-	public static final String CERTIFICATE_TRAINING_DAYS_PER_YEAR = "certificate.training.days.per.year";
+
+	// Courses
+	public static final String COURSE_TRAINING_DAYS_PER_YEAR = "course.training.days.per.year";
 
 	private GraphParameterKeys() {
 

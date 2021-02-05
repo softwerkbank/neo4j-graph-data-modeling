@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ch.swb.graphgenerator.graph.configuration.GraphConfiguration;
 import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
@@ -24,7 +25,7 @@ public class ParticipatedCourseGeneratorTest {
 
 	@BeforeEach
 	void setupTestcase() {
-		testee = new ParticipatedCourseGenerator(new FixedNodeProvider(new GraphParameters()));
+		testee = new ParticipatedCourseGenerator(new FixedNodeProvider(new GraphParameters(new GraphConfiguration())));
 	}
 
 	@Test

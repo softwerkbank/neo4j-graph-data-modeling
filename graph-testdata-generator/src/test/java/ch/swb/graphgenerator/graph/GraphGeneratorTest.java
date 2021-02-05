@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import ch.swb.graphgenerator.graph.configuration.GraphConfiguration;
 import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
@@ -24,7 +25,7 @@ class GraphGeneratorTest {
 	@DisplayName("Using default graph Parameters should generate default number of Nodes with Edges")
 	void when_generateGraphWithDefaultParameters_then_defaultNumberOfEmployeesWithEmploymentsWereGenerated() {
 		// Arrange
-		GraphParameters defaultParameters = new GraphParameters();
+		GraphParameters defaultParameters = new GraphParameters(new GraphConfiguration());
 		FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(defaultParameters);
 		NodeGenerator nodeGenerator = new NodeGenerator(new EmploymentNodeGenerator(fixedNodeProvider), fixedNodeProvider, defaultParameters);
 		RelationshipGenerator relationshipGenerator = new RelationshipGenerator(defaultParameters,
