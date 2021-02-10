@@ -20,9 +20,9 @@ import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
-import ch.swb.graphgenerator.graph.model.nodes.Technology;
-import ch.swb.graphgenerator.graph.model.nodes.Project;
 import ch.swb.graphgenerator.graph.model.nodes.Methodology;
+import ch.swb.graphgenerator.graph.model.nodes.Project;
+import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
@@ -217,9 +217,19 @@ public class GraphDataRepository {
 
 				Vertex courseNode = traversal.next();
 
-				for (String knowledgeName : course.getKnowledges()) {
-					Vertex knowledgeNode = g.V().has(Technology.LABEL, Technology.KEY_NAME, knowledgeName).next();
-					g.addE(Constants.COURSE_KNOWLEDGE_LABEL).from(courseNode).to(knowledgeNode).next();
+				for (String transferredKnowledge : course.getKnowledges()) {
+					// check if the course transfers knowledge of a technology or methodology
+					GraphTraversal<Vertex, Vertex> technologyTraversal = g.V().has(Technology.LABEL, Technology.KEY_NAME, transferredKnowledge);
+					if (technologyTraversal.hasNext()) {
+						Vertex technologyNode = technologyTraversal.next();
+						g.addE(Constants.COURSE_TECHNOLOGY_METHODOLOGY_LABEL).from(courseNode).to(technologyNode).next();
+					} else {
+						GraphTraversal<Vertex, Vertex> methodologyTraversal = g.V().has(Methodology.LABEL, Methodology.KEY_NAME, transferredKnowledge);
+						if (methodologyTraversal.hasNext()) {
+							Vertex methodologyNode = methodologyTraversal.next();
+							g.addE(Constants.COURSE_TECHNOLOGY_METHODOLOGY_LABEL).from(courseNode).to(methodologyNode).next();
+						}
+					}
 				}
 
 				transaction.commit();

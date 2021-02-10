@@ -7,7 +7,7 @@ CALL apoc.refactor.categorize('position', 'IN_POSITION', true, 'Position', 'name
 CREATE CONSTRAINT unique_role_name ON (r:Role) ASSERT r.name IS UNIQUE;
 
 MATCH (a:Assignment)
-UNWIND a.roles AS role		// for each role in roles
-MERGE (r:Role {name: role})	// Create role if not exist
-MERGE (a)-[:IN_ROLE]->(r)	// Create relationship to role if not exist
-REMOVE a.roles;				// Remove property "roles" from Assignment
+UNWIND a.roles AS role
+MERGE (r:Role {name: role})
+MERGE (a)-[:IN_ROLE]->(r)
+REMOVE a.roles;
