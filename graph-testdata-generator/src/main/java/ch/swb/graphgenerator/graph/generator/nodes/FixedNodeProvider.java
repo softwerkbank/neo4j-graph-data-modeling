@@ -16,10 +16,10 @@ import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
-import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import ch.swb.graphgenerator.graph.model.nodes.Position;
 import ch.swb.graphgenerator.graph.model.nodes.Role;
-import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Methodology;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
@@ -32,8 +32,8 @@ public class FixedNodeProvider {
 	private final List<Certificate> certificates = new ArrayList<>();
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
-	private final List<Knowledge> knowledges = new ArrayList<>();
-	private final List<Skill> skills = new ArrayList<>();
+	private final List<Technology> knowledges = new ArrayList<>();
+	private final List<Methodology> skills = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
 	private Company companyForLastEmployment;
 	private EasyRandom random;
@@ -48,8 +48,8 @@ public class FixedNodeProvider {
 		initCertificates("src/main/resources/data/certificates.yaml");
 		initRoles("src/main/resources/data/roles.yaml");
 		initPositions("src/main/resources/data/positions.yaml");
-		initKnowledges("src/main/resources/data/knowledges.yaml");
-		initSkills("src/main/resources/data/skills.yaml");
+		initTechnologies("src/main/resources/data/technologies.yaml");
+		initMethodologies("src/main/resources/data/methodologies.yaml");
 		initCourses("src/main/resources/data/courses.yaml");
 		this.companyForLastEmployment = new Company(UUID.randomUUID(), "Skillsight Consulting AG", "IT Dienstleistungen");
 	}
@@ -78,18 +78,18 @@ public class FixedNodeProvider {
 		}
 	}
 
-	private void initKnowledges(String yaml) {
+	private void initTechnologies(String yaml) {
 		try {
-			this.knowledges.addAll(YAMLUtil.getListOfObjects(new File(yaml), Knowledge.class));
+			this.knowledges.addAll(YAMLUtil.getListOfObjects(new File(yaml), Technology.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
 
 	}
 
-	private void initSkills(String yaml) {
+	private void initMethodologies(String yaml) {
 		try {
-			this.skills.addAll(YAMLUtil.getListOfObjects(new File(yaml), Skill.class));
+			this.skills.addAll(YAMLUtil.getListOfObjects(new File(yaml), Methodology.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -135,23 +135,23 @@ public class FixedNodeProvider {
 		return Collections.unmodifiableList(positions);
 	}
 
-	public Knowledge getRandomKnowledge() {
+	public Technology getRandomKnowledge() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(graphParameters.getNumberOfKnowledges());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfTechnologies());
 		return knowledges.get(randomIndex);
 	}
 
-	public List<Knowledge> getKnowledges() {
+	public List<Technology> getTechnologies() {
 		return Collections.unmodifiableList(knowledges);
 	}
 
-	public Skill getRandomSkill() {
+	public Methodology getRandomSkill() {
 		random.setSeed(System.nanoTime());
-		int randomIndex = random.nextInt(graphParameters.getNumberOfSkills());
+		int randomIndex = random.nextInt(graphParameters.getNumberOfMethodologies());
 		return skills.get(randomIndex);
 	}
 
-	public List<Skill> getSkills() {
+	public List<Methodology> getMethodologies() {
 		return Collections.unmodifiableList(skills);
 	}
 

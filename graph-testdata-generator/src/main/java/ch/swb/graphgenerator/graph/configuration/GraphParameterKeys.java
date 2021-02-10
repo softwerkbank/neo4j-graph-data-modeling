@@ -6,8 +6,8 @@ public class GraphParameterKeys {
 	public static final String NUMBER_CUSTOMERS = "number.customers";
 	public static final String NUMBER_COMPANIES = "number.companies";
 	public static final String NUMBER_CERTIFICATES = "number.certificates";
-	public static final String NUMBER_KNOWLEDGES = "number.knowledges";
-	public static final String NUMBER_SKILLS = "number.skills";
+	public static final String NUMBER_TECHNOLOGIES = "number.technologies";
+	public static final String NUMBER_METHODOLOGIES = "number.methodologies";
 	public static final String NUMBER_COURSES = "number.courses";
 	public static final String NUMBER_PROJECTS = "number.projects";
 

@@ -20,9 +20,9 @@ import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
-import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Methodology;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
-import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import jakarta.inject.Inject;
 
 public class NodeGenerator {
@@ -61,8 +61,8 @@ public class NodeGenerator {
 
 		graph.addCompanies(generateCompanies());
 		graph.addCertificates(generateCertificates());
-		graph.addKnowledges(generateKnowledges());
-		graph.addSkills(generateSkills());
+		graph.addTechnologies(generateTechnologies());
+		graph.addMethodologies(generateMethodologies());
 		graph.addCourses(generateCourses());
 		graph.addProjects(generateProjects());
 		graph.addEmployees(generateEmployees());
@@ -89,22 +89,22 @@ public class NodeGenerator {
 		return certificates;
 	}
 
-	private List<Knowledge> generateKnowledges() {
-		int toIndex = Math.min(parameters.getNumberOfKnowledges(), fixedNodeProvider.getKnowledges().size());
-		List<Knowledge> knowledges = fixedNodeProvider.getKnowledges().subList(0, toIndex);
-		LOGGER.info("Generated {} knowledges", knowledges.size());
+	private List<Technology> generateTechnologies() {
+		int toIndex = Math.min(parameters.getNumberOfTechnologies(), fixedNodeProvider.getTechnologies().size());
+		List<Technology> knowledges = fixedNodeProvider.getTechnologies().subList(0, toIndex);
+		LOGGER.info("Generated {} technologies", knowledges.size());
 		return knowledges;
 	}
 
-	private List<Skill> generateSkills() {
-		int toIndex = Math.min(parameters.getNumberOfSkills(), fixedNodeProvider.getSkills().size());
-		List<Skill> skills = fixedNodeProvider.getSkills().subList(0, toIndex);
-		LOGGER.info("Generated {} skills", skills.size());
+	private List<Methodology> generateMethodologies() {
+		int toIndex = Math.min(parameters.getNumberOfMethodologies(), fixedNodeProvider.getMethodologies().size());
+		List<Methodology> skills = fixedNodeProvider.getMethodologies().subList(0, toIndex);
+		LOGGER.info("Generated {} methodologies", skills.size());
 		return skills;
 	}
 
 	private List<Course> generateCourses() {
-		int toIndex = Math.min(parameters.getNumberOfKnowledges(), fixedNodeProvider.getCourses().size());
+		int toIndex = Math.min(parameters.getNumberOfCourses(), fixedNodeProvider.getCourses().size());
 		List<Course> courses = fixedNodeProvider.getCourses().subList(0, toIndex);
 		LOGGER.info("Generated {} courses", courses.size());
 		return courses;

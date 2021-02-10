@@ -7,9 +7,9 @@ public class DefaultGraphParameters {
 	public static final int DEFAULT_NUMBER_CUSTOMERS = 20;
 	public static final int DEFAULT_NUMBER_COMPANIES = 30;
 	public static final int DEFAULT_NUMBER_CERTIFICATES = 60;
-	public static final int DEFAULT_NUMBER_KNOWLEDGES = 66;
-	public static final int DEFAULT_NUMBER_SKILLS = 60;
-	public static final int DEFAULT_NUMBER_COURSES = 66;
+	public static final int DEFAULT_NUMBER_TECHNOLOGIES = 55;
+	public static final int DEFAULT_NUMBER_METHODOLOGIES = 10;
+	public static final int DEFAULT_NUMBER_COURSES = 65;
 	public static final int DEFAULT_NUMBER_PROJECTS = 30;
 //	public static final int DEFAULT_NUMBER_OF_ROLES = 15;
 

@@ -45,14 +45,6 @@
    
 - name: TypeScript
 
-- name: Scrum
-
-- name: Risk management
-
-- name: ITIL
-
-- name: SAFe
-
 - name: Cloud Computing
 
 - name: UML
@@ -69,17 +61,7 @@
 
 - name: Camunda
 
-- name: Requirements Engineering
-
-- name: Business process analysis
-
 - name: Hadoop
-
-- name: Agile development
-
-- name: TDD (Test Driven Development)
-
-- name: BDD (Behavior Driven Development)
 
 - name: Cucumber
   tags:
@@ -93,8 +75,6 @@
 - name: Linux
 
 - name: Windows
-
-- name: DevOps
 
 - name: Ansible
   tags:
@@ -153,8 +133,6 @@
 - name: Spring Boot
 
 - name: Kubernetes
-
-- name: Domain Driven Design (DDD)
 
 - name: HTML
 

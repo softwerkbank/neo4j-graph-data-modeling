@@ -20,9 +20,9 @@ import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
 import ch.swb.graphgenerator.graph.model.nodes.Employment;
-import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
-import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Methodology;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
@@ -36,8 +36,8 @@ public class GraphDataRepository {
 
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
-			persistKnowledges(neo4jGraph, graph);
-			persistSkills(neo4jGraph, graph);
+			persistTechnologies(neo4jGraph, graph);
+			persistMethodologies(neo4jGraph, graph);
 			persistCourses(neo4jGraph, graph);
 			persistProjects(neo4jGraph, graph);
 
@@ -148,22 +148,22 @@ public class GraphDataRepository {
 		}
 	}
 
-	private void persistKnowledges(Neo4JGraph neo4jGraph, GraphData graph) {
-		for (Knowledge knowledge : graph.getKnowledges()) {
+	private void persistTechnologies(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Technology knowledge : graph.getTechnologies()) {
 			try (Transaction transaction = neo4jGraph.tx()) {
 				GraphTraversalSource g = neo4jGraph.traversal();
 
 				String tags = knowledge.getTags().stream().collect(Collectors.joining(","));
-				GraphTraversal<Vertex, Vertex> traversal = g.addV(Knowledge.LABEL)
-						.property(Knowledge.KEY_ID, knowledge.getId().toString())
-						.property(Knowledge.KEY_NAME, knowledge.getName());
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Technology.LABEL)
+						.property(Technology.KEY_ID, knowledge.getId().toString())
+						.property(Technology.KEY_NAME, knowledge.getName());
 
 				if (knowledge.getDescription() != null) {
-					traversal.property(Knowledge.KEY_DESCRIPTION, knowledge.getDescription());
+					traversal.property(Technology.KEY_DESCRIPTION, knowledge.getDescription());
 				}
 
 				if (!tags.isBlank()) {
-					traversal.property(Knowledge.KEY_TAGS, tags);
+					traversal.property(Technology.KEY_TAGS, tags);
 				}
 
 				traversal.next();
@@ -172,22 +172,22 @@ public class GraphDataRepository {
 		}
 	}
 
-	private void persistSkills(Neo4JGraph neo4jGraph, GraphData graph) {
-		for (Skill skill : graph.getSkills()) {
+	private void persistMethodologies(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Methodology skill : graph.getMethodologies()) {
 			try (Transaction transaction = neo4jGraph.tx()) {
 				GraphTraversalSource g = neo4jGraph.traversal();
 
 				String tags = skill.getTags().stream().collect(Collectors.joining(","));
-				GraphTraversal<Vertex, Vertex> traversal = g.addV(Skill.LABEL)
-						.property(Skill.KEY_ID, skill.getId().toString())
-						.property(Skill.KEY_NAME, skill.getName());
+				GraphTraversal<Vertex, Vertex> traversal = g.addV(Methodology.LABEL)
+						.property(Methodology.KEY_ID, skill.getId().toString())
+						.property(Methodology.KEY_NAME, skill.getName());
 
 				if (skill.getDescription() != null) {
-					traversal.property(Skill.KEY_DESCRIPTION, skill.getDescription());
+					traversal.property(Methodology.KEY_DESCRIPTION, skill.getDescription());
 				}
 
 				if (!tags.isBlank()) {
-					traversal.property(Skill.KEY_TAGS, tags);
+					traversal.property(Methodology.KEY_TAGS, tags);
 				}
 
 				traversal.next();
@@ -218,7 +218,7 @@ public class GraphDataRepository {
 				Vertex courseNode = traversal.next();
 
 				for (String knowledgeName : course.getKnowledges()) {
-					Vertex knowledgeNode = g.V().has(Knowledge.LABEL, Knowledge.KEY_NAME, knowledgeName).next();
+					Vertex knowledgeNode = g.V().has(Technology.LABEL, Technology.KEY_NAME, knowledgeName).next();
 					g.addE(Constants.COURSE_KNOWLEDGE_LABEL).from(courseNode).to(knowledgeNode).next();
 				}
 

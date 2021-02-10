@@ -2,8 +2,8 @@
 MATCH (Employment)-[r:ASSIGNED_PROJECT]->(:Project) SET r.roles = split(r.roles, ",");
 
 // Converting tags to a list
-MATCH (k:Knowledge) WHERE EXISTS(k.tags) SET k.tags = split(k.tags, ",");
-MATCH (s:Skill) WHERE EXISTS(s.tags) SET s.tags = split(s.tags, ",");
+MATCH (t:Technology) WHERE EXISTS(t.tags) SET t.tags = split(t.tags, ",");
+MATCH (m:Methodology) WHERE EXISTS(m.tags) SET m.tags = split(m.tags, ",");
 
 // Converting date string to date
 MATCH (emp:Employment) 

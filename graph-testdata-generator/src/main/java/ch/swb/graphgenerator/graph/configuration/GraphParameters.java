@@ -11,8 +11,8 @@ public class GraphParameters {
 	private int numberOfCompanies;
 	private int numberOfCertificates;
 	private int numberOfProjects;
-	private int numberOfKnowledges;
-	private int numberOfSkills;
+	private int numberOfTechnologies;
+	private int numberOfMethodologies;
 	private int numberOfCourses;
 
 	private Period averageEmploymentPeriod;
@@ -34,8 +34,8 @@ public class GraphParameters {
 		numberOfCompanies = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_COMPANIES, DefaultGraphParameters.DEFAULT_NUMBER_COMPANIES);
 		numberOfCertificates = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_CERTIFICATES, DefaultGraphParameters.DEFAULT_NUMBER_CERTIFICATES);
 		numberOfProjects = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_PROJECTS, DefaultGraphParameters.DEFAULT_NUMBER_PROJECTS);
-		numberOfKnowledges = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_KNOWLEDGES, DefaultGraphParameters.DEFAULT_NUMBER_KNOWLEDGES);
-		numberOfSkills = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_SKILLS, DefaultGraphParameters.DEFAULT_NUMBER_SKILLS);
+		numberOfTechnologies = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_TECHNOLOGIES, DefaultGraphParameters.DEFAULT_NUMBER_TECHNOLOGIES);
+		numberOfMethodologies = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_METHODOLOGIES, DefaultGraphParameters.DEFAULT_NUMBER_METHODOLOGIES);
 		numberOfCourses = graphConfig.getConfigValue(GraphParameterKeys.NUMBER_COURSES, DefaultGraphParameters.DEFAULT_NUMBER_COURSES);
 
 		// Employment
@@ -78,12 +78,12 @@ public class GraphParameters {
 		return numberOfCertificates;
 	}
 
-	public int getNumberOfKnowledges() {
-		return numberOfKnowledges;
+	public int getNumberOfTechnologies() {
+		return numberOfTechnologies;
 	}
 
-	public int getNumberOfSkills() {
-		return numberOfSkills;
+	public int getNumberOfMethodologies() {
+		return numberOfMethodologies;
 	}
 
 	public int getNumberOfCourses() {

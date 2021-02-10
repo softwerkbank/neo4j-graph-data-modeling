@@ -8,17 +8,17 @@ import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
 import ch.swb.graphgenerator.graph.model.nodes.Course;
 import ch.swb.graphgenerator.graph.model.nodes.Employee;
-import ch.swb.graphgenerator.graph.model.nodes.Knowledge;
+import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import ch.swb.graphgenerator.graph.model.nodes.Project;
-import ch.swb.graphgenerator.graph.model.nodes.Skill;
+import ch.swb.graphgenerator.graph.model.nodes.Methodology;
 
 public class GraphData {
 
 	private final List<Employee> employees = new ArrayList<>();
 	private final List<Company> companies = new ArrayList<>();
 	private final List<Certificate> certificates = new ArrayList<>();
-	private final List<Knowledge> knowledges = new ArrayList<>();
-	private final List<Skill> skills = new ArrayList<>();
+	private final List<Technology> technologies = new ArrayList<>();
+	private final List<Methodology> methodologies = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
 	private final List<Project> projects = new ArrayList<>();
 
@@ -58,28 +58,28 @@ public class GraphData {
 		this.certificates.addAll(certificates);
 	}
 
-	public List<Knowledge> getKnowledges() {
-		return Collections.unmodifiableList(knowledges);
+	public List<Technology> getTechnologies() {
+		return Collections.unmodifiableList(technologies);
 	}
 
-	public void addKnowledge(Knowledge knowledge) {
-		this.knowledges.add(knowledge);
+	public void addTechnology(Technology technology) {
+		this.technologies.add(technology);
 	}
 
-	public void addKnowledges(List<Knowledge> knowledges) {
-		this.knowledges.addAll(knowledges);
+	public void addTechnologies(List<Technology> technologies) {
+		this.technologies.addAll(technologies);
 	}
 
-	public List<Skill> getSkills() {
-		return Collections.unmodifiableList(skills);
+	public List<Methodology> getMethodologies() {
+		return Collections.unmodifiableList(methodologies);
 	}
 
-	public void addSkill(Skill skill) {
-		this.skills.add(skill);
+	public void addMethodology(Methodology methodology) {
+		this.methodologies.add(methodology);
 	}
 
-	public void addSkills(List<Skill> skills) {
-		this.skills.addAll(skills);
+	public void addMethodologies(List<Methodology> methodologies) {
+		this.methodologies.addAll(methodologies);
 	}
 
 	public List<Course> getCourses() {
