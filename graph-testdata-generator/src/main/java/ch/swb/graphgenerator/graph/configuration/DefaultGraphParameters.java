@@ -24,6 +24,8 @@ public class DefaultGraphParameters {
 	public static final Period PROJECT_DEFAULT_MIN_PERIOD_ASSIGNMENT = Period.ofMonths(6);
 	public static final Period PROJECT_DEFAULT_MAX_PERIOD_ASSIGNMENT = Period.ofMonths(36);
 	public static final int PROJECT_DEFAULT_MAX_ROLES = 3;
+	public static final int PROJECT_DEFAULT_MAX_USED_TECHNOLOGIES = 10;
+	public static final int PROJECT_DEFAULT_MAX_USED_METHODOLOGIES = 5;
 
 	// Certificates
 	public static final int CERTIFICATE_DEFAULT_NUMBER_YEARS_PER_CERTIFICATE = 3;

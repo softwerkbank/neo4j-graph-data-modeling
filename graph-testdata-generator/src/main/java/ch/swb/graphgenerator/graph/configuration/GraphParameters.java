@@ -7,26 +7,28 @@ import jakarta.inject.Singleton;
 
 @Singleton
 public class GraphParameters {
-	private int numberOfEmployees;
-	private int numberOfCompanies;
-	private int numberOfCertificates;
-	private int numberOfProjects;
-	private int numberOfTechnologies;
-	private int numberOfMethodologies;
-	private int numberOfCourses;
+	private final int numberOfEmployees;
+	private final int numberOfCompanies;
+	private final int numberOfCertificates;
+	private final int numberOfProjects;
+	private final int numberOfTechnologies;
+	private final int numberOfMethodologies;
+	private final int numberOfCourses;
 
-	private Period averageEmploymentPeriod;
-	private Period jitterAverageEmploymentPeriod;
-	private Period firstEmploymentAfter;
-	private Period jitterFirstEmployment;
-	private Period jitterBetweenEmployments;
+	private final Period averageEmploymentPeriod;
+	private final Period jitterAverageEmploymentPeriod;
+	private final Period firstEmploymentAfter;
+	private final Period jitterFirstEmployment;
+	private final Period jitterBetweenEmployments;
 
-	private Period minPeriodProjectAssignment;
-	private Period maxPeriodProjectAssignment;
-	private int maxRolesProject;
+	private final Period minPeriodProjectAssignment;
+	private final Period maxPeriodProjectAssignment;
+	private final int maxRolesProject;
+	private final int maxUsedTechnologiesProject;
+	private final int maxUsedMethodologiesProject;
 
-	private int certificateEveryNumberOfYears;
-	private int trainingDaysPerYear;
+	private final int certificateEveryNumberOfYears;
+	private final int trainingDaysPerYear;
 
 	@Inject
 	public GraphParameters(GraphConfiguration graphConfig) {
@@ -56,6 +58,10 @@ public class GraphParameters {
 		maxPeriodProjectAssignment = graphConfig.getConfigValue(GraphParameterKeys.PROJECT_MAX_PERIOD_ASSIGNMENT,
 				DefaultGraphParameters.PROJECT_DEFAULT_MAX_PERIOD_ASSIGNMENT);
 		maxRolesProject = graphConfig.getConfigValue(GraphParameterKeys.PROJECT_MAX_ROLES, DefaultGraphParameters.PROJECT_DEFAULT_MAX_ROLES);
+		maxUsedTechnologiesProject = graphConfig.getConfigValue(GraphParameterKeys.PROJECT_MAX_USED_TECHNOLOGIES,
+				DefaultGraphParameters.PROJECT_DEFAULT_MAX_USED_TECHNOLOGIES);
+		maxUsedMethodologiesProject = graphConfig.getConfigValue(GraphParameterKeys.PROJECT_MAX_USED_METHODOLOGIES,
+				DefaultGraphParameters.PROJECT_DEFAULT_MAX_USED_METHODOLOGIES);
 
 		// Certificate
 		certificateEveryNumberOfYears = graphConfig.getConfigValue(GraphParameterKeys.CERTIFICATE_NUMBER_YEARS_PER_CERTIFICATE,
@@ -124,6 +130,14 @@ public class GraphParameters {
 
 	public int getMaxRolesProject() {
 		return maxRolesProject;
+	}
+
+	public int getMaxUsedTechnologiesProject() {
+		return maxUsedTechnologiesProject;
+	}
+
+	public int getMaxUsedMethodologiesProject() {
+		return maxUsedMethodologiesProject;
 	}
 
 	public int getCertifcateEveryNumberOfYears() {

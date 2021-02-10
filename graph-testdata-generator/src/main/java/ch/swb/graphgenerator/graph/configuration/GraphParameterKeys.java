@@ -22,6 +22,8 @@ public class GraphParameterKeys {
 	public static final String PROJECT_MIN_PERIOD_ASSIGNMENT = "project.min.period.assignment";
 	public static final String PROJECT_MAX_PERIOD_ASSIGNMENT = "project.max.period.assignment";
 	public static final String PROJECT_MAX_ROLES = "project.max.roles";
+	public static final String PROJECT_MAX_USED_TECHNOLOGIES = "project.max.used.technologies";
+	public static final String PROJECT_MAX_USED_METHODOLOGIES = "project.max.used.methodologies";
 
 	// Certificates
 	public static final String CERTIFICATE_NUMBER_YEARS_PER_CERTIFICATE = "certificate.number.years.per.certificate";
