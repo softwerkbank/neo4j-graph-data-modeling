@@ -32,8 +32,8 @@ public class FixedNodeProvider {
 	private final List<Certificate> certificates = new ArrayList<>();
 	private final List<Role> roles = new ArrayList<>();
 	private final List<Position> positions = new ArrayList<>();
-	private final List<Technology> knowledges = new ArrayList<>();
-	private final List<Methodology> skills = new ArrayList<>();
+	private final List<Technology> technologies = new ArrayList<>();
+	private final List<Methodology> methodologies = new ArrayList<>();
 	private final List<Course> courses = new ArrayList<>();
 	private Company companyForLastEmployment;
 	private EasyRandom random;
@@ -80,7 +80,7 @@ public class FixedNodeProvider {
 
 	private void initTechnologies(String yaml) {
 		try {
-			this.knowledges.addAll(YAMLUtil.getListOfObjects(new File(yaml), Technology.class));
+			this.technologies.addAll(YAMLUtil.getListOfObjects(new File(yaml), Technology.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -89,7 +89,7 @@ public class FixedNodeProvider {
 
 	private void initMethodologies(String yaml) {
 		try {
-			this.skills.addAll(YAMLUtil.getListOfObjects(new File(yaml), Methodology.class));
+			this.methodologies.addAll(YAMLUtil.getListOfObjects(new File(yaml), Methodology.class));
 		} catch (Exception e) {
 			LOGGER.error("Error while reading certificates from YAML file: {}", yaml, e);
 		}
@@ -135,24 +135,24 @@ public class FixedNodeProvider {
 		return Collections.unmodifiableList(positions);
 	}
 
-	public Technology getRandomKnowledge() {
+	public Technology getRandomTechnology() {
 		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(graphParameters.getNumberOfTechnologies());
-		return knowledges.get(randomIndex);
+		return technologies.get(randomIndex);
 	}
 
 	public List<Technology> getTechnologies() {
-		return Collections.unmodifiableList(knowledges);
+		return Collections.unmodifiableList(technologies);
 	}
 
-	public Methodology getRandomSkill() {
+	public Methodology getRandomMethodology() {
 		random.setSeed(System.nanoTime());
 		int randomIndex = random.nextInt(graphParameters.getNumberOfMethodologies());
-		return skills.get(randomIndex);
+		return methodologies.get(randomIndex);
 	}
 
 	public List<Methodology> getMethodologies() {
-		return Collections.unmodifiableList(skills);
+		return Collections.unmodifiableList(methodologies);
 	}
 
 	public Course getRandomCourse() {

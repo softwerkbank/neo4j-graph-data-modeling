@@ -10,6 +10,7 @@ import ch.swb.graphgenerator.graph.configuration.GraphParameters;
 import ch.swb.graphgenerator.graph.generator.nodes.EmploymentNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.nodes.FixedNodeProvider;
 import ch.swb.graphgenerator.graph.generator.nodes.NodeGenerator;
+import ch.swb.graphgenerator.graph.generator.nodes.ProjectNodeGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.AssignedProjectGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.ParticipatedCourseGenerator;
 import ch.swb.graphgenerator.graph.generator.relationships.PassedExamGenerator;
@@ -27,7 +28,8 @@ class GraphGeneratorTest {
 		// Arrange
 		GraphParameters defaultParameters = new GraphParameters(new GraphConfiguration());
 		FixedNodeProvider fixedNodeProvider = new FixedNodeProvider(defaultParameters);
-		NodeGenerator nodeGenerator = new NodeGenerator(new EmploymentNodeGenerator(fixedNodeProvider), fixedNodeProvider, defaultParameters);
+		NodeGenerator nodeGenerator = new NodeGenerator(new EmploymentNodeGenerator(fixedNodeProvider), new ProjectNodeGenerator(fixedNodeProvider),
+				fixedNodeProvider, defaultParameters);
 		RelationshipGenerator relationshipGenerator = new RelationshipGenerator(defaultParameters,
 				new AssignedProjectGenerator(fixedNodeProvider),
 				new PassedExamGenerator(fixedNodeProvider),

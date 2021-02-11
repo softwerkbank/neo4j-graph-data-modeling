@@ -29,6 +29,7 @@ public class NodeGenerator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(NodeGenerator.class);
 
 	private final EmploymentNodeGenerator employmentGenerator;
+	private final ProjectNodeGenerator projectGenerator;
 	private final FixedNodeProvider fixedNodeProvider;
 	private final GraphParameters parameters;
 
@@ -36,8 +37,10 @@ public class NodeGenerator {
 	private final EasyRandom easyRandom;
 
 	@Inject
-	public NodeGenerator(EmploymentNodeGenerator employmentGenerator, FixedNodeProvider fixedNodeProvider, GraphParameters parameters) {
+	public NodeGenerator(EmploymentNodeGenerator employmentGenerator, ProjectNodeGenerator projectGenerator, FixedNodeProvider fixedNodeProvider,
+			GraphParameters parameters) {
 		this.employmentGenerator = employmentGenerator;
+		this.projectGenerator = projectGenerator;
 		this.fixedNodeProvider = fixedNodeProvider;
 		this.parameters = parameters;
 
@@ -111,11 +114,8 @@ public class NodeGenerator {
 	}
 
 	private List<Project> generateProjects() {
-		List<Project> projects = new ArrayList<>();
-		for (int i = 0; i < parameters.getNumberOfProjects(); i++) {
-			Project project = new Project(UUID.randomUUID(), faker.superhero().name(), faker.lorem().characters(2000, 4000), i % 2 == 0 ? "german" : "english");
-			projects.add(project);
-		}
+		List<Project> projects = projectGenerator.generateProjects(parameters.getNumberOfProjects(), parameters.getMaxUsedTechnologiesProject(),
+				parameters.getMaxUsedMethodologiesProject());
 		LOGGER.info("Generated {} projects", projects.size());
 		return projects;
 	}
