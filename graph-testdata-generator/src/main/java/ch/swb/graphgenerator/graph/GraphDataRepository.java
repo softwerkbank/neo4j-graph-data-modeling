@@ -242,12 +242,22 @@ public class GraphDataRepository {
 			try (Transaction transaction = neo4jGraph.tx()) {
 				GraphTraversalSource g = neo4jGraph.traversal();
 
-				g.addV(Project.LABEL)
+				Vertex projectNode = g.addV(Project.LABEL)
 						.property(Project.KEY_ID, project.getId().toString())
 						.property(Project.KEY_NAME, project.getName())
 						.property(Project.KEY_DESCRIPTION, project.getDescription())
 						.property(Project.KEY_WORKING_LANGUAGE, project.getWorkingLanguage())
 						.next();
+
+				for (Technology technology : project.getUsedTechnologies()) {
+					Vertex technologyNode = g.V().has(Technology.LABEL, Technology.KEY_ID, technology.getId().toString()).next();
+					g.addE(Constants.PROJECT_TECHNOLOGY_LABEL).from(projectNode).to(technologyNode).next();
+				}
+
+				for (Methodology methodology : project.getUsedMethodologies()) {
+					Vertex methodologyNode = g.V().has(Methodology.LABEL, Methodology.KEY_ID, methodology.getId().toString()).next();
+					g.addE(Constants.PROJECT_TECHNOLOGY_LABEL).from(projectNode).to(methodologyNode).next();
+				}
 
 				transaction.commit();
 			}
