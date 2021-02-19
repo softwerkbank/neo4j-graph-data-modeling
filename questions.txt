@@ -1,2 +1,45 @@
 In which order did the employments take place?
-What are the last three employments for employee xy?
+What are the last <x> employments for employee <y>?
+
+Which employees share knowledge about Java, Relational DBs, Continuous Integration and mobile development?
+Which employees are not assigned to a project at the moment?
+
+
+Amount of experience
+---------------------
+Which employees have more than <x> years of experience as <role>?
+How many years of experience does the employee <y> have in <technology | methodology>?
+How many years of experience does the employee <y> have as <role>?
+
+Best fit for role
+------------------
+Who is an expert to give a public talk about <technology | methodology>?
+Who fits best for a job as <role> with technologies 1, 2, 3, 4 and has at least <number> years experience?
+Who is best suited to succeed <employee>? (The employee leaves the company and the successor should have similar skills)
+
+Expertise in areas
+------------------
+Which employees have worked in projects of insurance companies?
+Which employees worked as <role> on public transport software in the last <number> years/month?
+Which employees have experience in working for customer <x>?
+
+Finding a team
+--------------
+Which <number> employees have already worked together and cover the following requirements <list of technologies/methodologies>?
+
+Training
+--------
+Which employees have to update any of their certifications in the next <number> of months?
+Which courses or certifications are recommended for employee <x>? 
+
+Happy employees (not in first iteration)
+----------------------------------------
+What roles, technologies/methodologies does the employee <x> like?
+What roles, technologies/methodologies does the employee <x> dislike?
+In which direction would the employee like to develop him-/herself?
+
+Skills endorsement (not in first iteration)
+-------------------------------------------
+Which skills of employee <x> are confirmed by <number> other employees?
+Which employees can be paired together so that employee <x> develops skill and gains experience in <technology | methodology>?
+ 
