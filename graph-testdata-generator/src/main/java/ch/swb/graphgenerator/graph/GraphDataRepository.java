@@ -33,82 +33,13 @@ public class GraphDataRepository {
 		Neo4JNativeElementIdProvider idProvider = new Neo4JNativeElementIdProvider();
 		try (Driver driver = GraphDatabase.driver("bolt://localhost", AuthTokens.basic("neo4j", "Neo4jAdmin4711"));
 				Neo4JGraph neo4jGraph = new Neo4JGraph(driver, "skillsight", idProvider, idProvider)) {
-
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
 			persistTechnologies(neo4jGraph, graph);
 			persistMethodologies(neo4jGraph, graph);
 			persistCourses(neo4jGraph, graph);
 			persistProjects(neo4jGraph, graph);
-
-			for (Employee employee : graph.getEmployees()) {
-				try (Transaction transaction = neo4jGraph.tx()) {
-					GraphTraversalSource g = neo4jGraph.traversal();
-
-					Vertex employeeNode = g.addV(Employee.LABEL)
-							.property(Employee.KEY_ID, employee.getId().toString())
-							.property(Employee.KEY_FIRSTNAME, employee.getFirstname())
-							.property(Employee.KEY_LASTNAME, employee.getLastname())
-							.property(Employee.KEY_LOGINNAME, employee.getLoginname())
-							.property(Employee.KEY_BIRTHDAY, employee.getDateOfBirth().format(DateTimeFormatter.ISO_DATE))
-							.next();
-
-					for (Employment employment : employee.getEmployments()) {
-						Vertex employmentNode = g.addV(Employment.LABEL)
-								.property(Employment.KEY_START, employment.getStart().format(DateTimeFormatter.ISO_DATE))
-								.property(Employment.KEY_END, employment.getEnd() != null ? employment.getEnd().format(DateTimeFormatter.ISO_DATE) : null)
-								.property(Employment.KEY_POSITION, employment.getPosition())
-								.next();
-
-						g.addE(Constants.EMPLOYEE_EMPLOYMENT_LABEL).from(employeeNode).to(employmentNode).next();
-
-						Company company = employment.getCompany();
-						Vertex companyNode = g.V().has(Company.LABEL, Company.KEY_ID, company.getId().toString()).next();
-						g.addE(Constants.EMPLOYMENT_COMPANY_LABEL).from(employmentNode).to(companyNode).next();
-
-						for (AssignedProject assignedProject : employment.getAssignedProjects()) {
-							Vertex projectNode = g.V().has(assignedProject.getTo().getNodeLabel(),
-									Project.KEY_ID,
-									assignedProject.getTo().getNodeId().toString()).next();
-
-							String roles = assignedProject.getRoles().stream().map(r -> r.getName()).collect(Collectors.joining(","));
-
-							g.addE(AssignedProject.LABEL).from(employmentNode).to(projectNode)
-									.property(AssignedProject.KEY_START, assignedProject.getStart().format(DateTimeFormatter.ISO_DATE))
-									.property(AssignedProject.KEY_END,
-											assignedProject.getEnd() != null ? assignedProject.getEnd().format(DateTimeFormatter.ISO_DATE) : null)
-									.property(AssignedProject.KEY_WORKLOAD, String.valueOf(assignedProject.getWorkload()))
-									.property(AssignedProject.KEY_ROLES, roles)
-									.next();
-						}
-					}
-
-					for (PassedExam passedExam : employee.getPassedExams()) {
-						Vertex certificateNode = g.V().has(passedExam.getTo().getNodeLabel(),
-								Certificate.KEY_ID,
-								passedExam.getTo().getNodeId().toString()).next();
-
-						g.addE(PassedExam.LABEL).from(employeeNode).to(certificateNode)
-								.property(PassedExam.KEY_EXAMINATION_DATE, passedExam.getExaminationDate().format(DateTimeFormatter.ISO_DATE))
-								.property(PassedExam.KEY_EXAMINATION_INSTITUTE, passedExam.getExaminationInstitute())
-								.property(PassedExam.KEY_EXAM, passedExam.getExam())
-								.next();
-					}
-
-					for (ParticipatedCourse participatedCourse : employee.getParticipatedCourses()) {
-						Vertex courseNode = g.V().has(participatedCourse.getTo().getNodeLabel(),
-								Course.KEY_ID,
-								participatedCourse.getTo().getNodeId().toString()).next();
-
-						g.addE(ParticipatedCourse.LABEL).from(employeeNode).to(courseNode)
-								.property(ParticipatedCourse.KEY_START_DATE, participatedCourse.getStartDate().format(DateTimeFormatter.ISO_DATE))
-								.property(ParticipatedCourse.KEY_END_DATE, participatedCourse.getEndDate().format(DateTimeFormatter.ISO_DATE))
-								.next();
-					}
-
-					transaction.commit();
-				}
-			}
+			persistEmployees(neo4jGraph, graph);
 		}
 	}
 
@@ -257,6 +188,77 @@ public class GraphDataRepository {
 				for (Methodology methodology : project.getUsedMethodologies()) {
 					Vertex methodologyNode = g.V().has(Methodology.LABEL, Methodology.KEY_ID, methodology.getId().toString()).next();
 					g.addE(Constants.PROJECT_TECHNOLOGY_LABEL).from(projectNode).to(methodologyNode).next();
+				}
+
+				transaction.commit();
+			}
+		}
+	}
+
+	private void persistEmployees(Neo4JGraph neo4jGraph, GraphData graph) {
+		for (Employee employee : graph.getEmployees()) {
+			try (Transaction transaction = neo4jGraph.tx()) {
+				GraphTraversalSource g = neo4jGraph.traversal();
+
+				Vertex employeeNode = g.addV(Employee.LABEL)
+						.property(Employee.KEY_ID, employee.getId().toString())
+						.property(Employee.KEY_FIRSTNAME, employee.getFirstname())
+						.property(Employee.KEY_LASTNAME, employee.getLastname())
+						.property(Employee.KEY_LOGINNAME, employee.getLoginname())
+						.property(Employee.KEY_BIRTHDAY, employee.getDateOfBirth().format(DateTimeFormatter.ISO_DATE))
+						.next();
+
+				for (Employment employment : employee.getEmployments()) {
+					Vertex employmentNode = g.addV(Employment.LABEL)
+							.property(Employment.KEY_START, employment.getStart().format(DateTimeFormatter.ISO_DATE))
+							.property(Employment.KEY_END, employment.getEnd() != null ? employment.getEnd().format(DateTimeFormatter.ISO_DATE) : null)
+							.property(Employment.KEY_POSITION, employment.getPosition())
+							.next();
+
+					g.addE(Constants.EMPLOYEE_EMPLOYMENT_LABEL).from(employeeNode).to(employmentNode).next();
+
+					Company company = employment.getCompany();
+					Vertex companyNode = g.V().has(Company.LABEL, Company.KEY_ID, company.getId().toString()).next();
+					g.addE(Constants.EMPLOYMENT_COMPANY_LABEL).from(employmentNode).to(companyNode).next();
+
+					for (AssignedProject assignedProject : employment.getAssignedProjects()) {
+						Vertex projectNode = g.V().has(assignedProject.getTo().getNodeLabel(),
+								Project.KEY_ID,
+								assignedProject.getTo().getNodeId().toString()).next();
+
+						String roles = assignedProject.getRoles().stream().map(r -> r.getName()).collect(Collectors.joining(","));
+
+						g.addE(AssignedProject.LABEL).from(employmentNode).to(projectNode)
+								.property(AssignedProject.KEY_START, assignedProject.getStart().format(DateTimeFormatter.ISO_DATE))
+								.property(AssignedProject.KEY_END,
+										assignedProject.getEnd() != null ? assignedProject.getEnd().format(DateTimeFormatter.ISO_DATE) : null)
+								.property(AssignedProject.KEY_WORKLOAD, String.valueOf(assignedProject.getWorkload()))
+								.property(AssignedProject.KEY_ROLES, roles)
+								.next();
+					}
+				}
+
+				for (PassedExam passedExam : employee.getPassedExams()) {
+					Vertex certificateNode = g.V().has(passedExam.getTo().getNodeLabel(),
+							Certificate.KEY_ID,
+							passedExam.getTo().getNodeId().toString()).next();
+
+					g.addE(PassedExam.LABEL).from(employeeNode).to(certificateNode)
+							.property(PassedExam.KEY_EXAMINATION_DATE, passedExam.getExaminationDate().format(DateTimeFormatter.ISO_DATE))
+							.property(PassedExam.KEY_EXAMINATION_INSTITUTE, passedExam.getExaminationInstitute())
+							.property(PassedExam.KEY_EXAM, passedExam.getExam())
+							.next();
+				}
+
+				for (ParticipatedCourse participatedCourse : employee.getParticipatedCourses()) {
+					Vertex courseNode = g.V().has(participatedCourse.getTo().getNodeLabel(),
+							Course.KEY_ID,
+							participatedCourse.getTo().getNodeId().toString()).next();
+
+					g.addE(ParticipatedCourse.LABEL).from(employeeNode).to(courseNode)
+							.property(ParticipatedCourse.KEY_START_DATE, participatedCourse.getStartDate().format(DateTimeFormatter.ISO_DATE))
+							.property(ParticipatedCourse.KEY_END_DATE, participatedCourse.getEndDate().format(DateTimeFormatter.ISO_DATE))
+							.next();
 				}
 
 				transaction.commit();
