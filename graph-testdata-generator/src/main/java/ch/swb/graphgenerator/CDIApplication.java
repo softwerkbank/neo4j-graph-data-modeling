@@ -16,7 +16,8 @@ public class CDIApplication {
 		try (SeContainer container = SeContainerInitializer.newInstance().initialize()) {
 			// Load configuration from file
 			GraphConfiguration graphConfiguration = container.select(GraphConfiguration.class).get();
-			graphConfiguration.loadGraphConfiguration("config.properties");
+			graphConfiguration.loadConfiguration("config.properties");
+			graphConfiguration.loadConfiguration("db.properties");
 
 			Application application = container.select(Application.class).get();
 			application.run();

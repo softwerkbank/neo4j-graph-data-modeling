@@ -21,9 +21,9 @@ public class GraphConfiguration {
 		this.config = new PropertiesConfiguration();
 	}
 
-	public void loadGraphConfiguration(String path) throws ConfigurationException {
+	public void loadConfiguration(String path) throws ConfigurationException {
 		Configurations configs = new Configurations();
-		config = configs.properties(new File(path));
+		config.append(configs.properties(new File(path)));
 		LOGGER.info("Read {} properties from file {}", config.size(), path);
 	}
 
@@ -33,6 +33,10 @@ public class GraphConfiguration {
 
 	public int getConfigValue(String key, int defaultValue) {
 		return config.getInt(key, defaultValue);
+	}
+
+	public boolean getConfigValue(String key, boolean defaultValue) {
+		return config.getBoolean(key, defaultValue);
 	}
 
 	public Period getConfigValue(String key, Period defaultValue) {

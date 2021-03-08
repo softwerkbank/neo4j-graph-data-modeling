@@ -14,6 +14,7 @@ import org.neo4j.driver.GraphDatabase;
 import com.steelbridgelabs.oss.neo4j.structure.Neo4JGraph;
 import com.steelbridgelabs.oss.neo4j.structure.providers.Neo4JNativeElementIdProvider;
 
+import ch.swb.graphgenerator.graph.configuration.DbParameters;
 import ch.swb.graphgenerator.graph.model.GraphData;
 import ch.swb.graphgenerator.graph.model.nodes.Certificate;
 import ch.swb.graphgenerator.graph.model.nodes.Company;
@@ -26,13 +27,24 @@ import ch.swb.graphgenerator.graph.model.nodes.Technology;
 import ch.swb.graphgenerator.graph.model.relationships.AssignedProject;
 import ch.swb.graphgenerator.graph.model.relationships.ParticipatedCourse;
 import ch.swb.graphgenerator.graph.model.relationships.PassedExam;
+import jakarta.inject.Inject;
 
 public class GraphDataRepository {
 
+	private final DbParameters dbParameters;
+	private final String connectionString;
+
+	@Inject
+	public GraphDataRepository(DbParameters dbParameters) {
+		this.dbParameters = dbParameters;
+		this.connectionString = String.format("bolt://%s:%d", dbParameters.getHost(), dbParameters.getPort());
+	}
+
 	public void persist(GraphData graph) {
 		Neo4JNativeElementIdProvider idProvider = new Neo4JNativeElementIdProvider();
-		try (Driver driver = GraphDatabase.driver("bolt://localhost", AuthTokens.basic("neo4j", "Neo4jAdmin4711"));
-				Neo4JGraph neo4jGraph = new Neo4JGraph(driver, "skillsight", idProvider, idProvider)) {
+
+		try (Driver driver = createDriver();
+				Neo4JGraph neo4jGraph = new Neo4JGraph(driver, dbParameters.getName(), idProvider, idProvider)) {
 			persistCompanies(neo4jGraph, graph);
 			persistCertificates(neo4jGraph, graph);
 			persistTechnologies(neo4jGraph, graph);
@@ -41,6 +53,12 @@ public class GraphDataRepository {
 			persistProjects(neo4jGraph, graph);
 			persistEmployees(neo4jGraph, graph);
 		}
+	}
+
+	private Driver createDriver() {
+		return dbParameters.useAuthentication()
+				? GraphDatabase.driver(connectionString, AuthTokens.basic(dbParameters.getUser(), dbParameters.getPassword()))
+				: GraphDatabase.driver(connectionString);
 	}
 
 	private void persistCompanies(Neo4JGraph neo4jGraph, GraphData graph) {

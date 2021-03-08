@@ -23,7 +23,7 @@ class GraphConfigurationTest {
 	@DisplayName("When initGraphConfiguration is called, then only values of listed properties are used, otherwise default values are used")
 	void when_initGraphConfiguration_then_onlyListedPropertiesAreUsedOtherwiseDefaultValues() throws ConfigurationException {
 		// act
-		testee.loadGraphConfiguration("src/test/resources/config.properties");
+		testee.loadConfiguration("src/test/resources/config.properties");
 
 		// assert
 		// value from properties file
